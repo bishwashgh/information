@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .main{
+            background-image: url(OIP\ \(2\).jpg);
+            height: 300px;
+            width: auto;
+            border-radius: 10px;
+        }
+        nav{
+           background-color:white;
+            height: 50px;
+            width: auto;
+            display: flex;
+            gap: 1.3rem;
+            border-radius: 10px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .image1{
+            color: black;
+            padding-top: 13px;
+            padding-left: 13px;
+            border-radius: 20px;
+           
+        }
+        .image1:hover{
+            background-color: blue;
+            width: 50px;
+            height: 30px;
+            align-self: center;
+        }
+        .image2:hover{
+            background-color: blue;
+             width: 60px;
+            height: 30px;
+            align-self: center;
+            
+        }
+        .image3:hover{
+            background-color: blue;
+             width: 70px;
+            height: 30px;
+            
+            align-self: center;
+            
+        }
+        .image4:hover{
+            background-color: blue;
+             width: 60px;
+            height: 30px;
+            align-self: center;
+            
+        }
+        .image5:hover{
+            background-color: blue;
+             width: 60px;
+            height: 30px;
+            
+            align-self: center;
+            
+        }
+        .image2{
+            color: black;
+             padding-top: 13px;
+            
+            padding-left: 13px;
+            border-radius: 20px;
+        }
+       
+        .image4{
+            color: black;
+             padding-top: 13px;
+             padding-left: 13px;
+            border-radius: 20px;
+            
+        }
+        .image5{
+            color: black;
+             padding-top: 13px;
+             padding-left: 13px;
+            border-radius: 20px;
+            
+        }
+        #search{
+            height: 20px;
+            width: 70px;
+            align-self: center;
+        }
+        input{
+            padding: 5px;
+            margin-left: auto;
+            margin-right: 10px;
+        }
+        .show{
+            color: white;
+        }
+        .dropdown {
+      float: left;
+      overflow: hidden;
+    }
+
+    .dropdown .dropbtn {
+      font-size: 16px;
+      border: none;
+      outline: none;
+      color:black;
+      padding: 14px 16px;
+      background-color: inherit;
+      font-family: inherit;
+      margin: 0;
+      cursor: pointer;
+    }
+
+    .navbar a:hover, .dropdown:hover .dropbtn {
+      color: #2196F3;
+    }
+
+   
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: black;
+      min-width: 200px;
+      border-radius: 10px;
+      box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+
+    /* Dropdown links */
+    .dropdown-content a {
+      float: none;
+      color:black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      text-align: left;
+    }
+
+    .dropdown-content a:hover {
+      background-color: black;
+    }
+
+    /* Show dropdown on hover */
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div>
+
+        </div>
+    </div>
+    <nav>
+        <div class="image1">Home</div>
+        <div class="image2">Gallery</div>
+        <div class="dropdown">
+            <button class="dropbtn">Platform</button>
+            <div class="dropdown-content">
+            <ul class="show">
+         <li>Emulator</li>
+         <li>Mobile</li>
+    
+         </ul>
+         </div>
+       </div>
+        <div class="image4">Content</div>
+        <div class="image5">Contact</div>
+        <input type="search" name="" id="search" placeholder="Search">
+    </nav>
+</body>
+</html>
