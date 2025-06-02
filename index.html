@@ -1,177 +1,372 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <script src="https://kit.fontawesome.com/ae26b5f911.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Responsive Profile</title>
     <style>
-        .main{
-            background-image: url(OIP\ \(2\).jpg);
-            height: 300px;
-            width: auto;
-            border-radius: 10px;
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
         }
-        nav{
-           background-color:white;
-            height: 50px;
-            width: auto;
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #f8f8f8, #e8f0ff);
+        }
+        nav {
+            
             display: flex;
-            gap: 1.3rem;
-            border-radius: 10px;
-            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            justify-content: center;
+            background: linear-gradient(to right, #000428, #004e92);
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
-        .image1{
-            color: black;
-            padding-top: 13px;
-            padding-left: 13px;
+        nav a {
+            color: white;
+            margin: 0 20px;
+            text-decoration: none;
+            font-weight: bold;
+            position: relative;
+            padding: 8px 12px;
+            transition: all 0.3s ease-in-out;
+        }
+        nav a:hover {
+            color: yellow;
+            transform: scale(1.1);
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: 0;
+            left: 0;
+            background-color: yellow;
+            transition: 0.3s;
+        }
+        nav a:hover::after {
+            width: 100%;
+        }
+        section {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+        .main {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
             border-radius: 20px;
-           
-        }
-        .image1:hover{
-            background-color: blue;
-            width: 50px;
-            height: 30px;
-            align-self: center;
-        }
-        .image2:hover{
-            background-color: blue;
-             width: 60px;
-            height: 30px;
-            align-self: center;
-            
-        }
-        .image3:hover{
-            background-color: blue;
-             width: 70px;
-            height: 30px;
-            
-            align-self: center;
-            
-        }
-        .image4:hover{
-            background-color: blue;
-             width: 60px;
-            height: 30px;
-            align-self: center;
-            
-        }
-        .image5:hover{
-            background-color: blue;
-             width: 60px;
-            height: 30px;
-            
-            align-self: center;
-            
-        }
-        .image2{
+            box-shadow: 0px 5px 5px 2px black;
+            padding: 20px;
+            background-color: white;
             color: black;
-             padding-top: 13px;
-            
-            padding-left: 13px;
+        }
+        img {
+            height: 300px;
+            width: 100%;
+            max-width: 300px;
+            border-radius: 200px;
+            border: 2px solid white;
+            box-shadow: 2px 2px 2px blue;
+            display: block;
+            margin: 0 auto;
+        }
+        .first {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+        }
+        .left {
+            flex: 1;
+            min-width: 280px;
             border-radius: 20px;
-        }
-       
-        .image4{
-            color: black;
-             padding-top: 13px;
-             padding-left: 13px;
-            border-radius: 20px;
-            
-        }
-        .image5{
-            color: black;
-             padding-top: 13px;
-             padding-left: 13px;
-            border-radius: 20px;
-            
-        }
-        #search{
-            height: 20px;
-            width: 70px;
-            align-self: center;
-        }
-        input{
-            padding: 5px;
-            margin-left: auto;
-            margin-right: 10px;
-        }
-        .show{
+            background-image: linear-gradient(navy, black, crimson);
+            padding: 20px;
+            text-align: center;
             color: white;
         }
-        .dropdown {
-      float: left;
-      overflow: hidden;
-    }
+        .right {
+            flex: 2;
+            min-width: 280px;
+            padding: 20px;
+        }
+        #hl {
+            display: inline-block;
+            text-shadow: 2px 2px 2px black;
+            background-image: linear-gradient(to right, blue, yellow, aqua);
+            border: 2px solid black;
+            margin: 5px;
+            text-align: center;
+            width: 100px;
+            padding: 5px;
+            color: black;
+            text-decoration: none;
+            border-radius: 10px;
+        }
+        #hl:hover {
+            color: blue;
+        }
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .skill {
+            background-color: #f0f0f0;
+            padding: 8px 12px;
+            border-radius: 8px;
+            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            font-weight: bold;
+        }
+        .skill a {
+            text-decoration: none;
+            color: black;
+        }
+        @media (max-width: 768px) {
+            .main {
+                flex-direction: column;
+                align-items: center;
+            }
+            .first {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .left,
+            .right {
+                width: 100%;
+            }
+        }
+        iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .project {
+            margin-bottom: 30px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            color: black;
+        }
+        .project h3 {
+            margin: 0 0 10px;
+        }
+        .project video {
+            height: 180px;
+            width: 320px;
+            border-radius: 10px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+            display: block;
+            margin-bottom: 10px;
+        }
 
-    .dropdown .dropbtn {
-      font-size: 16px;
-      border: none;
-      outline: none;
-      color:black;
-      padding: 14px 16px;
-      background-color: inherit;
-      font-family: inherit;
-      margin: 0;
-      cursor: pointer;
-    }
-
-    .navbar a:hover, .dropdown:hover .dropbtn {
-      color: #2196F3;
-    }
-
-   
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: black;
-      min-width: 200px;
-      border-radius: 10px;
-      box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-      z-index: 1;
-    }
-
-    /* Dropdown links */
-    .dropdown-content a {
-      float: none;
-      color:black;
-      padding: 12px 16px;
-      text-decoration: none;
-      display: block;
-      text-align: left;
-    }
-
-    .dropdown-content a:hover {
-      background-color: black;
-    }
-
-    /* Show dropdown on hover */
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
+        /* News ticker styles */
+        #news-ticker {
+            overflow: hidden;
+            background: #004e92;
+            color: white;
+            border-radius: 10px;
+            padding: 10px 0;
+            position: relative;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+        }
+        #news-ticker .news-content {
+            display: inline-block;
+            white-space: nowrap;
+            padding-left: 100%;
+            animation: ticker 20s linear infinite;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        @keyframes ticker {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        #srch{
+            display: flex;
+            float: right;
+            margin-left: 450px;
+            border-radius: 50px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            font-size: medium;
+            box-shadow: 0px 3px 3px 3px antiquewhite;
+        }
+        #srch:hover{
+            background-color: antiquewhite;
+        }
     </style>
 </head>
 <body>
-    <div class="main">
-        <div>
-
-        </div>
-    </div>
     <nav>
-        <div class="image1">Home</div>
-        <div class="image2">Gallery</div>
-        <div class="dropdown">
-            <button class="dropbtn">Platform</button>
-            <div class="dropdown-content">
-            <ul class="show">
-         <li>Emulator</li>
-         <li>Mobile</li>
-    
-         </ul>
-         </div>
-       </div>
-        <div class="image4">Content</div>
-        <div class="image5">Contact</div>
-        <input type="search" name="" id="search" placeholder="Search">
+        <a href="#home">Home</a>
+        <a href="#post">Post</a>
+        <a href="#project">Project</a>
+        <a href="#about">About Me</a>
+        <input type="search" name="" id="srch" placeholder="Search">
     </nav>
+
+    <section id="home">
+        <h2>Latest AI News</h2>
+        <div id="news-ticker">
+            <div class="news-content">
+                Breaking: AI breakthrough improves language models &nbsp;&bull;&nbsp;
+                New AI ethics guidelines released worldwide &nbsp;&bull;&nbsp;
+                AI achieves new milestones in healthcare diagnostics &nbsp;&bull;&nbsp;
+                Robotics powered by AI revolutionize manufacturing &nbsp;&bull;&nbsp;
+                OpenAI releases GPT-5 with enhanced capabilities &nbsp;&bull;&nbsp;
+                AI-powered climate change predictions gain accuracy &nbsp;&bull;&nbsp;
+                AI-driven art gains popularity in creative industries
+            </div>
+            
+        </div>
+    </section>
+
+    <section id="post">
+        <h2>Latest Post</h2>
+        <p>No recent posts available. Stay tuned!</p>
+    </section>
+
+    <section id="project">
+        <h2>Major Projects</h2>
+
+        <div class="project">
+            <h3>Face Recognition System [<a href="https://luxand.cloud/get-facial-recognition-api/?utm_source=google&utm_medium=cpc-face-recognition&utm_campaign=face-recognition&gad_source=1&gad_campaignid=10492842641&gbraid=0AAAAACTZIE2wad_64Kinf5JZ3OEv2nWjY&gclid=CjwKCAjwruXBBhArEiwACBRtHYcekdQrM6Ye0uk1eTspdztTC_coSiq9CNLg_Jo-o-hyq2HftZEInRoCS88QAvD_BwE">Link</a>]</h3>
+            <video
+                controls
+                autoplay
+                loop
+                muted
+                playsinline
+                preload="auto"
+                width="320"
+                height="180"
+            >
+                <source
+                    src="https://v.ftcdn.net/10/79/24/08/700_F_1079240863_pYgdxJiCzLdN4Z0Ss1I4zMjxSnt2BB20_ST.mp4"
+                    type="video/webm"
+                />
+                <source
+                    src="https://v.ftcdn.net/10/79/24/08/700_F_1079240863_pYgdxJiCzLdN4Z0Ss1I4zMjxSnt2BB20_ST.mp4"
+                    type="video/mp4"
+                />
+                Your browser does not support the video tag.
+            </video>
+            <p>A project demonstrating facial recognition with AI techniques.</p>
+        </div>
+
+        <div class="project">
+            <h3>AI Chatbot using Python [<a href="https://deepai.org/chat">Link</a>]</h3>
+            <video
+                controls
+                autoplay
+                loop
+                muted
+                playsinline
+                preload="auto"
+                width="320"
+                height="180"
+            >
+                <source
+                    src="https://video-previews.elements.envatousercontent.com/06289631-c9c6-4e5a-aa04-6f87bdc23005/watermarked_preview/watermarked_preview.mp4"
+                    type="video/webm"
+                />
+                <source
+                    src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/tiger.mp4"
+                    type="video/mp4"
+                />
+                Your browser does not support the video tag.
+            </video>
+            <p>An AI-powered chatbot implemented in Python for natural language interactions.</p>
+        </div>
+
+        <div class="project">
+            <h3>Online Voting System [<a href="https://electionbuddy.com/features/online-voting/">Link</a>]</h3>
+            
+            <p>A secure and transparent online voting platform to facilitate digital elections with ease.</p>
+        </div>
+
+        <div class="project">
+            <h3>Weather Forecast App [<a href="https://www.accuweather.com/en/np/kathmandu/241809/hourly-weather-forecast/241809">Weather</a>]</h3>
+           
+
+            <p>An app providing real-time weather updates and forecasts with a user-friendly interface.</p>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="main">
+            <div class="left">
+                <img src="https://yt3.ggpht.com/43pKloT58OwAKwBWh86_eOOhabYMwRhSGdajUrbuMIUEirhAlPfqm9xPYviF9CJ16tcj6e12k-WufQ=s499-c-fcrop64=1,00000a97fffff568-rw-nd-v1" />
+                <h2 id="name">Bishwas Ghimire</h2>
+                <p id="post">
+                    Student<br />
+                    NCIT College
+                </p>
+                <a href="https://ncit.edu.np/">
+                    <img
+                        src="https://theedunepal.ap-south-1.linodeobjects.com/bachelorfairuploads/clients/ncit/logo/nepal_college_of_informationpng_20220608011130.png"
+                        id="imag"
+                        style="width: 100px; height: 100px; border-radius: 10px"
+                    />
+                </a>
+                <p class="para">
+                    Enthusiastic and optimistic, always embracing new challenges with a positive mindset...
+                </p>
+            </div>
+            <div class="right">
+                <h1>Information</h1>
+                <hr />
+                <div class="first">
+                    <div class="email">
+                        <h3>Email</h3>
+                        <p>bishwasghimire2060@gmail.com</p>
+                        <p><a href="mailto:bishwasghimire2060@gmail.com" id="hl">Mail Me</a></p>
+                    </div>
+                    <div class="phone">
+                        <h3>Phone</h3>
+                        <p>+9779861472541</p>
+                    </div>
+                    <div class="address">
+                        <h3>Address</h3>
+                        <p>Chitwan, Nepal</p>
+                    </div>
+                </div>
+                <h1>Skills</h1>
+                <hr />
+                <div class="skills">
+                    <div class="skill"><a href="https://en.wikipedia.org/wiki/C">C</a></div>
+                    <div class="skill"><a href="https://en.wikipedia.org/wiki/C%2B%2B">C++</a></div>
+                    <div class="skill"><a href="https://en.wikipedia.org/wiki/Java_(programming_language)">JAVA</a></div>
+                    <div class="skill"><a href="https://en.wikipedia.org/wiki/HTML">HTML</a></div>
+                    <div class="skill"><a href="https://en.wikipedia.org/wiki/CSS">CSS</a></div>
+                    <div class="skill"><a href="https://en.wikipedia.org/wiki/JavaScript">JavaScript</a></div>
+                    
+                </div>
+                <br>
+                <h1>Connect Me</h1>
+                <hr>
+                <div id="acm">
+                    <i class="fa-brands fa-facebook fa-beat" style="color: #196dae;"></i>
+                    <a href="https://www.facebook.com/bishwas.ghimire.144/" id="hl" target="_blank">Facebook</a>
+                    <i class="fa-brands fa-instagram fa-beat" style="color: red;"></i>
+                    <a href="https://www.instagram.com/bishwas.ghimire.144/?hl=en" target="_blank" id="hl">Instagram</a>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 </html>
