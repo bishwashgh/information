@@ -4,12 +4,23 @@
     <script src="https://kit.fontawesome.com/ae26b5f911.js" crossorigin="anonymous"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Responsive Profile</title>
+    <title>Bishwas Ghimire</title>
     <style>
         * {
             box-sizing: border-box;
             scroll-behavior: smooth;
         }
+        body { font-family: Arial, sans-serif; padding: 20px; background-color: #f0f0f0; }
+    h1 { color: #2c3e50; }
+    .news-item { background: white; margin: 10px 0; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .news-item h3 { margin: 0; font-size: 18px; }
+    .news-item p { font-size: 14px; color: #333; }
+    .news-item a { text-decoration: none; color: #2980b9; }
+    .newslive{
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        background-color: #7095ba;
+        border-radius: 10px;
+    }
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -220,19 +231,8 @@
     </nav>
 
     <section id="home">
-        <h2>Latest AI News</h2>
-        <div id="news-ticker">
-            <div class="news-content">
-                Breaking: AI breakthrough improves language models &nbsp;&bull;&nbsp;
-                New AI ethics guidelines released worldwide &nbsp;&bull;&nbsp;
-                AI achieves new milestones in healthcare diagnostics &nbsp;&bull;&nbsp;
-                Robotics powered by AI revolutionize manufacturing &nbsp;&bull;&nbsp;
-                OpenAI releases GPT-5 with enhanced capabilities &nbsp;&bull;&nbsp;
-                AI-powered climate change predictions gain accuracy &nbsp;&bull;&nbsp;
-                AI-driven art gains popularity in creative industries
-            </div>
-            
-        </div>
+        <h1 class="newslive">📰 Nepali News (Live)</h1>
+        <div id="news-container">Loading news...</div>
     </section>
 
     <section id="post">
@@ -368,5 +368,38 @@
             </div>
         </div>
     </section>
+    <script>
+    const apiKey = 'pub_2555b4871b214b759b5d806cf84f1ec6'; // <-- Replace with your real API key
+
+    const url = `https://newsdata.io/api/1/news?apikey=${apiKey}&country=np&language=ne`;
+
+    async function loadNepaliNews() {
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+
+        const newsContainer = document.getElementById('news-container');
+        newsContainer.innerHTML = '';
+
+        data.results.forEach(article => {
+          const div = document.createElement('div');
+          div.className = 'news-item';
+          div.innerHTML = `
+            <h3><a href="${article.link}" target="_blank">${article.title}</a></h3>
+            <p>${article.description || 'No description available.'}</p>
+          `;
+          newsContainer.appendChild(div);
+        });
+      } catch (err) {
+        console.error(err);
+        document.getElementById('news-container').innerText = 'Failed to load news.';
+      }
+    }
+
+    loadNepaliNews();
+  </script>
+
+</body>
+</html>
 </body>
 </html>
