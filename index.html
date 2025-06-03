@@ -6,219 +6,254 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Bishwas Ghimire</title>
     <style>
+        /* Reset box-sizing for all elements */
         * {
             box-sizing: border-box;
             scroll-behavior: smooth;
         }
-        body { font-family: Arial, sans-serif; padding: 20px; background-color: #f0f0f0; }
-    h1 { color: #2c3e50; }
-    .news-item { background: white; margin: 10px 0; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-    .news-item h3 { margin: 0; font-size: 18px; }
-    .news-item p { font-size: 14px; color: #333; }
-    .news-item a { text-decoration: none; color: #2980b9; }
-    .newslive{
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
-        background-color: #7095ba;
-        border-radius: 10px;
-    }
+
+        /* Body styles for responsiveness */
         body {
-            margin: 0;
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 2vh 2vw;
             background: linear-gradient(to right, #f8f8f8, #e8f0ff);
         }
-        nav {
-            
-            display: flex;
-            justify-content: center;
-            background: linear-gradient(to right, #000428, #004e92);
-            padding: 10px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        nav a {
-            color: white;
-            margin: 0 20px;
-            text-decoration: none;
-            font-weight: bold;
-            position: relative;
-            padding: 8px 12px;
-            transition: all 0.3s ease-in-out;
-        }
-        nav a:hover {
-            color: yellow;
-            transform: scale(1.1);
-        }
-        nav a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 3px;
-            bottom: 0;
-            left: 0;
-            background-color: yellow;
-            transition: 0.3s;
-        }
-        nav a:hover::after {
-            width: 100%;
-        }
-        section {
-            padding: 40px 20px;
-            max-width: 1200px;
-            margin: auto;
-        }
-        .main {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            border-radius: 20px;
-            box-shadow: 0px 5px 5px 2px black;
-            padding: 20px;
-            background-color: white;
-            color: black;
-        }
-        img {
-            height: 300px;
-            width: 100%;
-            max-width: 300px;
-            border-radius: 200px;
-            border: 2px solid white;
-            box-shadow: 2px 2px 2px blue;
-            display: block;
-            margin: 0 auto;
-        }
-        .first {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 50px;
-        }
-        .left {
-            flex: 1;
-            min-width: 280px;
-            border-radius: 20px;
-            background-image: linear-gradient(navy, black, crimson);
-            padding: 20px;
-            text-align: center;
-            color: white;
-        }
-        .right {
-            flex: 2;
-            min-width: 280px;
-            padding: 20px;
-        }
-        #hl {
-            display: inline-block;
-            text-shadow: 2px 2px 2px black;
-            background-image: linear-gradient(to right, blue, yellow, aqua);
-            border: 2px solid black;
-            margin: 5px;
-            text-align: center;
-            width: 100px;
-            padding: 5px;
-            color: black;
-            text-decoration: none;
-            border-radius: 10px;
-        }
-        #hl:hover {
-            color: blue;
-        }
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        .skill {
-            background-color: #f0f0f0;
-            padding: 8px 12px;
-            border-radius: 8px;
-            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-            font-weight: bold;
-        }
-        .skill a {
-            text-decoration: none;
-            color: black;
-        }
-        @media (max-width: 768px) {
-            .main {
-                flex-direction: column;
-                align-items: center;
-            }
-            .first {
-                flex-direction: column;
-                gap: 20px;
-            }
-            .left,
-            .right {
-                width: 100%;
-            }
-        }
-        iframe {
-            width: 100%;
-            height: 400px;
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        }
-        .project {
-            margin-bottom: 30px;
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-            color: black;
-        }
-        .project h3 {
-            margin: 0 0 10px;
-        }
-        .project video {
-            height: 180px;
-            width: 320px;
-            border-radius: 10px;
-            box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
-            display: block;
-            margin-bottom: 10px;
-        }
 
-        /* News ticker styles */
-        #news-ticker {
-            overflow: hidden;
-            background: #004e92;
-            color: white;
-            border-radius: 10px;
-            padding: 10px 0;
-            position: relative;
-            box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
-        }
-        #news-ticker .news-content {
-            display: inline-block;
-            white-space: nowrap;
-            padding-left: 100%;
-            animation: ticker 20s linear infinite;
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-        @keyframes ticker {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-100%);
-            }
-        }
-        #srch{
-            display: flex;
-            float: right;
-            margin-left: 450px;
-            border-radius: 50px;
-            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-            font-size: medium;
-            box-shadow: 0px 3px 3px 3px antiquewhite;
-        }
-        #srch:hover{
-            background-color: antiquewhite;
-        }
+        /* Heading styles */
+h1 {
+    color: #050505;
+}
+
+/* News item styles */
+.news-item {
+    background: white;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.news-item h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+.news-item p {
+    font-size: 1rem;
+    color: #333;
+}
+.news-item a {
+    text-decoration: none;
+    color: #2980b9;
+}
+
+/* News live header style */
+.newslive {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: #eef0f1;
+    border-radius: 10px;
+    padding: 1vh 2vw;
+    font-size: 1.2rem;
+}
+
+/* Navigation styles */
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background: linear-gradient(to right, #000428, #004e92);
+    padding: 1vh 1vw;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+nav a {
+    color: white;
+    margin: 1vh 2vw;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0.5vh 1vw;
+    transition: all 0.3s ease-in-out;
+}
+nav a:hover {
+    color: yellow;
+    transform: scale(1.1);
+}
+/* Search box styles */
+#srch {
+    margin: 1vh 2vw;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 1rem;
+    padding: 0.5vh 1vw;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Sections */
+section {
+    padding: 3vh 2vw;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Main container with flexible layout for responsiveness */
+.main {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2vw;
+    border-radius: 20px;
+    box-shadow: 0px 5px 5px 2px rgba(0,0,0,0.2);
+    padding: 2vh 2vw;
+    background-color: #fff;
+    color: black;
+}
+
+/* Left and right sections */
+.left, .right {
+    flex: 1 1 300px;
+    min-width: 280px;
+}
+.left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: linear-gradient(navy, black, crimson);
+    padding: 2vh 2vw;
+    border-radius: 20px;
+    color: white;
+    text-align: center;
+}
+.right {
+    padding: 2vh 2vw;
+}
+/* Image styling for responsiveness */
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 20px;
+    border: 2px solid white;
+    box-shadow: 2px 2px 2px blue;
+    display: block;
+    margin: 1vh auto;
+}
+
+/* Skills styles */
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+.skill {
+    background-color: #f0f0f0;
+    padding: 8px 12px;
+    border-radius: 8px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    font-weight: bold;
+}
+.skill a {
+    text-decoration: none;
+    color: black;
+}
+
+/* Contact and connect section styles */
+#acm {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1vw;
+    align-items: center;
+    margin-top: 1vh;
+}
+#acm a {
+    margin-left: 0.5vw;
+}
+
+/* Video responsiveness */
+video {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.3);
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Project styles */
+.project {
+    margin-bottom: 30px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    color: black;
+}
+.project h3 {
+    margin: 0 0 10px;
+}
+.project p {
+    font-size: 1rem;
+}
+
+/* News ticker styles */
+#news-ticker {
+    overflow: hidden;
+    background: #004e92;
+    color: white;
+    border-radius: 10px;
+    padding: 1vh 1vw;
+    position: relative;
+    box-shadow: 0 0 8px rgba(0,0,0,0.3);
+}
+#news-ticker .news-content {
+    display: inline-block;
+    white-space: nowrap;
+    padding-left: 100%;
+    animation: ticker 20s linear infinite;
+    font-weight: bold;
+    font-size: 1rem;
+}
+@keyframes ticker {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* Responsive adjustments for screens smaller than 768px */
+@media (max-width: 768px) {
+    body {
+        padding: 2vh 4vw;
+    }
+    nav {
+        flex-direction: column;
+        align-items: center;
+    }
+    nav a {
+        margin: 1vh 0;
+    }
+    #news-ticker {
+        font-size: 0.9rem;
+    }
+    .main {
+        flex-direction: column;
+    }
+    .first {
+        flex-direction: column;
+        gap: 2vh;
+    }
+    .left, .right {
+        width: 100%;
+    }
+    h1, h2, h3 {
+        font-size: 1.5rem;
+    }
+    p {
+        font-size: 1rem;
+    }
+}
     </style>
 </head>
 <body>
@@ -227,7 +262,7 @@
         <a href="#post">Post</a>
         <a href="#project">Project</a>
         <a href="#about">About Me</a>
-        <input type="search" name="" id="srch" placeholder="Search">
+        <input type="search" id="srch" placeholder="Search" />
     </nav>
 
     <section id="home">
@@ -245,24 +280,9 @@
 
         <div class="project">
             <h3>Face Recognition System [<a href="https://luxand.cloud/get-facial-recognition-api/?utm_source=google&utm_medium=cpc-face-recognition&utm_campaign=face-recognition&gad_source=1&gad_campaignid=10492842641&gbraid=0AAAAACTZIE2wad_64Kinf5JZ3OEv2nWjY&gclid=CjwKCAjwruXBBhArEiwACBRtHYcekdQrM6Ye0uk1eTspdztTC_coSiq9CNLg_Jo-o-hyq2HftZEInRoCS88QAvD_BwE">Link</a>]</h3>
-            <video
-                controls
-                autoplay
-                loop
-                muted
-                playsinline
-                preload="auto"
-                width="320"
-                height="180"
-            >
-                <source
-                    src="https://v.ftcdn.net/10/79/24/08/700_F_1079240863_pYgdxJiCzLdN4Z0Ss1I4zMjxSnt2BB20_ST.mp4"
-                    type="video/webm"
-                />
-                <source
-                    src="https://v.ftcdn.net/10/79/24/08/700_F_1079240863_pYgdxJiCzLdN4Z0Ss1I4zMjxSnt2BB20_ST.mp4"
-                    type="video/mp4"
-                />
+            <video controls autoplay loop muted playsinline preload="auto">
+                <source src="https://v.ftcdn.net/10/79/24/08/700_F_1079240863_pYgdxJiCzLdN4Z0Ss1I4zMjxSnt2BB20_ST.mp4" type="video/webm" />
+                <source src="https://v.ftcdn.net/10/79/24/08/700_F_1079240863_pYgdxJiCzLdN4Z0Ss1I4zMjxSnt2BB20_ST.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
             </video>
             <p>A project demonstrating facial recognition with AI techniques.</p>
@@ -270,24 +290,9 @@
 
         <div class="project">
             <h3>AI Chatbot using Python [<a href="https://deepai.org/chat">Link</a>]</h3>
-            <video
-                controls
-                autoplay
-                loop
-                muted
-                playsinline
-                preload="auto"
-                width="320"
-                height="180"
-            >
-                <source
-                    src="https://video-previews.elements.envatousercontent.com/06289631-c9c6-4e5a-aa04-6f87bdc23005/watermarked_preview/watermarked_preview.mp4"
-                    type="video/webm"
-                />
-                <source
-                    src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/tiger.mp4"
-                    type="video/mp4"
-                />
+            <video controls autoplay loop muted playsinline preload="auto">
+                <source src="https://video-previews.elements.envatousercontent.com/06289631-c9c6-4e5a-aa04-6f87bdc23005/watermarked_preview/watermarked_preview.mp4" type="video/webm" />
+                <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/tiger.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
             </video>
             <p>An AI-powered chatbot implemented in Python for natural language interactions.</p>
@@ -295,14 +300,11 @@
 
         <div class="project">
             <h3>Online Voting System [<a href="https://electionbuddy.com/features/online-voting/">Link</a>]</h3>
-            
             <p>A secure and transparent online voting platform to facilitate digital elections with ease.</p>
         </div>
 
         <div class="project">
             <h3>Weather Forecast App [<a href="https://www.accuweather.com/en/np/kathmandu/241809/hourly-weather-forecast/241809">Weather</a>]</h3>
-           
-
             <p>An app providing real-time weather updates and forecasts with a user-friendly interface.</p>
         </div>
     </section>
@@ -310,22 +312,13 @@
     <section id="about">
         <div class="main">
             <div class="left">
-                <img src="https://yt3.ggpht.com/43pKloT58OwAKwBWh86_eOOhabYMwRhSGdajUrbuMIUEirhAlPfqm9xPYviF9CJ16tcj6e12k-WufQ=s499-c-fcrop64=1,00000a97fffff568-rw-nd-v1" />
+                <img src="https://yt3.ggpht.com/43pKloT58OwAKwBWh86_eOOhabYMwRhSGdajUrbuMIUEirhAlPfqm9xPYviF9CJ16tcj6e12k-WufQ=s499-c-fcrop64=1,00000a97fffff568-rw-nd-v1" alt="Bishwas Ghimire" />
                 <h2 id="name">Bishwas Ghimire</h2>
-                <p id="post">
-                    Student<br />
-                    NCIT College
-                </p>
+                <p id="post">Student<br />NCIT College</p>
                 <a href="https://ncit.edu.np/">
-                    <img
-                        src="https://theedunepal.ap-south-1.linodeobjects.com/bachelorfairuploads/clients/ncit/logo/nepal_college_of_informationpng_20220608011130.png"
-                        id="imag"
-                        style="width: 100px; height: 100px; border-radius: 10px"
-                    />
+                    <img src="https://theedunepal.ap-south-1.linodeobjects.com/bachelorfairuploads/clients/ncit/logo/nepal_college_of_informationpng_20220608011130.png" id="imag" style="width: 100px; height: 100px; border-radius: 10px"/>
                 </a>
-                <p class="para">
-                    Enthusiastic and optimistic, always embracing new challenges with a positive mindset...
-                </p>
+                <p class="para">Enthusiastic and optimistic, always embracing new challenges with a positive mindset...</p>
             </div>
             <div class="right">
                 <h1>Information</h1>
@@ -354,11 +347,10 @@
                     <div class="skill"><a href="https://en.wikipedia.org/wiki/HTML">HTML</a></div>
                     <div class="skill"><a href="https://en.wikipedia.org/wiki/CSS">CSS</a></div>
                     <div class="skill"><a href="https://en.wikipedia.org/wiki/JavaScript">JavaScript</a></div>
-                    
                 </div>
-                <br>
+                <br />
                 <h1>Connect Me</h1>
-                <hr>
+                <hr />
                 <div id="acm">
                     <i class="fa-brands fa-facebook fa-beat" style="color: #196dae;"></i>
                     <a href="https://www.facebook.com/bishwas.ghimire.144/" id="hl" target="_blank">Facebook</a>
@@ -368,38 +360,37 @@
             </div>
         </div>
     </section>
+
+    <!-- News API Script -->
     <script>
-    const apiKey = 'pub_2555b4871b214b759b5d806cf84f1ec6'; // <-- Replace with your real API key
+        const apiKey = 'pub_2555b4871b214b759b5d806cf84f1ec6'; // Replace with your real API key
 
-    const url = `https://newsdata.io/api/1/news?apikey=${apiKey}&country=np&language=ne`;
+        const url = `https://newsdata.io/api/1/news?apikey=${apiKey}&country=np&language=ne`;
 
-    async function loadNepaliNews() {
-      try {
-        const res = await fetch(url);
-        const data = await res.json();
+        async function loadNepaliNews() {
+            try {
+                const res = await fetch(url);
+                const data = await res.json();
 
-        const newsContainer = document.getElementById('news-container');
-        newsContainer.innerHTML = '';
+                const newsContainer = document.getElementById('news-container');
+                newsContainer.innerHTML = '';
 
-        data.results.forEach(article => {
-          const div = document.createElement('div');
-          div.className = 'news-item';
-          div.innerHTML = `
-            <h3><a href="${article.link}" target="_blank">${article.title}</a></h3>
-            <p>${article.description || 'No description available.'}</p>
-          `;
-          newsContainer.appendChild(div);
-        });
-      } catch (err) {
-        console.error(err);
-        document.getElementById('news-container').innerText = 'Failed to load news.';
-      }
-    }
+                data.results.forEach(article => {
+                    const div = document.createElement('div');
+                    div.className = 'news-item';
+                    div.innerHTML = `
+                        <h3><a href="${article.link}" target="_blank">${article.title}</a></h3>
+                        <p>${article.description || 'No description available.'}</p>
+                    `;
+                    newsContainer.appendChild(div);
+                });
+            } catch (err) {
+                console.error(err);
+                document.getElementById('news-container').innerText = 'Failed to load news.';
+            }
+        }
 
-    loadNepaliNews();
-  </script>
-
-</body>
-</html>
+        loadNepaliNews();
+    </script>
 </body>
 </html>
