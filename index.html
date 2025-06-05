@@ -21,239 +21,262 @@
         }
 
         /* Heading styles */
-h1 {
-    color: #050505;
-}
+        h1 {
+            color: #050505;
+            animation: fadeIn 1s ease-in-out;
+        }
 
-/* News item styles */
-.news-item {
-    background: white;
-    margin: 10px 0;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-.news-item h3 {
-    margin: 0;
-    font-size: 1.2rem;
-}
-.news-item p {
-    font-size: 1rem;
-    color: #333;
-}
-.news-item a {
-    text-decoration: none;
-    color: #2980b9;
-}
+        /* Fade-in animation */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
 
-/* News live header style */
-.newslive {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    background-color: #eef0f1;
-    border-radius: 10px;
-    padding: 1vh 2vw;
-    font-size: 1.2rem;
-}
+        /* News item styles */
+        .news-item {
+            background: white;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .news-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .news-item h3 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+        .news-item p {
+            font-size: 1rem;
+            color: #333;
+        }
+        .news-item a {
+            text-decoration: none;
+            color: #2980b9;
+        }
 
-/* Navigation styles */
-nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    background: linear-gradient(to right, #000428, #004e92);
-    padding: 1vh 1vw;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-nav a {
-    color: white;
-    margin: 1vh 2vw;
-    text-decoration: none;
-    font-weight: bold;
-    padding: 0.5vh 1vw;
-    transition: all 0.3s ease-in-out;
-}
-nav a:hover {
-    color: yellow;
-    transform: scale(1.1);
-}
-/* Search box styles */
-#srch {
-    margin: 1vh 2vw;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-size: 1rem;
-    padding: 0.5vh 1vw;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
+        /* News live header style */
+        .newslive {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            background-color: #eef0f1;
+            border-radius: 10px;
+            padding: 1vh 2vw;
+            font-size: 1.2rem;
+        }
 
-/* Sections */
-section {
-    padding: 3vh 2vw;
-    max-width: 1200px;
-    margin: auto;
-}
+        /* Navigation styles */
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            background: linear-gradient(to right, #000428, #004e92);
+            padding: 1vh 1vw;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        nav a {
+            color: white;
+            margin: 1vh 2vw;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5vh 1vw;
+            transition: all 0.3s ease-in-out;
+        }
+        nav a:hover {
+            color: yellow;
+            transform: scale(1.1);
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
 
-/* Main container with flexible layout for responsiveness */
-.main {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2vw;
-    border-radius: 20px;
-    box-shadow: 0px 5px 5px 2px rgba(0,0,0,0.2);
-    padding: 2vh 2vw;
-    background-color: #fff;
-    color: black;
-}
+        /* Search box styles */
+        #srch {
+            margin: 1vh 2vw;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            font-size: 1rem;
+            padding: 0.5vh 1vw;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            transition: border-color 0.3s;
+        }
+        #srch:focus {
+            border-color: #2980b9;
+            outline: none;
+        }
 
-/* Left and right sections */
-.left, .right {
-    flex: 1 1 300px;
-    min-width: 280px;
-}
-.left {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-image: linear-gradient(navy, black, crimson);
-    padding: 2vh 2vw;
-    border-radius: 20px;
-    color: white;
-    text-align: center;
-}
-.right {
-    padding: 2vh 2vw;
-}
-/* Image styling for responsiveness */
-img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 20px;
-    border: 2px solid white;
-    box-shadow: 2px 2px 2px blue;
-    display: block;
-    margin: 1vh auto;
-}
+        /* Sections */
+        section {
+            padding: 3vh 2vw;
+            max-width: 1200px;
+            margin: auto;
+        }
 
-/* Skills styles */
-.skills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 10px;
-}
-.skill {
-    background-color: #f0f0f0;
-    padding: 8px 12px;
-    border-radius: 8px;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-    font-weight: bold;
-}
-.skill a {
-    text-decoration: none;
-    color: black;
-}
+        /* Main container with flexible layout for responsiveness */
+        .main {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2vw;
+            border-radius: 20px;
+            box-shadow: 0px 5px 5px 2px rgba(0,0,0,0.2);
+            padding: 2vh 2vw;
+            background-color: #fff;
+            color: black;
+        }
 
-/* Contact and connect section styles */
-#acm {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1vw;
-    align-items: center;
-    margin-top: 1vh;
-}
-#acm a {
-    margin-left: 0.5vw;
-}
+        /* Left and right sections */
+        .left, .right {
+            flex: 1 1 300px;
+            min-width: 280px;
+        }
+        .left {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-image: linear-gradient(navy, black, crimson);
+            padding: 2vh 2vw;
+            border-radius: 20px;
+            color: white;
+            text-align: center;
+            animation: slideIn 0.5s ease-in-out;
+        }
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .right {
+            padding: 2vh 2vw;
+        }
 
-/* Video responsiveness */
-video {
-    width: 100%;
-    height: auto;
-    max-width: 100%;
-    border-radius: 10px;
-    box-shadow: 0 0 8px rgba(0,0,0,0.3);
-    display: block;
-    margin-bottom: 10px;
-}
+        /* Image styling for responsiveness */
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 20px;
+            border: 2px solid white;
+            box-shadow: 2px 2px 2px blue;
+            display: block;
+            margin: 1vh auto;
+        }
 
-/* Project styles */
-.project {
-    margin-bottom: 30px;
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    color: black;
-}
-.project h3 {
-    margin: 0 0 10px;
-}
-.project p {
-    font-size: 1rem;
-}
+        /* Skills styles */
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .skill {
+            background-color: #f0f0f0;
+            padding: 8px 12px;
+            border-radius: 8px;
+            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+        .skill:hover {
+            transform: scale(1.05);
+        }
+        .skill a {
+            text-decoration: none;
+            color: black;
+        }
 
-/* News ticker styles */
-#news-ticker {
-    overflow: hidden;
-    background: #004e92;
-    color: white;
-    border-radius: 10px;
-    padding: 1vh 1vw;
-    position: relative;
-    box-shadow: 0 0 8px rgba(0,0,0,0.3);
-}
-#news-ticker .news-content {
-    display: inline-block;
-    white-space: nowrap;
-    padding-left: 100%;
-    animation: ticker 20s linear infinite;
-    font-weight: bold;
-    font-size: 1rem;
-}
-@keyframes ticker {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-100%);
-    }
-}
+        /* Contact and connect section styles */
+        #acm {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1vw;
+            align-items: center;
+            margin-top: 1vh;
+        }
+        #acm a {
+            margin-left: 0.5vw;
+        }
 
-/* Responsive adjustments for screens smaller than 768px */
-@media (max-width: 768px) {
-    body {
-        padding: 2vh 4vw;
-    }
-    nav {
-        flex-direction: column;
-        align-items: center;
-    }
-    nav a {
-        margin: 1vh 0;
-    }
-    #news-ticker {
-        font-size: 0.9rem;
-    }
-    .main {
-        flex-direction: column;
-    }
-    .first {
-        flex-direction: column;
-        gap: 2vh;
-    }
-    .left, .right {
-        width: 100%;
-    }
-    h1, h2, h3 {
-        font-size: 1.5rem;
-    }
-    p {
-        font-size: 1rem;
-    }
-}
+        /* Project styles */
+        .project {
+            margin-bottom: 30px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            color: black;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .project:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .project h3 {
+            margin: 0 0 10px;
+        }
+        .project p {
+            font-size: 1rem;
+        }
+
+        /* News ticker styles */
+        #news-ticker {
+            overflow: hidden;
+            background: #004e92;
+            color: white;
+            border-radius: 10px;
+            padding: 1vh 1vw;
+            position: relative;
+            box-shadow: 0 0 8px rgba(0,0,0,0.3);
+        }
+        #news-ticker .news-content {
+            display: inline-block;
+            white-space: nowrap;
+            padding-left: 100%;
+            animation: ticker 20s linear infinite;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+        @keyframes ticker {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        /* Responsive adjustments for screens smaller than 768px */
+        @media (max-width: 768px) {
+            body {
+                padding: 2vh 4vw;
+            }
+            nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            nav a {
+                margin: 1vh 0;
+            }
+            #news-ticker {
+                font-size: 0.9rem;
+            }
+            .main {
+                flex-direction: column;
+            }
+            .first {
+                flex-direction: column;
+                gap: 2vh;
+            }
+            .left, .right {
+                width: 100%;
+            }
+            h1, h2, h3 {
+                font-size: 1.5rem;
+            }
+            p {
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -280,21 +303,11 @@ video {
 
         <div class="project">
             <h3>Face Recognition System [<a href="https://luxand.cloud/get-facial-recognition-api/?utm_source=google&utm_medium=cpc-face-recognition&utm_campaign=face-recognition&gad_source=1&gad_campaignid=10492842641&gbraid=0AAAAACTZIE2wad_64Kinf5JZ3OEv2nWjY&gclid=CjwKCAjwruXBBhArEiwACBRtHYcekdQrM6Ye0uk1eTspdztTC_coSiq9CNLg_Jo-o-hyq2HftZEInRoCS88QAvD_BwE">Link</a>]</h3>
-            <video controls autoplay loop muted playsinline preload="auto">
-                <source src="https://v.ftcdn.net/10/79/24/08/700_F_1079240863_pYgdxJiCzLdN4Z0Ss1I4zMjxSnt2BB20_ST.mp4" type="video/webm" />
-                <source src="https://v.ftcdn.net/10/79/24/08/700_F_1079240863_pYgdxJiCzLdN4Z0Ss1I4zMjxSnt2BB20_ST.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-            </video>
             <p>A project demonstrating facial recognition with AI techniques.</p>
         </div>
 
         <div class="project">
             <h3>AI Chatbot using Python [<a href="https://deepai.org/chat">Link</a>]</h3>
-            <video controls autoplay loop muted playsinline preload="auto">
-                <source src="https://video-previews.elements.envatousercontent.com/06289631-c9c6-4e5a-aa04-6f87bdc23005/watermarked_preview/watermarked_preview.mp4" type="video/webm" />
-                <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/tiger.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-            </video>
             <p>An AI-powered chatbot implemented in Python for natural language interactions.</p>
         </div>
 
