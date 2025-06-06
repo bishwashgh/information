@@ -293,7 +293,7 @@
     </nav>
 
     <section id="home" style="padding: 20px; background-color: #f5f5f5;">
-        <h2 style="font-size: 24px; margin-bottom: 10px;">📰 Google News</h2>
+        <h2 style="font-size: 24px; margin-bottom: 10px;">📰TOP-News</h2>
         <div id="google-news-container">Loading...</div>
 </section>
 
@@ -409,7 +409,7 @@
         container.appendChild(div);
       });
     } catch (error) {
-      document.getElementById('google-news-container').innerHTML = 'Google समाचार लोड गर्न सकिएन।';
+      document.getElementById('google-news-container').innerHTML = 'Failed to load news';
       console.error(error);
     }
   }
