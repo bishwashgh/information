@@ -1,422 +1,576 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
-    <script src="https://kit.fontawesome.com/ae26b5f911.js" crossorigin="anonymous"></script>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Bishwas Ghimire</title>
-    <style>
-        /* Reset box-sizing for all elements */
-        * {
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bishwas Ghimire</title>
+  <script src="https://kit.fontawesome.com/ae26b5f911.js" crossorigin="anonymous"></script>
+  <style>
+    /* CSS Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+        Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      margin: 0;
+      padding: 2vh 2vw;
+      background: #ffffff;
+      color: #6b7280;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
+    }
+    /* Floating background circles container */
+    #floating-shapes {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      overflow: visible;
+      z-index: 0;
+      user-select: none;
+    }
+    /* Floating circle style and animations */
+    .floating-circle {
+      position: absolute;
+      border: 1.2px solid #d1d5db; /* subtle gray border */
+      border-radius: 50%;
+      opacity: 0.15;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+      will-change: transform, opacity;
+      filter: drop-shadow(0 0 2px rgba(209, 213, 219, 0.1));
+      background: transparent;
+      pointer-events: none;
+    }
+    /* individual circle animations (different size, speed, movement) */
+    .circle1 {
+      width: 160px;
+      height: 160px;
+      top: 10vh;
+      left: 15vw;
+      animation-name: floatUpDown1;
+      animation-duration: 18s;
+      animation-delay: 0s;
+    }
+    .circle2 {
+      width: 100px;
+      height: 100px;
+      top: 40vh;
+      left: 70vw;
+      animation-name: floatUpDown2;
+      animation-duration: 22s;
+      animation-delay: 3s;
+    }
+    .circle3 {
+      width: 60px;
+      height: 60px;
+      top: 70vh;
+      left: 30vw;
+      animation-name: floatUpDown3;
+      animation-duration: 20s;
+      animation-delay: 5s;
+    }
+    .circle4 {
+      width: 200px;
+      height: 200px;
+      top: 80vh;
+      left: 80vw;
+      animation-name: floatUpDown1;
+      animation-duration: 25s;
+      animation-delay: 1s;
+    }
+    /* float vertical animations with subtle X moves */
+    @keyframes floatUpDown1 {
+      0%   { transform: translate(0, 0) scale(1); opacity: 0.15; }
+      50%  { transform: translate(10px, -20px) scale(1.05); opacity: 0.2;  }
+      100% { transform: translate(0, 0) scale(1); opacity: 0.15; }
+    }
+    @keyframes floatUpDown2 {
+      0%   { transform: translate(0, 0) scale(1); opacity: 0.12; }
+      50%  { transform: translate(-15px, 20px) scale(0.95); opacity: 0.18; }
+      100% { transform: translate(0, 0) scale(1); opacity: 0.12; }
+    }
+    @keyframes floatUpDown3 {
+      0%   { transform: translate(0, 0) scale(1); opacity: 0.1; }
+      50%  { transform: translate(8px, -15px) scale(1.1); opacity: 0.17;  }
+      100% { transform: translate(0, 0) scale(1); opacity: 0.1; }
+    }
+    /* Navigation */
+    nav {
+      border-radius: 0.75rem;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      justify-content: center;
+      gap: clamp(1rem, 2vw, 3rem);
+      background: transparent;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1001;
+      backdrop-filter: saturate(180%) blur(10px);
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 2px 10px rgb(0 0 0 / 0.05);
+      user-select: none;
+    }
+    nav a {
+      color: #374151;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.125rem;
+      transition: color 0.3s ease, transform 0.3s ease;
+      position: relative;
+      padding: 0.25rem 0;
+      user-select: text;
+    }
+    nav a::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: #2563eb;
+      border-radius: 9999px;
+      transition: width 0.3s ease;
+    }
+    nav a:hover,
+    nav a:focus {
+      color: #2563eb;
+      outline: none;
+      transform: scale(1.05);
+    }
+    nav a:hover::after,
+    nav a:focus::after {
+      width: 100%;
+    }
+    #srch {
+      margin-left: auto;
+      min-width: 200px;
+      padding: 0.5rem 1rem;
+      border-radius: 0.75rem;
+      border: 1px solid #d1d5db;
+      font-weight: 400;
+      font-size: 1rem;
+      color: #374151;
+      transition: border-color 0.3s ease;
+    }
+    #srch:focus {
+      border-color: #2563eb;
+      outline-offset: 2px;
+      outline: 2px solid #bfdbfe;
+    }
 
-        /* Body styles for responsiveness */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 2vh 2vw;
-            background: linear-gradient(to right, #f8f8f8, #e8f0ff);
-        }
+    /* Section styles */
+    section {
+      max-width: 1200px;
+      margin-inline: auto;
+      padding: 5rem 2rem 6rem;
+      border-radius: 0.75rem;
+      background: #fff;
+      box-shadow: 0 2px 12px rgb(0 0 0 / 0.05);
+      color: #374151;
+      position: relative;
+      overflow: hidden;
+    }
+    section h2 {
+      font-weight: 700;
+      font-size: clamp(2.5rem, 4vw, 3.5rem);
+      margin-bottom: 1.5rem;
+      color: #111827;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    section.visible h2 {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* News items */
+    .news-item {
+      background: #f9fafb;
+      margin-bottom: 1.5rem;
+      padding: 1rem 1.25rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 1px 4px rgb(0 0 0 / 0.05);
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+      cursor: pointer;
+      user-select: none;
+      color: #374151;
+    }
+    .news-item:hover,
+    .news-item:focus-within {
+      box-shadow: 0 6px 20px rgb(0 0 0 / 0.1);
+      transform: translateY(-4px);
+      outline: none;
+      color: #2563eb;
+    }
+    .news-item h3 {
+      margin-top: 0;
+      font-weight: 600;
+      font-size: 1.3rem;
+      line-height: 1.2;
+      color: inherit;
+    }
+    .news-item p {
+      font-size: 0.9rem;
+      color: #6b7280;
+      margin: 0.25rem 0 0;
+    }
+    .news-item a {
+      text-decoration: none;
+      color: inherit;
+      font-weight: 600;
+    }
 
-        /* Heading styles */
-        h1 {
-            color: #050505;
-            animation: fadeIn 1s ease-in-out;
-        }
+    /* Project cards */
+    .project {
+      background: #f9fafb;
+      padding: 1.5rem 2rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 1px 8px rgb(0 0 0 / 0.06);
+      transition: transform 0.3s ease;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .project.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.15s;
+    }
+    .project h3 {
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      color: #111827;
+    }
+    .project p {
+      font-size: 1rem;
+      color: #4b5563;
+      margin: 0;
+    }
 
-        /* Fade-in animation */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* News item styles */
-        .news-item {
-            background: white;
-            margin: 10px 0;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .news-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-        .news-item h3 {
-            margin: 0;
-            font-size: 1.2rem;
-        }
-        .news-item p {
-            font-size: 1rem;
-            color: #333;
-        }
-        .news-item a {
-            text-decoration: none;
-            color: #2980b9;
-        }
-
-        /* News live header style */
-        .newslive {
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-            background-color: #eef0f1;
-            border-radius: 10px;
-            padding: 1vh 2vw;
-            font-size: 1.2rem;
-        }
-
-        /* Navigation styles */
-        nav {
-            border:8px solid #004e92;
-            border-radius: 20px;
-            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            background: linear-gradient(to right, #000428, #004e92);
-            padding: 1vh 1vw;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        nav a {
-            color: white;
-            margin: 1vh 2vw;
-            text-decoration: none;
-            font-weight: bold;
-            padding: 0.5vh 1vw;
-            transition: all 0.3s ease-in-out;
-        }
-        nav a:hover {
-            color: yellow;
-            transform: scale(1.1);
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-        }
-
-        /* Search box styles */
-        #srch {
-            margin: 1vh 2vw;
-            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-            padding: 0.5vh 1vw;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            transition: border-color 0.3s;
-        }
-        #srch:focus {
-            border-color: #2980b9;
-            outline: none;
-        }
-
-        /* Sections */
-        section {
-            padding: 3vh 2vw;
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        /* Main container with flexible layout for responsiveness */
-        .main {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2vw;
-            border-radius: 20px;
-            box-shadow: 0px 5px 5px 2px rgba(0,0,0,0.2);
-            padding: 2vh 2vw;
-            background-color: #fff;
-            color: black;
-        }
-
-        /* Left and right sections */
-        .left, .right {
-            flex: 1 1 300px;
-            min-width: 280px;
-        }
-        .left {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-image: linear-gradient(navy, black, crimson);
-            padding: 2vh 2vw;
-            border-radius: 20px;
-            color: white;
-            text-align: center;
-            animation: slideIn 0.5s ease-in-out;
-        }
-        @keyframes slideIn {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        .right {
-            padding: 2vh 2vw;
-        }
-
-        /* Image styling for responsiveness */
-        img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 20px;
-            border: 2px solid white;
-            box-shadow: 2px 2px 2px blue;
-            display: block;
-            margin: 1vh auto;
-        }
-
-        /* Skills styles */
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        #google-news-container a:hover {
-  color: #007BFF;
-}
-
-        .skill {
-            background-color: #f0f0f0;
-            padding: 8px 12px;
-            border-radius: 8px;
-            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-            font-weight: bold;
-            transition: transform 0.3s;
-        }
-        .skill:hover {
-            transform: scale(1.05);
-        }
-        .skill a {
-            text-decoration: none;
-            color: black;
-        }
-
-        /* Contact and connect section styles */
-        #acm {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1vw;
-            align-items: center;
-            margin-top: 1vh;
-        }
-        #acm a {
-            margin-left: 0.5vw;
-        }
-
-        /* Project styles */
-        .project {
-            margin-bottom: 30px;
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-            color: black;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .project:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-        .project h3 {
-            margin: 0 0 10px;
-        }
-        .project p {
-            font-size: 1rem;
-        }
-
-        /* News ticker styles */
-        #news-ticker {
-            overflow: hidden;
-            background: #004e92;
-            color: white;
-            border-radius: 10px;
-            padding: 1vh 1vw;
-            position: relative;
-            box-shadow: 0 0 8px rgba(0,0,0,0.3);
-        }
-        #news-ticker .news-content {
-            display: inline-block;
-            white-space: nowrap;
-            padding-left: 100%;
-            animation: ticker 20s linear infinite;
-            font-weight: bold;
-            font-size: 1rem;
-        }
-        @keyframes ticker {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-100%);
-            }
-        }
-
-        /* Responsive adjustments for screens smaller than 768px */
-        @media (max-width: 768px) {
-            body {
-                padding: 2vh 4vw;
-            }
-            nav {
-                flex-direction: column;
-                align-items: center;
-            }
-            nav a {
-                margin: 1vh 0;
-            }
-            #news-ticker {
-                font-size: 0.9rem;
-            }
-            .main {
-                flex-direction: column;
-            }
-            .first {
-                flex-direction: column;
-                gap: 2vh;
-            }
-            .left, .right {
-                width: 100%;
-            }
-            h1, h2, h3 {
-                font-size: 1.5rem;
-            }
-            p {
-                font-size: 1rem;
-            }
-        }
-    </style>
+    /* About section */
+    .main {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 20px rgb(0 0 0 / 0.06);
+      padding: 2rem;
+      background: #fff;
+      color: #374151;
+      position: relative;
+      z-index: 1;
+    }
+    .left, .right {
+      flex: 1 1 320px;
+      min-width: 280px;
+    }
+    .left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: linear-gradient(180deg, #1e3a8a, #9333ea);
+      padding: 2rem;
+      border-radius: 0.75rem;
+      color: white;
+      text-align: center;
+      box-shadow: 0 6px 20px rgb(147 51 234 / 0.25);
+      user-select: none;
+    }
+    .left img {
+      border-radius: 1rem;
+      width: 100%;
+      max-width: 280px;
+      margin-bottom: 1.5rem;
+      border: 4px solid rgba(255 255 255 / 0.4);
+      box-shadow: 0 0 12px rgba(255 255 255 / 0.7);
+      filter: drop-shadow(0 0 4px rgba(255 255 255 / 0.45));
+    }
+    .left h2 {
+      font-weight: 800;
+      font-size: 2rem;
+      margin: 0 0 0.25rem;
+      user-select: text;
+    }
+    .left p {
+      font-weight: 500;
+      font-size: 1rem;
+    }
+    .left a img {
+      margin-top: 1.25rem;
+      transition: filter 0.3s ease;
+      filter: drop-shadow(0 0 5px rgba(255 255 255 / 0.6));
+      max-width: 100px;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      user-select: none;
+    }
+    .left a:hover img {
+      filter: drop-shadow(0 0 10px #7c3aed);
+      transform: scale(1.05);
+    }
+    .right {
+      padding: 0 1rem;
+      user-select: text;
+    }
+    .right h1 {
+      font-weight: 800;
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      color: #111827;
+    }
+    hr {
+      border: none;
+      border-top: 1.5px solid #e5e7eb;
+      margin: 0 0 1rem;
+    }
+    h3 {
+      margin-top: 0;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: #4b5563;
+    }
+    .right p, .right a {
+      font-size: 1rem;
+      color: #6b7280;
+      word-break: break-word;
+    }
+    .skills {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+    .skill {
+      background: #f3f4f6;
+      color: #374151;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: background-color 0.2s ease;
+      cursor: default;
+      user-select: none;
+      box-shadow: 0 1px 4px rgb(0 0 0 / 0.05);
+    }
+    .skill a {
+      color: inherit;
+      text-decoration: none;
+      cursor: default;
+      user-select: none;
+    }
+    /* Connect Me */
+    #acm {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+      user-select: none;
+    }
+    #acm i {
+      font-size: 1.3rem;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+    #acm i:hover {
+      color: #2563eb;
+      transform: scale(1.1);
+    }
+    #acm a {
+      color: #374151;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      user-select: text;
+    }
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      nav {
+        flex-wrap: wrap;
+      }
+      #srch {
+        flex-basis: 100%;
+        margin: 0.5rem 0 0 0;
+        max-width: 100%;
+      }
+      .main {
+        flex-direction: column;
+      }
+      .left, .right {
+        width: 100%;
+        padding: 0;
+        min-width: auto;
+      }
+      .left img {
+        max-width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#post">Post</a>
-        <a href="#project">Projects</a>
-        <a href="#about">About Me</a>
-        <input type="search" id="srch" placeholder="Search" />
-    </nav>
+  <!-- Floating background shapes -->
+  <div id="floating-shapes" aria-hidden="true">
+    <span class="floating-circle circle1"></span>
+    <span class="floating-circle circle2"></span>
+    <span class="floating-circle circle3"></span>
+    <span class="floating-circle circle4"></span>
+  </div>
 
-    <section id="home" style="padding: 20px; background-color: #f5f5f5;">
-        <h2 style="font-size: 24px; margin-bottom: 10px;">📰TOP-News</h2>
-        <div id="google-news-container">Loading...</div>
-</section>
+  <nav role="navigation" aria-label="Primary navigation">
+    <a href="#home">Home</a>
+    <a href="#post">Post</a>
+    <a href="#project">Projects</a>
+    <a href="#about">About Me</a>
+    <input type="search" id="srch" name="search" aria-label="Search website" placeholder="Search" />
+  </nav>
 
-    <section id="post">
-        <h2>Latest Post</h2>
-        <p>No recent posts available. Stay tuned!</p>
-    </section>
+  <section id="home" tabindex="-1">
+    <h2>📰 TOP-News</h2>
+    <div id="google-news-container">Loading latest news from Nepal...</div>
+  </section>
 
-    <section id="project">
-        <h2>Major Projects</h2>
+  <section id="post" tabindex="-1">
+    <h2>Latest Post</h2>
+    <p>No recent posts available. Stay tuned!</p>
+  </section>
 
-        <div class="project">
-            <h3>Face Recognition System [<a href="https://luxand.cloud/get-facial-recognition-api/?utm_source=google&utm_medium=cpc-face-recognition&utm_campaign=face-recognition&gad_source=1&gad_campaignid=10492842641&gbraid=0AAAAACTZIE2wad_64Kinf5JZ3OEv2nWjY&gclid=CjwKCAjwruXBBhArEiwACBRtHYcekdQrM6Ye0uk1eTspdztTC_coSiq9CNLg_Jo-o-hyq2HftZEInRoCS88QAvD_BwE">Link</a>]</h3>
-            <p>A project demonstrating facial recognition with AI techniques.</p>
+  <section id="project" tabindex="-1">
+    <h2>Major Projects</h2>
+
+    <article class="project" tabindex="0">
+      <h3>Face Recognition System [<a href="https://luxand.cloud/" target="_blank" rel="noopener noreferrer">Link</a>]</h3>
+      <p>Facial recognition using AI techniques.</p>
+    </article>
+
+    <article class="project" tabindex="0">
+      <h3>AI Chatbot using Python [<a href="https://deepai.org/chat" target="_blank" rel="noopener noreferrer">Link</a>]</h3>
+      <p>AI chatbot implemented in Python for natural interactions.</p>
+    </article>
+
+    <article class="project" tabindex="0">
+      <h3>Online Voting System [<a href="https://electionbuddy.com/" target="_blank" rel="noopener noreferrer">Link</a>]</h3>
+      <p>Secure online voting platform for digital elections.</p>
+    </article>
+
+    <article class="project" tabindex="0">
+      <h3>Weather Forecast App [<a href="https://www.accuweather.com/" target="_blank" rel="noopener noreferrer">Weather</a>]</h3>
+      <p>Real-time weather updates with user-friendly interface.</p>
+    </article>
+  </section>
+
+  <section id="about" tabindex="-1">
+    <div class="main">
+      <div class="left">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgkSirn4-uoswXMTBRP0znzPg3pXaVvgBziQ&amp;s" alt="Bishwas Ghimire" width="280" height="auto" />
+        <h2>Bishwas Ghimire</h2>
+        <p>Student<br />NCIT College</p>
+        <a href="https://ncit.edu.np/" target="_blank" rel="noopener noreferrer" aria-label="Nepal College of Information Technology website">
+          <img src="https://theedunepal.ap-south-1.linodeobjects.com/bachelorfairuploads/clients/ncit/logo/nepal_college_of_informationpng_20220608011130.png" alt="NCIT Logo" />
+        </a>
+        <p>Enthusiastic and optimistic, always embracing new challenges with a positive mindset...</p>
+      </div>
+      <div class="right">
+        <h1>Information</h1>
+        <hr />
+        <h3>Email</h3>
+        <p><a href="mailto:bishwasghimire2060@gmail.com">bishwasghimire2060@gmail.com</a></p>
+
+        <h3>Phone</h3>
+        <p>+9779866342404</p>
+
+        <h3>Address</h3>
+        <p>Chitwan, Nepal</p>
+
+        <h1>Skills</h1>
+        <hr />
+        <div class="skills">
+          <div class="skill" aria-label="Skill: C"><a href="#">C</a></div>
+          <div class="skill" aria-label="Skill: C++"><a href="#">C++</a></div>
+          <div class="skill" aria-label="Skill: JAVA"><a href="#">JAVA</a></div>
+          <div class="skill" aria-label="Skill: HTML"><a href="#">HTML</a></div>
+          <div class="skill" aria-label="Skill: CSS"><a href="#">CSS</a></div>
+          <div class="skill" aria-label="Skill: JavaScript"><a href="#">JavaScript</a></div>
         </div>
 
-        <div class="project">
-            <h3>AI Chatbot using Python [<a href="https://deepai.org/chat">Link</a>]</h3>
-            <p>An AI-powered chatbot implemented in Python for natural language interactions.</p>
+        <h1>Connect Me</h1>
+        <hr />
+        <div id="acm">
+          <i class="fa-brands fa-facebook" aria-hidden="true" style="color: #196dae;"></i>
+          <a href="https://www.facebook.com/bishwas.ghimire.144/" target="_blank" rel="noopener noreferrer">Facebook</a>
+          <i class="fa-brands fa-instagram" aria-hidden="true" style="color: red;"></i>
+          <a href="https://www.instagram.com/bishwas.ghimire.144/?hl=en" target="_blank" rel="noopener noreferrer">Instagram</a>
+          <i class="fa-brands fa-youtube" aria-hidden="true" style="color: #c1253c;"></i>
+          <a href="https://www.youtube.com/channel/UCHacpeYvSWuBX8zaYjvrQhg" target="_blank" rel="noopener noreferrer">YouTube</a>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="project">
-            <h3>Online Voting System [<a href="https://electionbuddy.com/features/online-voting/">Link</a>]</h3>
-            <p>A secure and transparent online voting platform to facilitate digital elections with ease.</p>
-        </div>
-
-        <div class="project">
-            <h3>Weather Forecast App [<a href="https://www.accuweather.com/en/np/kathmandu/241809/hourly-weather-forecast/241809">Weather</a>]</h3>
-            <p>An app providing real-time weather updates and forecasts with a user-friendly interface.</p>
-        </div>
-    </section>
-
-    <section id="about">
-        <div class="main">
-            <div class="left">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgkSirn4-uoswXMTBRP0znzPg3pXaVvgBziQ&s" alt="Bishwas Ghimire" />
-                <h2 id="name">Bishwas Ghimire</h2>
-                <p id="post">Student<br />NCIT College</p>
-                <a href="https://ncit.edu.np/">
-                    <img src="https://theedunepal.ap-south-1.linodeobjects.com/bachelorfairuploads/clients/ncit/logo/nepal_college_of_informationpng_20220608011130.png" id="imag" style="width: 100px; height: 100px; border-radius: 10px"/>
-                </a>
-                <p class="para">Enthusiastic and optimistic, always embracing new challenges with a positive mindset...</p>
-            </div>
-            <div class="right">
-                <h1>Information</h1>
-                <hr />
-                <div class="first">
-                    <div class="email">
-                        <h3>Email</h3>
-                        <p>bishwasghimire2060@gmail.com</p>
-                        <p><a href="mailto:bishwasghimire2060@gmail.com" id="hl">Mail Me</a></p>
-                    </div>
-                    <div class="phone">
-                        <h3>Phone</h3>
-                        <p>+9779866342404</p>
-                    </div>
-                    <div class="address">
-                        <h3>Address</h3>
-                        <p>Chitwan, Nepal</p>
-                    </div>
-                </div>
-                <h1>Skills</h1>
-                <hr />
-                <div class="skills">
-                    <div class="skill"><a href="https://en.wikipedia.org/wiki/C">C</a></div>
-                    <div class="skill"><a href="https://en.wikipedia.org/wiki/C%2B%2B">C++</a></div>
-                    <div class="skill"><a href="https://en.wikipedia.org/wiki/Java_(programming_language)">JAVA</a></div>
-                    <div class="skill"><a href="https://en.wikipedia.org/wiki/HTML">HTML</a></div>
-                    <div class="skill"><a href="https://en.wikipedia.org/wiki/CSS">CSS</a></div>
-                    <div class="skill"><a href="https://en.wikipedia.org/wiki/JavaScript">JavaScript</a></div>
-                </div>
-                <br />
-                <h1>Connect Me</h1>
-                <hr />
-                <div id="acm">
-                    <i class="fa-brands fa-facebook fa-beat" style="color: #196dae;"></i>
-                    <a href="https://www.facebook.com/bishwas.ghimire.144/" id="hl" target="_blank">FACEBOOK</a>
-                    <i class="fa-brands fa-instagram fa-beat" style="color: red;"></i>
-                    <a href="https://www.instagram.com/bishwas.ghimire.144/?hl=en" target="_blank" id="hl">INSTAGRAM</a>
-                    <i class="fa-brands fa-youtube fa-bounce" style="color: #c1253c;"></i>
-                    <a href="https://www.youtube.com/channel/UCHacpeYvSWuBX8zaYjvrQhg" target="_blank" id="h1">YOUTUBE</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- News API Script -->
-    <script>
-  async function loadGoogleNews() {
-    const rssUrl = 'https://news.google.com/rss/search?q=Nepal&hl=ne&gl=NP&ceid=NP:ne';
-    const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
-
-    try {
-      const response = await fetch(apiUrl);
-      const data = await response.json();
-
-      const container = document.getElementById('google-news-container');
-      container.innerHTML = '';
-
-      data.items.slice(0, 6).forEach(item => {
-        const div = document.createElement('div');
-        div.className = 'news-item';
-        div.style.marginBottom = '15px';
-        div.innerHTML = `
-          <h3 style="margin: 5px 0;">
-            <a href="${item.link}" target="_blank" style="text-decoration: none; color: #2c3e50;">
-              ${item.title}
-            </a>
-          </h3>
-          <small>${new Date(item.pubDate).toLocaleString()}</small>
-          <p style="margin: 5px 0; color: #555;">${item.description.split(" ").slice(0, 20).join(" ")}...</p>
-        `;
-        container.appendChild(div);
-      });
-    } catch (error) {
-      document.getElementById('google-news-container').innerHTML = 'Failed to load news';
-      console.error(error);
+  <!-- News API Script -->
+  <script>
+    async function loadGoogleNews() {
+      const rssUrl = 'https://news.google.com/rss/search?q=Nepal&hl=ne&gl=NP&ceid=NP:ne';
+      const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+      try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        const container = document.getElementById('google-news-container');
+        container.innerHTML = '';
+        data.items.slice(0, 10).forEach(item => {
+          const div = document.createElement('div');
+          div.className = 'news-item';
+          div.tabIndex = 0;
+          div.innerHTML = `
+            <h3><a href="${item.link}" target="_blank" rel="noopener noreferrer">${item.title}</a></h3>
+            <p>${new Date(item.pubDate).toLocaleString()}</p>
+          `;
+          container.appendChild(div);
+        });
+      } catch (error) {
+        document.getElementById('google-news-container').innerText = 'Failed to load news.';
+      }
     }
-  }
+    loadGoogleNews();
 
-  window.addEventListener('DOMContentLoaded', loadGoogleNews);
-</script>
+    // Animate section titles and projects on scroll into view
+    const observerOptions = {
+      threshold: 0.2
+    };
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('section').forEach(section => {
+      sectionObserver.observe(section);
+    });
+
+    const projectObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          projectObserver.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.project').forEach(proj => {
+      projectObserver.observe(proj);
+    });
+  </script>
 </body>
 </html>
+
