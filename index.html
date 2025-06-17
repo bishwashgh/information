@@ -1,112 +1,472 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Bishwas Ghimire</title>
-  <script src="https://kit.fontawesome.com/ae26b5f911.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="project.css">
-  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bishwas Ghimire - Personal Website</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Modern Animations */
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Glassmorphism Effect */
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .glass-effect:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Button Styles */
+        .btn-primary {
+            position: relative;
+            overflow: hidden;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+        }
+
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2));
+            transition: 0.5s;
+        }
+
+        .btn-primary:hover::after {
+            left: 100%;
+        }
+
+        /* Project Card Styles */
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            transition: all 0.5s ease;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1));
+            transition: 0.5s;
+        }
+
+        .project-card:hover::before {
+            left: 100%;
+        }
+
+        /* Tech Background */
+        .tech-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #0a192f 0%, #101e37 100%);
+        }
+
+        /* Particle Animation */
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .glass-effect {
+                padding: 1.5rem;
+            }
+
+            .project-card {
+                margin-bottom: 1.5rem;
+            }
+
+            .btn-primary {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+    </style>
+    <script src="bishwas.js" defer></script>
 </head>
-<body>
-  <!-- Floating background shapes -->
-  <div id="floating-shapes" aria-hidden="true">
-    <span class="floating-circle circle1"></span>
-    <span class="floating-circle circle2"></span>
-    <span class="floating-circle circle3"></span>
-    <span class="floating-circle circle4"></span>
-  </div>
-
-  <nav role="navigation" aria-label="Primary navigation">
-    <a href="#home">Home</a>
-    <a href="#post">Post</a>
-    <a href="#project">Projects</a>
-    <a href="#about">About Me</a>
-    <input type="search" id="srch" name="search" aria-label="Search website" placeholder="Search" />
-  </nav>
-
-  <section id="home" tabindex="-1">
-    <h2>📰 TOP-News</h2>
-    <div id="google-news-container">LOADING LATEST NEWS...</div>
-  </section>
-
-  <section id="post" tabindex="-1">
-    <h2>Latest Post</h2>
-    <p>No recent posts available. Stay tuned!</p>
-  </section>
-
-  <section id="project" tabindex="-1">
-    <h2>Major Projects</h2>
-
-    <article class="project" tabindex="0">
-      <h3>Face Recognition System [<a href="https://luxand.cloud/" target="_blank" rel="noopener noreferrer">Link</a>]</h3>
-      <p>Facial recognition using AI techniques.</p>
-    </article>
-
-    <article class="project" tabindex="0">
-      <h3>AI Chatbot using Python [<a href="https://deepai.org/chat" target="_blank" rel="noopener noreferrer">Link</a>]</h3>
-      <p>AI chatbot implemented in Python for natural interactions.</p>
-    </article>
-
-    <article class="project" tabindex="0">
-      <h3>Online Voting System [<a href="https://electionbuddy.com/" target="_blank" rel="noopener noreferrer">Link</a>]</h3>
-      <p>Secure online voting platform for digital elections.</p>
-    </article>
-
-    <article class="project" tabindex="0">
-      <h3>Weather Forecast App [<a href="https://www.accuweather.com/" target="_blank" rel="noopener noreferrer">Weather</a>]</h3>
-      <p>Real-time weather updates with user-friendly interface.</p>
-    </article>
-  </section>
-
-  <section id="about" tabindex="-1">
-    <div class="main">
-      <div class="left">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgkSirn4-uoswXMTBRP0znzPg3pXaVvgBziQ&amp;s" alt="Bishwas Ghimire" width="280" height="auto" />
-        <h2>Bishwas Ghimire</h2>
-        <p>Student<br />NCIT College</p>
-        <a href="https://ncit.edu.np/" target="_blank" rel="noopener noreferrer" aria-label="Nepal College of Information Technology website">
-          <img src="https://theedunepal.ap-south-1.linodeobjects.com/bachelorfairuploads/clients/ncit/logo/nepal_college_of_informationpng_20220608011130.png" alt="NCIT Logo" />
-        </a>
-        <p>Enthusiastic and optimistic, always embracing new challenges with a positive mindset...</p>
-      </div>
-      <div class="right">
-        <h1>Information</h1>
-        <hr />
-        <h3>Email</h3>
-        <p><a href="mailto:bishwasghimire2060@gmail.com">bishwasghimire2060@gmail.com</a></p>
-
-        <h3>Phone</h3>
-        <p>+9779866342404</p>
-
-        <h3>Address</h3>
-        <p>Chitwan, Nepal</p>
-
-        <h1>Skills</h1>
-        <hr />
-        <div class="skills">
-          <div class="skill" aria-label="Skill: C">C</div>
-          <div class="skill" aria-label="Skill: C++">C++</div>
-          <div class="skill" aria-label="Skill: JAVA">JAVA</div>
-          <div class="skill" aria-label="Skill: HTML">HTML</div>
-          <div class="skill" aria-label="Skill: CSS">CSS</div>
-          <div class="skill" aria-label="Skill: JavaScript">JAVASCRIPT</div>
+<body class="bg-white">
+    <!-- Tech Background Animation -->
+    <div class="tech-background">
+        <!-- Floating Particles -->
+        <div class="particle-group">
+            <div class="particle" style="left: 5%; top: 10%; animation-delay: 0.5s"></div>
+            <div class="particle" style="left: 15%; top: 25%; animation-delay: 1s"></div>
+            <div class="particle" style="left: 25%; top: 40%; animation-delay: 1.5s"></div>
+            <div class="particle" style="left: 35%; top: 55%; animation-delay: 2s"></div>
+            <div class="particle" style="left: 45%; top: 70%; animation-delay: 2.5s"></div>
+            <div class="particle" style="left: 55%; top: 85%; animation-delay: 3s"></div>
+            <div class="particle" style="left: 65%; top: 20%; animation-delay: 3.5s"></div>
+            <div class="particle" style="left: 75%; top: 35%; animation-delay: 4s"></div>
+            <div class="particle" style="left: 85%; top: 50%; animation-delay: 4.5s"></div>
+            <div class="particle" style="left: 95%; top: 65%; animation-delay: 5s"></div>
         </div>
-
-        <h1>Connect Me</h1>
-        <hr />
-        <div id="acm">
-          <i class="fa-brands fa-facebook" aria-hidden="true" style="color: #196dae;"></i>
-          <a href="https://www.facebook.com/bishwas.ghimire.144/" target="_blank" rel="noopener noreferrer">Facebook</a>
-          <i class="fa-brands fa-instagram" aria-hidden="true" style="color: red;"></i>
-          <a href="https://www.instagram.com/bishwas.ghimire.144/?hl=en" target="_blank" rel="noopener noreferrer">Instagram</a>
-          <i class="fa-brands fa-youtube" aria-hidden="true" style="color: #c1253c;"></i>
-          <a href="https://www.youtube.com/channel/UCHacpeYvSWuBX8zaYjvrQhg" target="_blank" rel="noopener noreferrer">YouTube</a>
-        </div>
-      </div>
+        <!-- Background Gradient -->
+        <div class="bg-gradient absolute inset-0"></div>
     </div>
-  </section>
+    <!-- Navbar -->
+    <nav class="fixed w-full bg-white shadow-lg z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <a href="#home" class="text-2xl font-bold text-gray-800">
+                    Bishwas Ghimire
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-gray-600 hover:text-blue-600 transition-colors">Home</a>
+                    <a href="#projects" class="text-gray-600 hover:text-blue-600 transition-colors">Projects</a>
+                    <a href="#collaborate" class="text-gray-600 hover:text-blue-600 transition-colors">Collaborate</a>
+                    <a href="#footer" class="text-gray-600 hover:text-blue-600 transition-colors">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-  <script src="projectjs.js"></script>
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col items-center text-center">
+                <!-- Profile Photo -->
+                <div class="relative mb-10">
+                    <div class="glass-effect p-2">
+                        <img src="https://wallpapers.com/images/hd/cool-discord-profile-pictures-1080-x-1080-ouhe25uehbs4l0x3.jpg" alt="Bishwas Ghimire" class="w-40 h-40 rounded-full object-cover">
+                        <div class="absolute -top-3 -right-3 w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Name and Title -->
+                <div class="mb-6">
+                    <h1 class="text-5xl md:text-7xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+                        Bishwas Ghimire
+                    </h1>
+                    <p class="text-xl md:text-2xl text-gray-300">
+                        Full Stack Developer | Problem Solver | Innovator
+                    </p>
+                </div>
+
+                <!-- About Me Content -->
+                <div class="glass-effect p-6 rounded-xl mb-8">
+                    <p class="text-gray-300 mb-4">
+                        Hi there! I'm Bishwas Ghimire, a passionate software developer with a keen interest in creating innovative solutions. 
+                        With a strong foundation in both frontend and backend development, I thrive on solving complex problems and 
+                        building user-friendly applications.
+                    </p>
+                    <p class="text-gray-300 mb-4">
+                        My journey in technology has been driven by a desire to create meaningful experiences through code. 
+                        I'm constantly learning and exploring new technologies to stay at the forefront of web development.
+                    </p>
+                    <p class="text-gray-300">
+                        When I'm not coding, you can find me exploring new technologies, reading about the latest development trends, 
+                        or working on personal projects that challenge me to grow as a developer.
+                    </p>
+                </div>
+
+                <!-- View Projects Button -->
+                <div class="flex justify-center">
+                    <a href="#projects" class="btn-outline">View Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-12">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+                My Skills
+            </h2>
+            <div class="flex flex-wrap justify-center gap-6">
+                <!-- HTML Skill -->
+                <div class="skill-card glass-effect p-4 rounded-lg transform transition-all duration-300 hover:scale-105">
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-12 h-12 mb-2">
+                            <i class="fab fa-html5 text-3xl text-red-500"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold">HTML5</h3>
+                    </div>
+                </div>
+
+                <!-- CSS Skill -->
+                <div class="skill-card glass-effect p-4 rounded-lg transform transition-all duration-300 hover:scale-105">
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-12 h-12 mb-2">
+                            <i class="fab fa-css3-alt text-3xl text-blue-500"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold">CSS3</h3>
+                    </div>
+                </div>
+
+                <!-- React Skill -->
+                <div class="skill-card glass-effect p-4 rounded-lg transform transition-all duration-300 hover:scale-105">
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-12 h-12 mb-2">
+                            <i class="fab fa-react text-3xl text-blue-600"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold">React</h3>
+                    </div>
+                </div>
+
+                <!-- PHP Skill -->
+                <div class="skill-card glass-effect p-4 rounded-lg transform transition-all duration-300 hover:scale-105">
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-12 h-12 mb-2">
+                            <i class="fab fa-php text-3xl text-purple-500"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold">PHP</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <div id="projects" class="min-h-screen bg-gray-50 pt-24">
+        <div class="container mx-auto px-4 py-20">
+            <h2 class="text-3xl font-bold text-gray-800 mb-12 text-center fade-in">My Projects</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Book Store Project -->
+                <div class="project-card">
+                    <div class="relative">
+                        <!-- Project Image with Overlay -->
+                        <div class="relative h-64 overflow-hidden rounded-xl">
+                            <img src="https://images.nightcafe.studio/jobs/GS2XseG4DVwf2L0fig3b/GS2XseG4DVwf2L0fig3b--1--oteg0.jpg?tr=w-1600,c-at_max" 
+                                 alt="Book Store" class="w-full h-full object-cover transform transition-transform duration-500 hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500">
+                                <div class="absolute bottom-4 left-4">
+                                    <span class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-full">
+                                        Featured
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Project Details -->
+                        <div class="p-6 space-y-6 glass-effect">
+                            <!-- Project Title -->
+                            <div class="relative">
+                                <div class="absolute inset-0 bg-white/10 backdrop-blur-sm rounded-lg"></div>
+                                <h3 class="text-4xl font-bold text-white mb-4 relative z-10">
+                                    <span class="block bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                                        Book Store
+                                    </span>
+                                </h3>
+                            </div>
+                            
+                            <!-- Project Description -->
+                            <div class="bg-white/5 p-4 rounded-lg backdrop-blur-sm">
+                                <p class="text-lg text-white/90 leading-relaxed">
+                                    A modern e-commerce platform for book lovers featuring real-time search, recommendations, and user reviews.
+                                </p>
+                            </div>
+                            
+                            <!-- Tech Stack -->
+                            <div class="bg-white/5 p-4 rounded-lg backdrop-blur-sm">
+                                <div class="flex flex-wrap gap-4 justify-center">
+                                    <div class="tech-stack-item">
+                                        <span class="px-6 py-3 bg-blue-500/30 text-blue-200 rounded-full text-base font-medium flex items-center gap-2">
+                                            <i class="fab fa-html5 text-lg"></i>
+                                            <span>HTML5</span>
+                                        </span>
+                                    </div>
+                                    <div class="tech-stack-item">
+                                        <span class="px-6 py-3 bg-green-500/30 text-green-200 rounded-full text-base font-medium flex items-center gap-2">
+                                            <i class="fab fa-css3-alt text-lg"></i>
+                                            <span>CSS3</span>
+                                        </span>
+                                    </div>
+                                    <div class="tech-stack-item">
+                                        <span class="px-6 py-3 bg-yellow-500/30 text-yellow-200 rounded-full text-base font-medium flex items-center gap-2">
+                                            <i class="fab fa-js text-lg"></i>
+                                            <span>JavaScript</span>
+                                        </span>
+                                    </div>
+                                    <div class="tech-stack-item">
+                                        <span class="px-6 py-3 bg-purple-500/30 text-purple-200 rounded-full text-base font-medium flex items-center gap-2">
+                                            <i class="fab fa-php text-lg"></i>
+                                            <span>PHP</span>
+                                        </span>
+                                    </div>
+                                    <div class="tech-stack-item">
+                                        <span class="px-6 py-3 bg-blue-500/30 text-blue-200 rounded-full text-base font-medium flex items-center gap-2">
+                                            <i class="fab fa-react text-lg"></i>
+                                            <span>React</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Action Buttons -->
+                            <div class="bg-white/5 p-4 rounded-lg backdrop-blur-sm">
+                                <div class="flex justify-between items-center">
+                                    <a href="#" class="flex items-center gap-3 px-6 py-3 bg-blue-500/30 rounded-full text-white hover:bg-blue-500/40 transition-colors">
+                                        <i class="fab fa-github text-xl"></i>
+                                        <span class="text-lg font-medium">GitHub</span>
+                                    </a>
+                                    <a href="#" class="flex items-center gap-3 px-6 py-3 bg-blue-500/30 rounded-full text-white hover:bg-blue-500/40 transition-colors">
+                                        <i class="fas fa-external-link-alt text-xl"></i>
+                                        <span class="text-lg font-medium">Live Demo</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collaborate Section -->
+    <section id="collaborate" class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+                Collaborate with Me
+            </h2>
+            <div class="max-w-3xl mx-auto">
+                <div class="bg-white/5 p-6 rounded-xl glass-effect">
+                    <form id="collaborateForm" class="space-y-4">
+                        <div class="space-y-2">
+                            <label class="block text-lg font-medium text-black">Your Name</label>
+                            <input type="text" id="name" class="w-full px-4 py-2 bg-white/5 rounded-lg border border-white/20 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 text-black placeholder-gray-400" placeholder="Enter your full name" required>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block text-lg font-medium text-black">Your Email</label>
+                            <input type="email" id="email" class="w-full px-4 py-2 bg-white/5 rounded-lg border border-white/20 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 text-black placeholder-gray-400" placeholder="example@email.com" required>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block text-lg font-medium text-black">Project Description</label>
+                            <textarea id="message" class="w-full px-4 py-2 bg-white/5 rounded-lg border border-white/20 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 text-black placeholder-gray-400" rows="4" placeholder="Tell me about your project and how we can collaborate..." required></textarea>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block text-lg font-medium text-black">Preferred Communication Method</label>
+                            <select id="communication" class="w-full px-4 py-2 bg-white/5 rounded-lg border border-white/20 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 text-black placeholder-gray-400">
+                                <option value="email">Email</option>
+                                <option value="linkedin">LinkedIn</option>
+                                <option value="discord">Discord</option>
+                                <option value="github">GitHub</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="w-full px-6 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:opacity-90 transition-opacity">
+                            Submit Collaboration Request
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer" class="bg-gray-800 text-white">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Contact Me</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-envelope text-blue-500"></i>
+                            <a href="mailto:bishwasghimire2060@gmail.com" class="text-gray-400 hover:text-white transition-colors">Your email: bishwasghimire2060@gmail.com</a>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-map-marker-alt text-red-500"></i>
+                            <span class="text-gray-400">Your location: Kathmandu, Nepal</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative h-64">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.4280331247834!2d85.31529971495647!3d27.70918998279403!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19883430f783%3A0x1a1a1a1a1a1a1a1a!2sKathmandu%2C%20Nepal!5e0!3m2!1sen!2snp!4v1686987953000!5m2!1sen!2snp" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Social Links</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-github fa-2x"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-linkedin fa-2x"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-twitter fa-2x"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 Bishwas Ghimire. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Collaborate form submission handling
+        document.getElementById('collaborateForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your collaboration request! I will review your project and get back to you soon.');
+            this.reset();
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
