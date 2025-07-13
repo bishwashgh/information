@@ -182,8 +182,6 @@ class MoodSystem {
                 body.style.animation = 'melancholicBackground 20s infinite ease-in-out';
                 break;
             case 'mysterious':
-                body.style.animation = 'mysteriousBackground 15s infinite linear';
-                break;
         }
     }
 
@@ -198,20 +196,6 @@ class MoodSystem {
             const oldQuote = document.querySelector('.mood-quote');
             if (oldQuote) oldQuote.remove();
         }, 5000);
-    }
-
-    updateMoodMusic(musicFile) {
-        if (this.musicPlayer) {
-            this.musicPlayer.pause();
-            this.musicPlayer.src = '';
-        }
-
-        this.musicPlayer = new Audio(musicFile);
-        this.musicPlayer.loop = true;
-        this.musicPlayer.volume = 0.3;
-        this.musicPlayer.play().catch(error => {
-            console.log('Music playback error:', error);
-        });
     }
 
     addMoodListeners() {
