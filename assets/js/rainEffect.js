@@ -36,58 +36,121 @@ class RainEffect {
         this.rainDrops = [];
         this.ripples = [];
         this.isInitialized = false;
+
+        // Create canvas for rain effect
+        this.canvas = document.createElement('canvas');
+        this.canvas.className = 'rain-canvas';
+        this.container.appendChild(this.canvas);
+        this.ctx = this.canvas.getContext('2d');
+
+        // Set canvas dimensions
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
     }
 
     initialize() {
         if (this.isInitialized) return;
 
+        // Adjust effects based on device type and mood
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        const isFocused = document.body.classList.contains('focused');
+        
+        // Focused mood settings
+        const numDrops = isMobile ? (isFocused ? 10 : 30) : (isFocused ? 50 : 100);
+        const numRipples = isMobile ? (isFocused ? 3 : 5) : (isFocused ? 10 : 20);
+        const dropSpeed = isMobile ? (isFocused ? 1 : 2) : (isFocused ? 1.5 : 4);
+        const dropWidth = isMobile ? (isFocused ? 0.5 : 1) : (isFocused ? 1 : 2);
+        const rippleSize = isMobile ? (isFocused ? 10 : 20) : (isFocused ? 20 : 30);
+
         // Create rain drops
-        for (let i = 0; i < 50; i++) {
-            const drop = document.createElement('div');
-            drop.className = 'rain-drop';
-            drop.style.left = `${Math.random() * window.innerWidth}px`;
-            drop.style.top = `${Math.random() * window.innerHeight}px`;
-            this.container.appendChild(drop);
-            this.rainDrops.push(drop);
+        for (let i = 0; i < numDrops; i++) {
+            this.drops.push({
+                x: Math.random() * window.innerWidth,
+                y: Math.random() * window.innerHeight,
+                speed: dropSpeed + Math.random() * (isMobile ? 1 : 2),
+                width: dropWidth + Math.random() * (isMobile ? 0.5 : 1),
+                opacity: 0.2 + Math.random() * 0.3
+            });
         }
 
         // Create ripples
-        for (let i = 0; i < 10; i++) {
-            const ripple = document.createElement('div');
-            ripple.className = 'ripple';
-            ripple.style.left = `${Math.random() * window.innerWidth}px`;
-            ripple.style.top = `${Math.random() * window.innerHeight}px`;
-            ripple.style.animationDelay = `${i * 0.2}s`;
-            this.container.appendChild(ripple);
-            this.ripples.push(ripple);
+        for (let i = 0; i < numRipples; i++) {
+            this.ripples.push({
+                x: Math.random() * window.innerWidth,
+                y: Math.random() * window.innerHeight,
+                radius: 0,
+                maxRadius: rippleSize + Math.random() * (isMobile ? 5 : 10),
+                opacity: 0.4,
+                active: false
+            });
         }
 
-        // Update rain elements
-        this.updateRainDrops();
-        this.updateRipples();
-        
+        // Start animation loop
+        this.animate();
+
         this.isInitialized = true;
     }
 
-    updateRainDrops() {
-        this.rainDrops.forEach(drop => {
-            const x = Math.random() * window.innerWidth;
-            const y = Math.random() * window.innerHeight;
-            drop.style.left = `${x}px`;
-            drop.style.top = `${y}px`;
-            drop.style.animationDuration = `${2 + Math.random() * 2}s`;
-        });
-    }
+    animate() {
+        if (!this.isInitialized) return;
 
-    updateRipples() {
-        this.ripples.forEach((ripple, index) => {
-            const x = Math.random() * window.innerWidth;
-            const y = Math.random() * window.innerHeight;
-            ripple.style.left = `${x}px`;
-            ripple.style.top = `${y}px`;
-            ripple.style.animationDelay = `${index * 0.2}s`;
-            ripple.style.animationDuration = `${1 + Math.random() * 1}s`;
+        // Clear canvas
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+        // Draw rain drops
+        this.drops.forEach(drop => {
+            drop.y += drop.speed;
+            if (drop.y > window.innerHeight) {
+                drop.y = -10;
+                drop.x = Math.random() * window.innerWidth;
+            }
+
+            // Only draw if visible
+            if (drop.y > -20 && drop.y < window.innerHeight + 20) {
+                this.ctx.beginPath();
+                this.ctx.moveTo(drop.x, drop.y);
+                this.ctx.lineTo(drop.x, drop.y + 20);
+                this.ctx.strokeStyle = `rgba(255, 215, 0, ${drop.opacity})`;
+                this.ctx.lineWidth = drop.width;
+                this.ctx.stroke();
+
+                // Create ripple when drop hits ground
+                if (drop.y > window.innerHeight - 10) {
+                    const ripple = this.ripples[Math.floor(Math.random() * this.ripples.length)];
+                    if (!ripple.active) {
+                        ripple.x = drop.x;
+                        ripple.y = window.innerHeight;
+                        ripple.radius = 0;
+                        ripple.active = true;
+                    }
+                }
+            }
         });
+
+        // Draw ripples
+        this.ripples.forEach(ripple => {
+            if (ripple.active) {
+                ripple.radius += 2;
+                if (ripple.radius > ripple.maxRadius) {
+                    ripple.active = false;
+                }
+
+                // Only draw if visible
+                if (ripple.radius < ripple.maxRadius) {
+                    this.ctx.beginPath();
+                    this.ctx.arc(ripple.x, ripple.y, ripple.radius, 0, Math.PI * 2);
+                    this.ctx.fillStyle = `rgba(255, 215, 0, ${ripple.opacity * (1 - ripple.radius / ripple.maxRadius)})`;
+                    this.ctx.fill();
+                }
+            }
+        });
+
+        // Request next frame with throttling
+        const now = Date.now();
+        if (!this.lastFrameTime || (now - this.lastFrameTime) > (isMobile ? 16 : 8)) { // 60fps on desktop, 30fps on mobile
+            this.lastFrameTime = now;
+            requestAnimationFrame(() => this.animate());
+        }
     }
 
     start() {
