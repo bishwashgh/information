@@ -59,8 +59,10 @@ main {
   justify-content: center;
   align-items: center;
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.5s ease;
-  overflow: visible;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000;
 }
 
 .portal:hover {
