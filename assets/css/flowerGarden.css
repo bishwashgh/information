@@ -1,0 +1,117 @@
+/* Flower Garden Styles */
+.flower-garden {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+/* Flower Types */
+.flower {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    animation: float 10s ease-in-out infinite;
+    transform-origin: bottom center;
+}
+
+/* Different Flower Varieties */
+.flower.sunflower {
+    background: linear-gradient(45deg, #ffd700, #ff8c00);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.flower.rose {
+    background: linear-gradient(45deg, #ff1493, #ff69b4);
+    box-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
+}
+
+.flower.daisy {
+    background: linear-gradient(45deg, #fff, #ffd700);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.flower.tulip {
+    background: linear-gradient(45deg, #66ccff, #00bfff);
+    box-shadow: 0 0 10px rgba(102, 204, 255, 0.5);
+}
+
+/* Flower Animations */
+@keyframes float {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-20px) rotate(180deg);
+    }
+    100% {
+        transform: translateY(0) rotate(360deg);
+    }
+}
+
+@keyframes bloom {
+    0% {
+        transform: scale(0.8);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0.8);
+        opacity: 0.5;
+    }
+}
+
+/* Flower Controls */
+.flower-controls {
+    position: fixed;
+    bottom: 140px;
+    right: 20px;
+    background: rgba(255, 215, 0, 0.8);
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: flex;
+    gap: 5px;
+    z-index: 9999;
+}
+
+.flower-button {
+    background: none;
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-family: monospace;
+}
+
+/* Happy Mood Specific Styles */
+[data-mood="happy"] {
+    --flower-count: 50;
+    --flower-speed: 10s;
+    --flower-bloom-speed: 5s;
+}
+
+[data-mood="happy"] .flower {
+    animation-duration: var(--flower-speed);
+}
+
+[data-mood="happy"] .flower.sunflower {
+    animation: float var(--flower-speed) ease-in-out infinite,
+               bloom var(--flower-bloom-speed) ease-in-out infinite;
+}
+
+/* Flower Garden Container */
+.flower-garden-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+}

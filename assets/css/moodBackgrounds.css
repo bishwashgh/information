@@ -1,0 +1,121 @@
+/* Background Animations */
+@keyframes happyBackground {
+    0% {
+        background-position: 0 0;
+        filter: brightness(100%);
+    }
+    50% {
+        background-position: 100px 100px;
+        filter: brightness(110%);
+    }
+    100% {
+        background-position: 0 0;
+        filter: brightness(100%);
+    }
+}
+
+@keyframes calmBackground {
+    0% {
+        background-position: 0 0;
+        opacity: 0.5;
+    }
+    50% {
+        background-position: 50px 50px;
+        opacity: 0.7;
+    }
+    100% {
+        background-position: 0 0;
+        opacity: 0.5;
+    }
+}
+
+@keyframes focusedBackground {
+    0% {
+        background-position: 0 0;
+        transform: scale(1);
+    }
+    50% {
+        background-position: 20px 20px;
+        transform: scale(1.05);
+    }
+    100% {
+        background-position: 0 0;
+        transform: scale(1);
+    }
+}
+
+@keyframes melancholicBackground {
+    0% {
+        background-position: 0 0;
+        filter: contrast(100%);
+    }
+    50% {
+        background-position: 75px 75px;
+        filter: contrast(90%);
+    }
+    100% {
+        background-position: 0 0;
+        filter: contrast(100%);
+    }
+}
+
+@keyframes mysteriousBackground {
+    0% {
+        background-position: 0 0;
+        opacity: 0.2;
+    }
+    50% {
+        background-position: 50px 50px;
+        opacity: 0.4;
+    }
+    100% {
+        background-position: 0 0;
+        opacity: 0.2;
+    }
+}
+
+/* Background Patterns */
+[data-mood="happy"] {
+    --background-image: linear-gradient(45deg, #ffd700 25%, transparent 25%),
+                        linear-gradient(-45deg, #ffd700 25%, transparent 25%),
+                        linear-gradient(45deg, transparent 75%, #ffd700 75%),
+                        linear-gradient(-45deg, transparent 75%, #ffd700 75%);
+    --background-size: 20px 20px;
+    --background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+
+[data-mood="calm"] {
+    --background-image: radial-gradient(circle at 50% 50%, rgba(102, 204, 255, 0.1) 0%, transparent 50%);
+    --background-size: 100px 100px;
+    --background-position: 0 0;
+}
+
+[data-mood="focused"] {
+    --background-image: linear-gradient(135deg, rgba(255, 105, 180, 0.1) 0%, transparent 50%, rgba(0, 255, 0, 0.1) 50%, transparent 100%);
+    --background-size: 200px 200px;
+    --background-position: 0 0;
+}
+
+[data-mood="melancholic"] {
+    --background-image: linear-gradient(135deg, rgba(139, 69, 19, 0.1) 0%, transparent 50%, rgba(255, 215, 0, 0.1) 50%, transparent 100%);
+    --background-size: 150px 150px;
+    --background-position: 0 0;
+}
+
+[data-mood="mysterious"] {
+    --background-image: radial-gradient(circle at 50% 50%, rgba(0, 255, 0, 0.2) 0%, transparent 50%);
+    --background-size: 100px 100px;
+    --background-position: 0 0;
+}
+
+/* Background Transitions */
+[data-mood] {
+    transition: 
+        background-color 1s ease,
+        color 1s ease,
+        filter 1s ease,
+        background-image 1s ease,
+        background-size 1s ease,
+        background-position 1s ease,
+        opacity 1s ease;
+}

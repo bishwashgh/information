@@ -1,0 +1,151 @@
+/* Celestial bodies styles */
+.celestial-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px;
+}
+
+.sun-container {
+    position: relative;
+    width: 400px; /* Reduced from 800px */
+    height: 400px;
+    transform-origin: center;
+}
+
+.sun {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, #ffd700 0%, #ffaa00 70%, #ff5500 100%);
+    border-radius: 50%;
+    box-shadow: 0 0 50px rgba(255, 215, 0, 0.8);
+    animation: sunPulse 5s infinite;
+}
+
+@keyframes sunPulse {
+    0% { box-shadow: 0 0 50px rgba(255, 215, 0, 0.8); }
+    50% { box-shadow: 0 0 100px rgba(255, 215, 0, 1); }
+    100% { box-shadow: 0 0 50px rgba(255, 215, 0, 0.8); }
+}
+
+.earth-container {
+    position: absolute;
+    width: 240px; /* 3cm * 2 + earth size */
+    height: 240px;
+    transform-origin: center;
+}
+
+.earth {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    transform-origin: center;
+    animation: earthOrbit 30s linear infinite;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.earth::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 40% 30%, #0000ff 0%, #0000ff 20%, #0000ff 30%, #0000ff 40%, #0000ff 50%, #0000ff 60%, #0000ff 70%, #0000ff 80%, #0000ff 90%, #0000ff 100%);
+    animation: earthRotation 24h linear infinite;
+    transform-origin: center center;
+}
+
+.earth::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: 
+        /* North America */
+        radial-gradient(circle at 25% 25%, #00ff00 0%, transparent 50%) 0 0/100% 100%,
+        /* South America */
+        radial-gradient(circle at 35% 75%, #00ff00 0%, transparent 50%) 0 0/100% 100%,
+        /* Europe */
+        radial-gradient(circle at 65% 25%, #00ff00 0%, transparent 50%) 0 0/100% 100%,
+        /* Africa */
+        radial-gradient(circle at 65% 55%, #00ff00 0%, transparent 50%) 0 0/100% 100%,
+        /* Asia */
+        radial-gradient(circle at 85% 35%, #00ff00 0%, transparent 50%) 0 0/100% 100%,
+        /* Australia */
+        radial-gradient(circle at 90% 75%, #00ff00 0%, transparent 50%) 0 0/100% 100%;
+    background-blend-mode: lighten;
+    animation: earthRotation 24h linear infinite;
+    transform-origin: center center;
+}
+
+@keyframes earthRotation {
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(360deg); }
+}
+
+@keyframes earthOrbit {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(0, 0) rotate(360deg); }
+}
+
+.moon {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    animation: moonOrbit 15s linear infinite;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.moon::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: 
+        /* Crater patterns */
+        radial-gradient(circle at 30% 30%, #d3d3d3 0%, transparent 50%),
+        radial-gradient(circle at 70% 70%, #d3d3d3 0%, transparent 50%),
+        radial-gradient(circle at 20% 80%, #d3d3d3 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, #d3d3d3 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, #d3d3d3 0%, transparent 50%);
+    background-blend-mode: lighten;
+    animation: moonRotation 24h linear infinite;
+    transform-origin: center center;
+}
+
+@keyframes moonOrbit {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(0, 0) rotate(360deg); }
+}
+
+/* Celestial paths */
+.earth-path {
+    position: absolute;
+    width: 787px; /* 10cm * 2 = 393.7px * 2 */
+    height: 787px;
+    border: 1px dashed rgba(255, 215, 0, 0.1);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.moon-path {
+    position: absolute;
+    width: 236px; /* 3cm * 2 = 118.1px * 2 */
+    height: 236px;
+    border: 1px dashed rgba(255, 215, 0, 0.1);
+    border-radius: 50%;
+    pointer-events: none;
+}
