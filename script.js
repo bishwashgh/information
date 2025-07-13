@@ -2,6 +2,7 @@
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
+  initializeMobileOptimizations();
   initializeNeonEffects();
   initializeScrollAnimations();
   initializeProjectInteractions();
@@ -594,7 +595,154 @@ function initializeTicTacToe() {
   restartBtn.addEventListener('click', restartGame);
 }
 
-// Jump Game
+// Aggressive Mobile Performance Optimizations
+
+// Detect mobile and low-end devices
+function isMobileDevice() {
+  return window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+function isLowEndDevice() {
+  return window.innerWidth <= 480 || navigator.hardwareConcurrency <= 2;
+}
+
+// Disable heavy features on mobile
+function initializeMobileOptimizations() {
+  const isMobile = isMobileDevice();
+  const isLowEnd = isLowEndDevice();
+  
+  if (isMobile) {
+    // Disable lightning sphere completely on mobile
+    const lightningSphere = document.querySelector('.lightning-sphere');
+    if (lightningSphere) {
+      lightningSphere.style.display = 'none';
+    }
+    
+    // Disable particle creation
+    const particlesContainer = document.querySelector('.floating-particles');
+    if (particlesContainer) {
+      particlesContainer.innerHTML = '';
+    }
+    
+    // Optimize game performance
+    const jumpGame = document.getElementById('jump-game');
+    if (jumpGame) {
+      jumpGame.style.imageRendering = 'pixelated';
+    }
+  }
+  
+  if (isLowEnd) {
+    // Disable all animations for low-end devices
+    const style = document.createElement('style');
+    style.textContent = `
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+}
+
+// Optimize lightning sphere for mobile
+function initializeLightningSphere() {
+  const canvas = document.getElementById('lightning-sphere-canvas');
+  if (!canvas) return;
+  
+  const isMobile = isMobileDevice();
+  const isLowEnd = isLowEndDevice();
+  
+  // Completely disable on mobile
+  if (isMobile) {
+    canvas.style.display = 'none';
+    return;
+  }
+  
+  const ctx = canvas.getContext('2d');
+  const w = canvas.width;
+  const h = canvas.height;
+  const centerX = w / 2;
+  const centerY = h / 2;
+  const radius = 75;
+  
+  function drawSphere() {
+    ctx.clearRect(0, 0, w, h);
+    
+    // Core sphere only
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius - 8, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(0,30,40,0.95)';
+    ctx.fill();
+  }
+
+  function drawLightning() {
+    // Minimal lightning for performance
+    const bolts = isLowEnd ? 1 : 2;
+    
+    for (let i = 0; i < bolts; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const boltLength = 30;
+      const startX = centerX + Math.cos(angle) * (radius - 18);
+      const startY = centerY + Math.sin(angle) * (radius - 18);
+      
+      ctx.save();
+      ctx.strokeStyle = '#00ffff';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(centerX, centerY);
+      ctx.lineTo(startX, startY);
+      ctx.stroke();
+      ctx.restore();
+    }
+  }
+
+  function animate() {
+    drawSphere();
+    drawLightning();
+    
+    // Lower frame rate for performance
+    setTimeout(() => {
+      requestAnimationFrame(animate);
+    }, 50); // 20fps for better performance
+  }
+  
+  animate();
+}
+
+// Optimize particle creation for mobile
+function createFloatingParticles() {
+  const particlesContainer = document.querySelector('.floating-particles');
+  const isMobile = isMobileDevice();
+  const isLowEnd = isLowEndDevice();
+  
+  // No particles on mobile or low-end devices
+  if (isMobile || isLowEnd) {
+    particlesContainer.innerHTML = '';
+    return;
+  }
+  
+  const particleCount = window.innerWidth < 768 ? 3 : 5;
+  
+  for (let i = 0; i < particleCount; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    particle.style.cssText = `
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      background: ${getRandomNeonColor()};
+      border-radius: 50%;
+      animation: float 8s ease-in-out infinite;
+      animation-delay: ${Math.random() * 4}s;
+      left: ${Math.random() * 100}%;
+      top: ${Math.random() * 100}%;
+      will-change: transform;
+    `;
+    particlesContainer.appendChild(particle);
+  }
+}
+
+// Optimize jump game for mobile
 function initializeJumpGame() {
   const canvas = document.getElementById('jump-game');
   const ctx = canvas.getContext('2d');
@@ -602,6 +750,8 @@ function initializeJumpGame() {
   const restartBtn = document.getElementById('jump-restart');
   const scoreDisplay = document.getElementById('jump-score');
   const highScoreDisplay = document.getElementById('jump-high-score');
+  
+  const isMobile = isMobileDevice();
   
   let gameRunning = false;
   let animationId;
@@ -627,18 +777,28 @@ function initializeJumpGame() {
   
   function drawPlayer() {
     ctx.fillStyle = '#00ffff';
-    ctx.shadowColor = '#00ffff';
-    ctx.shadowBlur = 10;
+    // Remove shadow for mobile performance
+    if (!isMobile) {
+      ctx.shadowColor = '#00ffff';
+      ctx.shadowBlur = 10;
+    }
     ctx.fillRect(player.x, player.y, player.width, player.height);
-    ctx.shadowBlur = 0;
+    if (!isMobile) {
+      ctx.shadowBlur = 0;
+    }
   }
   
   function drawObstacle(obstacle) {
     ctx.fillStyle = '#ffa500';
-    ctx.shadowColor = '#ffa500';
-    ctx.shadowBlur = 10;
+    // Remove shadow for mobile performance
+    if (!isMobile) {
+      ctx.shadowColor = '#ffa500';
+      ctx.shadowBlur = 10;
+    }
     ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
-    ctx.shadowBlur = 0;
+    if (!isMobile) {
+      ctx.shadowBlur = 0;
+    }
   }
   
   function drawGround() {
@@ -706,43 +866,36 @@ function initializeJumpGame() {
     ctx.fillStyle = '#0a0a0a';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     
-    // Draw ground
     drawGround();
-    
-    // Update and draw player
-    updatePlayer();
     drawPlayer();
     
-    // Update and draw obstacles
-    updateObstacles();
-    obstacles.forEach(drawObstacle);
+    for (const obstacle of obstacles) {
+      drawObstacle(obstacle);
+    }
     
-    // Check collision
+    updatePlayer();
+    updateObstacles();
+    
     if (checkCollision()) {
       gameOver();
       return;
     }
     
-    animationId = requestAnimationFrame(gameLoop);
+    // Lower frame rate for mobile
+    const frameDelay = isMobile ? 33 : 16;
+    setTimeout(() => {
+      requestAnimationFrame(gameLoop);
+    }, frameDelay);
   }
   
   function gameOver() {
     gameRunning = false;
-    cancelAnimationFrame(animationId);
-    
     if (score > highScore) {
       highScore = score;
       localStorage.setItem('jumpHighScore', highScore);
       highScoreDisplay.textContent = highScore;
     }
-    
-    // Draw game over text
-    ctx.fillStyle = '#ff0000';
-    ctx.font = '30px Orbitron';
-    ctx.textAlign = 'center';
-    ctx.fillText('GAME OVER', canvas.width / 2, canvas.height / 2);
-    ctx.font = '16px Rajdhani';
-    ctx.fillText(`Score: ${score}`, canvas.width / 2, canvas.height / 2 + 30);
+    alert(`Game Over! Score: ${score}`);
   }
   
   function startGame() {
@@ -752,9 +905,6 @@ function initializeJumpGame() {
     score = 0;
     scoreDisplay.textContent = score;
     obstacles.length = 0;
-    
-    // Reset player
-    player.x = 50;
     player.y = groundY;
     player.velocityY = 0;
     player.jumping = false;
@@ -763,10 +913,7 @@ function initializeJumpGame() {
   }
   
   function restartGame() {
-    if (gameRunning) {
-      gameRunning = false;
-      cancelAnimationFrame(animationId);
-    }
+    gameOver();
     startGame();
   }
   
@@ -774,24 +921,17 @@ function initializeJumpGame() {
   startBtn.addEventListener('click', startGame);
   restartBtn.addEventListener('click', restartGame);
   
-  // Keyboard controls
-  document.addEventListener('keydown', (e) => {
-    if (e.code === 'Space' && gameRunning) {
-      e.preventDefault();
-      jump();
-    }
-  });
-  
-  // Mouse/touch controls
-  canvas.addEventListener('click', () => {
-    if (gameRunning) {
-      jump();
-    }
-  });
-  
+  // Touch/click to jump
+  canvas.addEventListener('click', jump);
   canvas.addEventListener('touchstart', (e) => {
     e.preventDefault();
-    if (gameRunning) {
+    jump();
+  });
+  
+  // Keyboard support
+  document.addEventListener('keydown', (e) => {
+    if (e.code === 'Space') {
+      e.preventDefault();
       jump();
     }
   });
@@ -864,101 +1004,5 @@ function checkPassword() {
       modalContent.style.animation = '';
     }, 500);
   }
-}
-  
-// Lightning Sphere Animation
-function initializeLightningSphere() {
-  const canvas = document.getElementById('lightning-sphere-canvas');
-  if (!canvas) return;
-  
-  const ctx = canvas.getContext('2d');
-  const w = canvas.width;
-  const h = canvas.height;
-  const centerX = w / 2;
-  const centerY = h / 2;
-  const radius = 75;
-  
-  // Reduce complexity for mobile
-  const isMobile = isMobileDevice();
-  const isLowEnd = isLowEndDevice();
-  
-  function drawSphere() {
-    ctx.clearRect(0, 0, w, h);
-    
-    // Simplified glow for mobile
-    if (!isMobile) {
-      ctx.save();
-      ctx.shadowColor = '#00ffff';
-      ctx.shadowBlur = 40;
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(0,255,255,0.08)';
-      ctx.fill();
-      ctx.restore();
-    }
-    
-    // Core sphere
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, radius - 8, 0, Math.PI * 2);
-    ctx.fillStyle = isMobile ? 'rgba(0,30,40,0.9)' : 'rgba(0,30,40,0.95)';
-    ctx.fill();
-  }
-
-  function drawLightning() {
-    // Reduce lightning bolts for mobile
-    const bolts = isMobile ? (isLowEnd ? 1 : 2) : (4 + Math.floor(Math.random() * 3));
-    
-    for (let i = 0; i < bolts; i++) {
-      const angle = Math.random() * Math.PI * 2;
-      const boltLength = isMobile ? (20 + Math.random() * 15) : (40 + Math.random() * 30);
-      const startX = centerX + Math.cos(angle) * (radius - 18);
-      const startY = centerY + Math.sin(angle) * (radius - 18);
-      let x = startX;
-      let y = startY;
-      
-      ctx.save();
-      ctx.strokeStyle = '#00ffff';
-      ctx.shadowColor = isMobile ? 'transparent' : '#fff';
-      ctx.shadowBlur = isMobile ? 0 : 10;
-      ctx.lineWidth = isMobile ? 1.5 : 2.5;
-      ctx.beginPath();
-      ctx.moveTo(centerX, centerY);
-      ctx.lineTo(x, y);
-      
-      // Reduce segments for mobile
-      const segments = isMobile ? 3 : 6;
-      for (let j = 0; j < segments; j++) {
-        const randAngle = angle + (Math.random() - 0.5) * 0.5;
-        const segLength = boltLength / segments;
-        x += Math.cos(randAngle) * segLength;
-        y += Math.sin(randAngle) * segLength;
-        ctx.lineTo(x, y);
-      }
-      ctx.stroke();
-      ctx.restore();
-    }
-  }
-
-  function animate() {
-    drawSphere();
-    drawLightning();
-    
-    // Reduce frame rate for mobile
-    const frameRate = isMobile ? 30 : 60;
-    setTimeout(() => {
-      requestAnimationFrame(animate);
-    }, isMobile ? 33 : 16); // ~30fps for mobile, ~60fps for desktop
-  }
-  
-  animate();
-}
-  
-// Mobile Performance Optimizations
-function isMobileDevice() {
-  return window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-}
-
-function isLowEndDevice() {
-  return window.innerWidth <= 480 || navigator.hardwareConcurrency <= 2;
 }
   
