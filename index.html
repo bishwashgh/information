@@ -39,56 +39,102 @@
   
   <!-- Navigation -->
   <nav class="neon-nav">
-    <div class="nav-brand">
-      <span class="neon-text">BSGVerse</span>
-    </div>
-    <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-    <div class="nav-links">
-      <a href="#home" class="nav-link">Home</a>
-      
-      <div class="nav-dropdown">
-        <button class="dropdown-toggle" onclick="toggleDropdown(this)">
-          Projects
-          <span class="dropdown-arrow"></span>
-        </button>
-        <div class="dropdown-menu">
-          <a href="#projects" class="dropdown-item">All Projects</a>
-          <a href="#calculator" class="dropdown-item">BSG Calculator</a>
-          <a href="#todo" class="dropdown-item">Task Manager</a>
-          <a href="#contact-form" class="dropdown-item">Contact Form</a>
-        </div>
+    <div class="nav-container">
+      <div class="nav-brand">
+        <div class="brand-glow"></div>
+        <span class="neon-text">BSGVerse</span>
+        <div class="brand-particles"></div>
       </div>
       
-      <div class="nav-dropdown">
-        <button class="dropdown-toggle" onclick="toggleDropdown(this)">
-          Gaming
-          <span class="dropdown-arrow"></span>
-        </button>
-        <div class="dropdown-menu">
-          <a href="#gaming" class="dropdown-item">Gaming Arena</a>
-          <a href="#tictactoe" class="dropdown-item">BSG Tic-Tac-Toe</a>
-          <a href="#jumper" class="dropdown-item">BSG Jumper</a>
-        </div>
+      <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
       
-      <div class="nav-dropdown">
-        <button class="dropdown-toggle" onclick="toggleDropdown(this)">
-          Tools
-          <span class="dropdown-arrow"></span>
-        </button>
-        <div class="dropdown-menu">
-          <a href="aura-demo.html" class="dropdown-item" target="_blank">AURA.MoodEngine</a>
-          <a href="puzzle-contact.html" class="dropdown-item" target="_blank">Proof-of-Contact</a>
-          <a href="cybermatrix-dashboard.html" class="dropdown-item" target="_blank">CyberMatrix</a>
+      <div class="nav-links">
+        <a href="#home" class="nav-link">
+          <span class="nav-icon">🏠</span>
+          <span class="nav-text">Home</span>
+          <div class="link-glow"></div>
+        </a>
+        
+        <div class="nav-dropdown">
+          <button class="dropdown-toggle" onclick="toggleDropdown(this)">
+            <span class="nav-icon">🚀</span>
+            <span class="nav-text">Projects</span>
+            <span class="dropdown-arrow"></span>
+            <div class="toggle-glow"></div>
+          </button>
+          <div class="dropdown-menu">
+            <div class="dropdown-header">
+              <span class="dropdown-title">🚀 Projects</span>
+              <div class="dropdown-glow"></div>
+            </div>
+            <a href="#projects" class="dropdown-item">
+              <span class="item-icon">📋</span>
+              <span class="item-text">All Projects</span>
+            </a>
+            <a href="#calculator" class="dropdown-item">
+              <span class="item-icon">🧮</span>
+              <span class="item-text">BSG Calculator</span>
+            </a>
+            <a href="#todo" class="dropdown-item">
+              <span class="item-icon">✅</span>
+              <span class="item-text">Task Manager</span>
+            </a>
+            <a href="#contact-form" class="dropdown-item">
+              <span class="item-icon">📧</span>
+              <span class="item-text">Contact Form</span>
+            </a>
+          </div>
         </div>
+        
+        <div class="nav-dropdown">
+          <button class="dropdown-toggle" onclick="toggleDropdown(this)">
+            <span class="nav-icon">🎮</span>
+            <span class="nav-text">Gaming</span>
+            <span class="dropdown-arrow"></span>
+            <div class="toggle-glow"></div>
+          </button>
+          <div class="dropdown-menu">
+            <div class="dropdown-header">
+              <span class="dropdown-title">🎮 Gaming</span>
+              <div class="dropdown-glow"></div>
+            </div>
+            <a href="#gaming" class="dropdown-item">
+              <span class="item-icon">🎯</span>
+              <span class="item-text">Gaming Arena</span>
+            </a>
+            <a href="#tictactoe" class="dropdown-item">
+              <span class="item-icon">⭕</span>
+              <span class="item-text">BSG Tic-Tac-Toe</span>
+            </a>
+            <a href="#jumper" class="dropdown-item">
+              <span class="item-icon">🦘</span>
+              <span class="item-text">BSG Jumper</span>
+            </a>
+          </div>
+        </div>
+        
+        <a href="aura-mood-engine.html" class="nav-link" target="_blank">
+          <span class="nav-icon">🎭</span>
+          <span class="nav-text">aura.moodengine</span>
+          <div class="link-glow"></div>
+        </a>
+        
+        <a href="#timeline" class="nav-link">
+          <span class="nav-icon">📅</span>
+          <span class="nav-text">Timeline</span>
+          <div class="link-glow"></div>
+        </a>
+        
+        <a href="#contact" class="nav-link">
+          <span class="nav-icon">📞</span>
+          <span class="nav-text">Contact</span>
+          <div class="link-glow"></div>
+        </a>
       </div>
-      
-      <a href="#timeline" class="nav-link">Timeline</a>
-      <a href="#contact" class="nav-link">Contact</a>
     </div>
   </nav>
 
@@ -191,6 +237,7 @@
           </div>
           <div class="game-status" id="tictactoe-status">Player X's turn</div>
           <button class="neon-button green" id="tictactoe-restart">Restart Game</button>
+          <button class="neon-button cyan" onclick="testTicTacToe()" style="margin-top: 10px;">Test Game</button>
         </div>
       </div>
 
@@ -387,5 +434,6 @@
 
   <script src="script.js"></script>
   <script src="aura-mood-engine.js"></script>
+  <script src="games.js"></script>
 </body>
 </html>
