@@ -31,7 +31,11 @@ function initializeNeonEffects() {
 // Create floating particles
 function createFloatingParticles() {
   const particlesContainer = document.querySelector('.floating-particles');
-  const particleCount = window.innerWidth < 768 ? 5 : 10; // Reduce particles on mobile
+  const isMobile = isMobileDevice();
+  const isLowEnd = isLowEndDevice();
+  
+  // Reduce particles significantly for mobile
+  const particleCount = isLowEnd ? 0 : (isMobile ? 2 : (window.innerWidth < 768 ? 5 : 10));
   
   for (let i = 0; i < particleCount; i++) {
     const particle = document.createElement('div');
@@ -42,7 +46,7 @@ function createFloatingParticles() {
       height: 1px;
       background: ${getRandomNeonColor()};
       border-radius: 50%;
-      animation: float ${4 + Math.random() * 3}s ease-in-out infinite;
+      animation: float ${isMobile ? '6s' : '8s'} ease-in-out infinite;
       animation-delay: ${Math.random() * 4}s;
       left: ${Math.random() * 100}%;
       top: ${Math.random() * 100}%;
@@ -866,51 +870,66 @@ function checkPassword() {
 function initializeLightningSphere() {
   const canvas = document.getElementById('lightning-sphere-canvas');
   if (!canvas) return;
+  
   const ctx = canvas.getContext('2d');
   const w = canvas.width;
   const h = canvas.height;
   const centerX = w / 2;
   const centerY = h / 2;
   const radius = 75;
-
+  
+  // Reduce complexity for mobile
+  const isMobile = isMobileDevice();
+  const isLowEnd = isLowEndDevice();
+  
   function drawSphere() {
     ctx.clearRect(0, 0, w, h);
-    // Glow
-    ctx.save();
-    ctx.shadowColor = '#00ffff';
-    ctx.shadowBlur = 40;
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(0,255,255,0.08)';
-    ctx.fill();
-    ctx.restore();
-    // Core
+    
+    // Simplified glow for mobile
+    if (!isMobile) {
+      ctx.save();
+      ctx.shadowColor = '#00ffff';
+      ctx.shadowBlur = 40;
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0,255,255,0.08)';
+      ctx.fill();
+      ctx.restore();
+    }
+    
+    // Core sphere
     ctx.beginPath();
     ctx.arc(centerX, centerY, radius - 8, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(0,30,40,0.95)';
+    ctx.fillStyle = isMobile ? 'rgba(0,30,40,0.9)' : 'rgba(0,30,40,0.95)';
     ctx.fill();
   }
 
   function drawLightning() {
-    const bolts = 4 + Math.floor(Math.random() * 3);
+    // Reduce lightning bolts for mobile
+    const bolts = isMobile ? (isLowEnd ? 1 : 2) : (4 + Math.floor(Math.random() * 3));
+    
     for (let i = 0; i < bolts; i++) {
       const angle = Math.random() * Math.PI * 2;
-      const boltLength = 40 + Math.random() * 30;
+      const boltLength = isMobile ? (20 + Math.random() * 15) : (40 + Math.random() * 30);
       const startX = centerX + Math.cos(angle) * (radius - 18);
       const startY = centerY + Math.sin(angle) * (radius - 18);
       let x = startX;
       let y = startY;
+      
       ctx.save();
       ctx.strokeStyle = '#00ffff';
-      ctx.shadowColor = '#fff';
-      ctx.shadowBlur = 10;
-      ctx.lineWidth = 2.5;
+      ctx.shadowColor = isMobile ? 'transparent' : '#fff';
+      ctx.shadowBlur = isMobile ? 0 : 10;
+      ctx.lineWidth = isMobile ? 1.5 : 2.5;
       ctx.beginPath();
       ctx.moveTo(centerX, centerY);
       ctx.lineTo(x, y);
-      for (let j = 0; j < 6; j++) {
+      
+      // Reduce segments for mobile
+      const segments = isMobile ? 3 : 6;
+      for (let j = 0; j < segments; j++) {
         const randAngle = angle + (Math.random() - 0.5) * 0.5;
-        const segLength = boltLength / 6;
+        const segLength = boltLength / segments;
         x += Math.cos(randAngle) * segLength;
         y += Math.sin(randAngle) * segLength;
         ctx.lineTo(x, y);
@@ -923,8 +942,23 @@ function initializeLightningSphere() {
   function animate() {
     drawSphere();
     drawLightning();
-    requestAnimationFrame(animate);
+    
+    // Reduce frame rate for mobile
+    const frameRate = isMobile ? 30 : 60;
+    setTimeout(() => {
+      requestAnimationFrame(animate);
+    }, isMobile ? 33 : 16); // ~30fps for mobile, ~60fps for desktop
   }
+  
   animate();
+}
+  
+// Mobile Performance Optimizations
+function isMobileDevice() {
+  return window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+function isLowEndDevice() {
+  return window.innerWidth <= 480 || navigator.hardwareConcurrency <= 2;
 }
   

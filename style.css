@@ -1806,3 +1806,132 @@ section {
     transition-duration: 0.01ms !important;
   }
 }  
+
+/* Mobile Performance Optimizations */
+
+/* Disable heavy animations on mobile */
+@media (max-width: 768px) {
+  .neon-grid {
+    animation: none !important;
+    background-size: 120px 120px;
+    opacity: 0.3;
+  }
+  
+  .floating-particles::before,
+  .floating-particles::after {
+    display: none !important;
+  }
+  
+  .solar-system {
+    opacity: 0.1;
+  }
+  
+  .sun {
+    animation: none !important;
+    width: 40px;
+    height: 40px;
+  }
+  
+  .planet {
+    animation: none !important;
+  }
+  
+  .asteroid-belt::before,
+  .asteroid-belt::after {
+    animation: none !important;
+  }
+  
+  /* Reduce lightning sphere complexity on mobile */
+  .lightning-sphere {
+    animation: none !important;
+  }
+  
+  #lightning-sphere-canvas {
+    filter: brightness(0.8);
+  }
+  
+  /* Optimize game performance */
+  #jump-game {
+    image-rendering: pixelated;
+  }
+  
+  /* Reduce glow effects on mobile */
+  .neon-text,
+  .neon-title,
+  .section-title {
+    text-shadow: 0 0 5px currentColor;
+  }
+  
+  .neon-button {
+    box-shadow: 0 0 5px currentColor;
+  }
+  
+  .project-card:hover,
+  .game-card:hover {
+    transform: translateY(-5px);
+  }
+}
+
+/* Ultra-mobile optimizations for very small screens */
+@media (max-width: 480px) {
+  .neon-grid {
+    display: none;
+  }
+  
+  .solar-system {
+    display: none;
+  }
+  
+  .lightning-sphere {
+    width: 60px;
+    height: 60px;
+  }
+  
+  #lightning-sphere-canvas {
+    width: 60px !important;
+    height: 60px !important;
+  }
+  
+  /* Disable all animations on very small screens */
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  /* Keep only essential hover effects */
+  .neon-button:hover,
+  .project-card:hover,
+  .game-card:hover {
+    transform: none;
+  }
+}
+
+/* Touch device optimizations */
+@media (pointer: coarse) {
+  .neon-grid {
+    animation: none !important;
+  }
+  
+  .floating-particles::before,
+  .floating-particles::after {
+    display: none !important;
+  }
+  
+  /* Reduce particle count for touch devices */
+  .particle {
+    display: none !important;
+  }
+}
+
+/* Low-end device optimizations */
+@media (max-width: 768px) and (max-resolution: 1dppx) {
+  .neon-grid,
+  .solar-system,
+  .floating-particles {
+    display: none !important;
+  }
+  
+  .lightning-sphere {
+    display: none !important;
+  }
+}  
