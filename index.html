@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BSGVerse | Bishwas Ghimire</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="aura-mood-engine.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Animated Background -->
+  <div class="neon-grid"></div>
+  <div class="floating-particles"></div>
+  <div class="solar-system">
+    <div class="sun"></div>
+    <div class="planet planet-1">
+      <div class="planet-core"></div>
+      <div class="orbit"></div>
+    </div>
+    <div class="planet planet-2">
+      <div class="planet-core"></div>
+      <div class="orbit"></div>
+    </div>
+    <div class="planet planet-3">
+      <div class="planet-core"></div>
+      <div class="orbit"></div>
+    </div>
+    <div class="planet planet-4">
+      <div class="planet-core"></div>
+      <div class="orbit"></div>
+    </div>
+    <div class="planet planet-5">
+      <div class="planet-core"></div>
+      <div class="orbit"></div>
+    </div>
+    <div class="asteroid-belt"></div>
+  </div>
+  
+  <!-- Navigation -->
+  <nav class="neon-nav">
+    <div class="nav-brand">
+      <span class="neon-text">BSGVerse</span>
+    </div>
+    <div class="nav-links">
+      <a href="#home" class="nav-link">Home</a>
+      <a href="#projects" class="nav-link">Projects</a>
+      <a href="#gaming" class="nav-link">Gaming</a>
+      <a href="aura-demo.html" class="nav-link" target="_blank">AURA.MoodEngine</a>
+      <a href="#timeline" class="nav-link">Timeline</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1 class="neon-title">
+          <span class="neon-cyan">BISHWAS</span>
+          <span class="neon-pink">GHIMIRE</span>
+        </h1>
+        <p class="hero-subtitle">Full-Stack Developer • Creative Coder • Digital Artist</p>
+        <div class="hero-description">
+          <p>Welcome to the neon-lit multiverse where code meets creativity</p>
+          <p>Building innovative digital experiences that push boundaries</p>
+        </div>
+        <div class="hero-cta">
+          <button class="neon-button cyan">Explore Projects</button>
+          <button class="neon-button pink" onclick="window.open('puzzle-contact.html', '_blank')">Connect</button>
+          <button class="neon-button green" onclick="openCyberMatrixModal()">CyberMatrix</button>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="lightning-sphere">
+          <canvas id="lightning-sphere-canvas" width="180" height="180"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="projects">
+    <h2 class="section-title neon-text">Digital Constellations</h2>
+    <div class="project-grid">
+      <div class="project-card" data-project="calculator">
+        <div class="card-glow cyan"></div>
+        <div class="card-content">
+                  <h3>BSG Calculator</h3>
+        <p>Interactive calculator with cyberpunk design and animations</p>
+          <div class="tech-stack">
+            <span class="tech-tag">HTML</span>
+            <span class="tech-tag">CSS</span>
+            <span class="tech-tag">JavaScript</span>
+          </div>
+          <button class="unlock-btn">Unlock Details</button>
+        </div>
+      </div>
+      
+      <div class="project-card" data-project="todo">
+        <div class="card-glow pink"></div>
+        <div class="card-content">
+          <h3>Task Manager</h3>
+          <p>Dynamic todo list with local storage and neon styling</p>
+          <div class="tech-stack">
+            <span class="tech-tag">HTML</span>
+            <span class="tech-tag">CSS</span>
+            <span class="tech-tag">JavaScript</span>
+          </div>
+          <button class="unlock-btn">Unlock Details</button>
+        </div>
+      </div>
+      
+      <div class="project-card" data-project="contact">
+        <div class="card-glow purple"></div>
+        <div class="card-content">
+          <h3>Contact Form</h3>
+          <p>PHP-powered contact form with email functionality</p>
+          <div class="tech-stack">
+            <span class="tech-tag">HTML</span>
+            <span class="tech-tag">CSS</span>
+            <span class="tech-tag">PHP</span>
+          </div>
+          <button class="unlock-btn">Unlock Details</button>
+        </div>
+      </div>
+    </div>
+    <div id="project-details" class="project-details"></div>
+  </section>
+
+  <!-- Gaming Arena -->
+  <section id="gaming" class="gaming">
+            <h2 class="section-title neon-text">BSG Gaming Arena</h2>
+    <div class="gaming-container">
+      <!-- Tic-Tac-Toe Game -->
+      <div class="game-card">
+        <div class="card-glow green"></div>
+        <div class="game-content">
+                  <h3>BSG Tic-Tac-Toe</h3>
+        <p>Classic game with cyberpunk aesthetics</p>
+          <div class="game-board" id="tictactoe-board">
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+          </div>
+          <div class="game-status" id="tictactoe-status">Player X's turn</div>
+          <button class="neon-button green" id="tictactoe-restart">Restart Game</button>
+        </div>
+      </div>
+
+      <!-- Click to Jump Game -->
+      <div class="game-card">
+        <div class="card-glow orange"></div>
+        <div class="game-content">
+                  <h3>BSG Jumper</h3>
+        <p>Click to make the BSG cube jump over obstacles</p>
+          <div class="jump-game-container">
+            <canvas id="jump-game" width="400" height="300"></canvas>
+            <div class="game-overlay">
+              <div class="score-display">
+                <span>Score: </span>
+                <span id="jump-score">0</span>
+              </div>
+              <div class="high-score">
+                <span>High Score: </span>
+                <span id="jump-high-score">0</span>
+              </div>
+            </div>
+          </div>
+          <div class="game-controls">
+            <button class="neon-button orange" id="jump-start">Start Game</button>
+            <button class="neon-button orange" id="jump-restart">Restart</button>
+          </div>
+          <div class="game-instructions">
+            <p>Click or press SPACE to jump!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline Section -->
+  <section id="timeline" class="timeline">
+    <h2 class="section-title neon-text">Digital Evolution</h2>
+    <div class="timeline-container">
+      <div class="timeline-item" data-year="2019">
+        <div class="timeline-marker cyan"></div>
+        <div class="timeline-content">
+          <h3>Digital Awakening</h3>
+          <p>Discovered the world of programming and web development</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item" data-year="2021">
+        <div class="timeline-marker pink"></div>
+        <div class="timeline-content">
+          <h3>Skill Evolution</h3>
+          <p>Mastered JavaScript, React, and modern web technologies</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item" data-year="2024">
+        <div class="timeline-marker purple"></div>
+        <div class="timeline-content">
+          <h3>Creative Breakthrough</h3>
+          <p>Developed passion for creative coding and UI/UX design</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item" data-year="2025">
+        <div class="timeline-marker cyan"></div>
+        <div class="timeline-content">
+          <h3>NeonVerse Era</h3>
+          <p>Building innovative digital experiences and portfolios 💻</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+            <h2 class="section-title neon-text">BSG Network</h2>
+    <div class="contact-container">
+      <div class="contact-form">
+        <div class="form-group">
+          <input type="text" id="name" class="neon-input" placeholder="Your Name">
+          <div class="input-glow"></div>
+        </div>
+        <div class="form-group">
+          <input type="email" id="email" class="neon-input" placeholder="Your Email">
+          <div class="input-glow"></div>
+        </div>
+        <div class="form-group">
+          <textarea id="message" class="neon-input" placeholder="Your Message" rows="5"></textarea>
+          <div class="input-glow"></div>
+        </div>
+        <button class="neon-button cyan send-btn">Send to BSGVerse</button>
+      </div>
+      
+      <div class="contact-info">
+        <div class="info-item">
+          <div class="info-icon">📧</div>
+          <div class="info-text">
+            <h4>Email</h4>
+            <p>bishwas@neonverse.dev</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">💼</div>
+          <div class="info-text">
+            <h4>LinkedIn</h4>
+            <p>linkedin.com/in/bishwas-ghimire</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">🐙</div>
+          <div class="info-text">
+            <h4>GitHub</h4>
+            <p>github.com/bishwas-ghimire</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sound Controls -->
+  <div id="sound-controls" class="sound-controls">
+    <button id="mute-btn" class="mute-btn" onclick="toggleMute()">
+      <span class="mute-icon">🔊</span>
+      <span class="unmute-icon hidden">🔇</span>
+    </button>
+  </div>
+
+  <!-- Audio Elements -->
+  <audio id="hover-sound" preload="auto">
+    <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIG2m98OScTgwOUarm7blmGgU7k9n1unEiBC13yO/eizEIHWq+8+OWT" type="audio/wav">
+  </audio>
+  <audio id="click-sound" preload="auto">
+    <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIG2m98OScTgwOUarm7blmGgU7k9n1unEiBC13yO/eizEIHWq+8+OWT" type="audio/wav">
+  </audio>
+  <audio id="game-sound" preload="auto">
+    <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIG2m98OScTgwOUarm7blmGgU7k9n1unEiBC13yO/eizEIHWq+8+OWT" type="audio/wav">
+  </audio>
+  <audio id="victory-sound" preload="auto">
+    <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIG2m98OScTgwOUarm7blmGgU7k9n1unEiBC13yO/eizEIHWq+8+OWT" type="audio/wav">
+  </audio>
+  <audio id="ambient-sound" preload="auto" loop>
+    <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIG2m98OScTgwOUarm7blmGgU7k9n1unEiBC13yO/eizEIHWq+8+OWT" type="audio/wav">
+  </audio>
+
+  <!-- AI Assistant -->
+  <div id="ai-assistant" class="ai-assistant">
+    <div class="assistant-icon" onclick="toggleAI()">
+      <div class="ai-glow"></div>
+      <span>🤖</span>
+    </div>
+    <div id="ai-chat" class="ai-chat hidden">
+      <div class="chat-header">
+        <h3>BSG AI Assistant</h3>
+        <button class="close-btn" onclick="toggleAI()">×</button>
+      </div>
+      <div id="chat-messages" class="chat-messages"></div>
+      <div class="chat-input">
+        <input type="text" id="ai-input" placeholder="Ask BSG AI..." onkeypress="handleAIKey(event)">
+        <button onclick="sendAIMessage()">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CyberMatrix Password Modal -->
+  <div id="cybermatrix-modal" class="cybermatrix-modal hidden">
+    <div class="modal-overlay" onclick="closeCyberMatrixModal()"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>🔐 CyberMatrix Access</h3>
+        <button class="modal-close" onclick="closeCyberMatrixModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="access-form">
+          <div class="form-group">
+            <label for="password-input">Enter Access Code:</label>
+            <input type="password" id="password-input" placeholder="Enter password..." onkeypress="handlePasswordKey(event)">
+            <div class="password-glow"></div>
+          </div>
+          <div class="form-actions">
+            <button class="neon-button green" onclick="checkPassword()">Access System</button>
+            <button class="neon-button cyan" onclick="closeCyberMatrixModal()">Cancel</button>
+          </div>
+          <div id="password-error" class="password-error hidden">
+            <span>❌ Access Denied - Invalid Code</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="neon-footer">
+    <p>© 2025 Bishwas Ghimire | BSGVerse</p>
+    <div class="footer-glow"></div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="aura-mood-engine.js"></script>
+</body>
+</html>
