@@ -1,0 +1,224 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Orbitron', monospace;
+    background: linear-gradient(45deg, #002222, #004444);
+    min-height: 100vh;
+    color: #00fff7;
+    position: relative;
+}
+
+#games-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 100;
+    transform: translate(50%, -50%);
+}
+
+.glow-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.glow-text {
+    color: #00fff7;
+    font-size: 1.2rem;
+    text-shadow: 0 0 5px #00fff7,
+                0 0 10px #00fff7,
+                0 0 15px #00fff7,
+                0 0 20px #00fff7,
+                0 0 30px #00fff7,
+                0 0 40px #00fff7;
+}
+
+.glow-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0, 255, 255, 0.5),
+        transparent
+    );
+    animation: glow 2s infinite;
+}
+
+@keyframes glow {
+    0% {
+        left: -100%;
+    }
+    50% {
+        left: 100%;
+    }
+    100% {
+        left: -100%;
+    }
+}
+
+.glow-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px #00fff7;
+}
+
+.game-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.game-header {
+    text-align: center;
+    width: 100%;
+}
+
+.game-header h1 {
+    color: #00fff7;
+    text-shadow: 0 0 10px #00fff7;
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+}
+
+.game-header .player-selection {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.player-btn {
+    padding: 0.8rem 1.5rem;
+    background: rgba(0, 255, 255, 0.1);
+    border: 2px solid #00fff7;
+    color: #00fff7;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+}
+
+.player-btn:hover {
+    background: rgba(0, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.player-btn.active {
+    background: #00fff7;
+    color: #000;
+}
+
+.game-board {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    justify-content: center;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    background: rgba(0, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid #00fff7;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+}
+
+.cell:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+}
+
+.cell.x {
+    color: #00fff7;
+}
+
+.cell.o {
+    color: #ff00ff;
+}
+
+.controls {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+#reset-btn, #back-btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+}
+
+#reset-btn {
+    background: #00fff7;
+    color: #000;
+}
+
+#reset-btn:hover {
+    background: #00cccc;
+    transform: translateY(-2px);
+}
+
+#back-btn {
+    background: rgba(0, 0, 0, 0.8);
+    color: #00fff7;
+}
+
+#back-btn:hover {
+    background: rgba(0, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.winner-announcement {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 15px;
+    border: 2px solid #00fff7;
+    color: #00fff7;
+    font-size: 2rem;
+    text-shadow: 0 0 10px #00fff7;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+    z-index: 100;
+}
