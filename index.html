@@ -49,9 +49,44 @@
     </div>
     <div class="nav-links">
       <a href="#home" class="nav-link">Home</a>
-      <a href="#projects" class="nav-link">Projects</a>
-      <a href="#gaming" class="nav-link">Gaming</a>
-      <a href="aura-demo.html" class="nav-link" target="_blank">AURA.MoodEngine</a>
+      
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle" onclick="toggleDropdown(this)">
+          Projects
+          <span class="dropdown-arrow"></span>
+        </button>
+        <div class="dropdown-menu">
+          <a href="#projects" class="dropdown-item">All Projects</a>
+          <a href="#calculator" class="dropdown-item">BSG Calculator</a>
+          <a href="#todo" class="dropdown-item">Task Manager</a>
+          <a href="#contact-form" class="dropdown-item">Contact Form</a>
+        </div>
+      </div>
+      
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle" onclick="toggleDropdown(this)">
+          Gaming
+          <span class="dropdown-arrow"></span>
+        </button>
+        <div class="dropdown-menu">
+          <a href="#gaming" class="dropdown-item">Gaming Arena</a>
+          <a href="#tictactoe" class="dropdown-item">BSG Tic-Tac-Toe</a>
+          <a href="#jumper" class="dropdown-item">BSG Jumper</a>
+        </div>
+      </div>
+      
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle" onclick="toggleDropdown(this)">
+          Tools
+          <span class="dropdown-arrow"></span>
+        </button>
+        <div class="dropdown-menu">
+          <a href="aura-demo.html" class="dropdown-item" target="_blank">AURA.MoodEngine</a>
+          <a href="puzzle-contact.html" class="dropdown-item" target="_blank">Proof-of-Contact</a>
+          <a href="cybermatrix-dashboard.html" class="dropdown-item" target="_blank">CyberMatrix</a>
+        </div>
+      </div>
+      
       <a href="#timeline" class="nav-link">Timeline</a>
       <a href="#contact" class="nav-link">Contact</a>
     </div>
