@@ -1935,3 +1935,133 @@ section {
     display: none !important;
   }
 }  
+
+/* Aggressive Mobile Performance Fixes */
+
+/* Disable ALL animations and heavy effects on mobile */
+@media (max-width: 768px) {
+  /* Completely disable background animations */
+  .neon-grid,
+  .floating-particles,
+  .solar-system {
+    display: none !important;
+  }
+  
+  /* Disable lightning sphere on mobile */
+  .lightning-sphere {
+    display: none !important;
+  }
+  
+  /* Remove all glow effects */
+  .neon-text,
+  .neon-title,
+  .section-title,
+  .neon-button,
+  .project-card,
+  .game-card {
+    text-shadow: none !important;
+    box-shadow: none !important;
+  }
+  
+  /* Disable hover effects */
+  .project-card:hover,
+  .game-card:hover,
+  .neon-button:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+  
+  /* Simplify game canvas */
+  #jump-game {
+    border: 1px solid #333;
+    background: #000;
+  }
+  
+  /* Remove all transitions */
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+  
+  /* Optimize text rendering */
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Ultra-low-end device optimizations */
+@media (max-width: 480px) {
+  /* Remove all decorative elements */
+  .neon-grid,
+  .floating-particles,
+  .solar-system,
+  .lightning-sphere {
+    display: none !important;
+  }
+  
+  /* Simplify layout */
+  .hero-content {
+    padding: 1rem 0.5rem;
+  }
+  
+  .project-grid,
+  .gaming-container {
+    gap: 0.5rem;
+    padding: 0 0.25rem;
+  }
+  
+  .project-card,
+  .game-card {
+    padding: 0.5rem;
+    margin: 0.25rem 0;
+  }
+  
+  /* Reduce font sizes */
+  .neon-title {
+    font-size: 1.5rem;
+  }
+  
+  .section-title {
+    font-size: 1.2rem;
+  }
+  
+  /* Simplify buttons */
+  .neon-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Touch device specific optimizations */
+@media (pointer: coarse) {
+  /* Disable all animations for touch devices */
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  /* Remove all background effects */
+  .neon-grid,
+  .floating-particles,
+  .solar-system,
+  .lightning-sphere {
+    display: none !important;
+  }
+  
+  /* Optimize for touch */
+  .neon-button,
+  .unlock-btn,
+  .cell {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Force hardware acceleration where needed */
+.project-card,
+.game-card,
+.neon-button {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}  
