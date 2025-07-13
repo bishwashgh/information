@@ -347,4 +347,4 @@ window.testJumpGame = function() {
   } else {
     console.error('❌ Jump Game not initialized');
   }
-}; 
+}

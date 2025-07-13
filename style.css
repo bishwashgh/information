@@ -2583,3 +2583,929 @@
     0%, 100% { text-shadow: 0 0 20px rgba(0, 255, 255, 0.8), 0 0 40px rgba(255, 0, 255, 0.4); }
     50% { text-shadow: 0 0 30px rgba(0, 255, 255, 1), 0 0 60px rgba(255, 0, 255, 0.6); }
   }
+
+  
+  /* Hero Section */
+  .hero {
+    padding: 1rem;
+    min-height: 100vh;
+    padding-top: 80px;
+  }
+  
+  .hero-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+  
+  .hero-text {
+    order: 1;
+  }
+  
+  .hero-visual {
+    order: 2;
+    justify-content: center;
+  }
+  
+  .neon-title {
+    font-size: 2.5rem;
+    line-height: 1.1;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  
+  .hero-description p {
+    font-size: 0.9rem;
+  }
+  
+  .hero-cta {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  
+  .neon-button {
+    width: 100%;
+    max-width: 250px;
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+  }
+  
+  /* Lightning Sphere */
+  .lightning-sphere {
+    width: 120px;
+    height: 120px;
+  }
+  
+  #lightning-sphere-canvas {
+    width: 120px;
+    height: 120px;
+  }
+  
+  /* Projects */
+  .project-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 0 1rem;
+  }
+  
+  .project-card {
+    margin: 0;
+  }
+  
+  .card-content h3 {
+    font-size: 1.3rem;
+  }
+  
+  .card-content p {
+    font-size: 0.9rem;
+  }
+  
+  /* Gaming */
+  .gaming-container {
+    flex-direction: column;
+    gap: 2rem;
+    padding: 0 1rem;
+  }
+  
+  .game-card {
+    width: 100%;
+    margin: 0;
+  }
+  
+  .game-board {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    max-width: 250px;
+    margin: 0 auto;
+  }
+  
+  .cell {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+  
+  .jump-game-container {
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+  }
+  
+  #jump-game {
+    width: 100%;
+    height: 200px;
+  }
+  
+  /* Timeline */
+  .timeline-container {
+    padding: 0 1rem;
+  }
+  
+  .timeline-content {
+    padding: 1rem;
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+  }
+  
+  .timeline-item:nth-child(odd) .timeline-content {
+    margin-left: 0;
+  }
+  
+  .timeline-item:nth-child(even) .timeline-content {
+    margin-right: 0;
+  }
+  
+  .timeline-marker {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  /* Contact */
+  .contact-container {
+    flex-direction: column;
+    gap: 2rem;
+    padding: 0 1rem;
+  }
+  
+  .contact-form {
+    width: 100%;
+  }
+  
+  .contact-info {
+    width: 100%;
+  }
+  
+  .info-item {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  
+  /* Sound Controls */
+  .sound-controls {
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .mute-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+  
+  /* AI Assistant */
+  .ai-assistant {
+    bottom: 80px;
+    right: 20px;
+  }
+  
+  .assistant-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+  
+  .ai-chat {
+    width: 90vw;
+    max-width: 350px;
+    right: 0;
+    bottom: 60px;
+  }
+  
+  /* Footer */
+  .neon-footer {
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  .neon-footer p {
+    font-size: 0.9rem;
+  }
+  
+  /* Modal */
+  .cybermatrix-modal .modal-content {
+    width: 95%;
+    max-width: 350px;
+    margin: 20px auto;
+  }
+  
+  .modal-header h3 {
+    font-size: 1.2rem;
+  }
+  
+  .access-form {
+    padding: 1rem;
+  }
+  
+  .form-group input {
+    font-size: 1rem;
+    padding: 0.8rem;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .form-actions .neon-button {
+    width: 100%;
+  }
+
+
+@media (max-width: 480px) {
+  /* Extra Small Devices */
+  .neon-nav {
+    padding: 0.5rem;
+  }
+  
+  .nav-brand .neon-text {
+    font-size: 1rem;
+  }
+  
+  .nav-links {
+    width: 100%;
+    max-width: none;
+  }
+  
+  .hero {
+    padding: 0.5rem;
+    padding-top: 70px;
+  }
+  
+  .neon-title {
+    font-size: 2rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.9rem;
+  }
+  
+  .hero-description p {
+    font-size: 0.8rem;
+  }
+  
+  .neon-button {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.8rem;
+  }
+  
+  .lightning-sphere {
+    width: 100px;
+    height: 100px;
+  }
+  
+  #lightning-sphere-canvas {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+    padding: 0 1rem;
+  }
+  
+  .project-card,
+  .game-card {
+    margin: 0 0.5rem;
+  }
+  
+  .card-content h3 {
+    font-size: 1.1rem;
+  }
+  
+  .card-content p {
+    font-size: 0.8rem;
+  }
+  
+  .game-board {
+    max-width: 200px;
+  }
+  
+  .cell {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+  
+  .jump-game-container {
+    max-width: 280px;
+  }
+  
+  #jump-game {
+    height: 150px;
+  }
+  
+  .timeline-content h3 {
+    font-size: 1.1rem;
+  }
+  
+  .timeline-content p {
+    font-size: 0.8rem;
+  }
+  
+  .contact-form {
+    padding: 1rem 0.5rem;
+  }
+  
+  .neon-input {
+    font-size: 0.9rem;
+    padding: 0.7rem;
+  }
+  
+  .info-item h4 {
+    font-size: 1rem;
+  }
+  
+  .info-item p {
+    font-size: 0.8rem;
+  }
+  
+  .ai-chat {
+    width: 95vw;
+    max-width: 300px;
+  }
+  
+  .chat-header h3 {
+    font-size: 1.1rem;
+  }
+  
+  .chat-input input {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 360px) {
+  /* Very Small Devices */
+  .neon-title {
+    font-size: 1.8rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.8rem;
+  }
+  
+  .neon-button {
+    padding: 0.6rem 1rem;
+    font-size: 0.75rem;
+  }
+  
+  .lightning-sphere {
+    width: 80px;
+    height: 80px;
+  }
+  
+  #lightning-sphere-canvas {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .section-title {
+    font-size: 1.3rem;
+  }
+  
+  .game-board {
+    max-width: 180px;
+  }
+  
+  .cell {
+    width: 45px;
+    height: 45px;
+    font-size: 1rem;
+  }
+  
+  .jump-game-container {
+    max-width: 250px;
+  }
+  
+  #jump-game {
+    height: 120px;
+  }
+}
+
+/* Landscape Orientation Fixes */
+@media (max-width: 768px) and (orientation: landscape) {
+  .hero {
+    min-height: 100vh;
+    padding-top: 60px;
+  }
+  
+  .hero-content {
+    gap: 1rem;
+  }
+  
+  .neon-title {
+    font-size: 2rem;
+  }
+  
+  .hero-cta {
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .neon-button {
+    width: auto;
+    max-width: none;
+  }
+  
+  .lightning-sphere {
+    width: 80px;
+    height: 80px;
+  }
+  
+  #lightning-sphere-canvas {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+/* Touch Device Optimizations */
+@media (pointer: coarse) {
+  .nav-link {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .neon-button {
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+  
+  .cell {
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+  
+  .game-controls .neon-button {
+    min-height: 44px;
+    padding: 0.8rem 1.5rem;
+  }
+  
+  .unlock-btn {
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+  
+  .send-btn {
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+  
+  .mute-btn {
+    min-width: 44px;
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+  
+  .assistant-icon {
+    min-width: 44px;
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+}
+
+/* High DPI Display Optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .neon-text,
+  .neon-title,
+  .section-title {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Accessibility Improvements */
+@media (prefers-reduced-motion: reduce) {
+  .nav-links {
+    transition: none;
+  }
+  
+  .mobile-menu-toggle span {
+    transition: none;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .neon-nav,
+  .sound-controls,
+  .ai-assistant,
+  .mobile-menu-toggle {
+    display: none !important;
+  }
+  
+  .hero {
+    min-height: auto;
+    padding: 2rem 0;
+  }
+  
+  .hero-content {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .neon-title {
+    color: #000 !important;
+    text-shadow: none !important;
+    animation: none !important;
+  }
+  
+  .neon-cyan {
+    color: #0066cc !important;
+    text-shadow: none !important;
+    animation: none !important;
+  }
+  
+  .neon-pink {
+    color: #cc0066 !important;
+    text-shadow: none !important;
+    animation: none !important;
+  }
+  
+  .neon-button {
+    border: 1px solid #000 !important;
+    color: #000 !important;
+    background: #fff !important;
+    box-shadow: none !important;
+  }
+  
+  .project-card,
+  .game-card {
+    border: 1px solid #000 !important;
+    box-shadow: none !important;
+  }
+  
+  .card-glow {
+    display: none !important;
+  }
+  
+  .solar-system,
+  .neon-grid,
+  .floating-particles {
+    display: none !important;
+  }
+  
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+}  
+
+/* Additional Mobile Responsive Fixes */
+@media (max-width: 768px) {
+  /* Ensure all content is visible */
+  body {
+    overflow-x: hidden;
+  }
+  
+  /* Fix section padding */
+  section {
+    padding: 2rem 1rem;
+  }
+  
+  /* Ensure proper spacing for all sections */
+  .projects,
+  .gaming,
+  .timeline,
+  .contact {
+    padding: 2rem 1rem;
+  }
+  
+  /* Fix text overflow */
+  .neon-title {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  .hero-subtitle,
+  .hero-description p {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  /* Ensure buttons are properly sized */
+  .neon-button {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  /* Fix project card text */
+  .card-content h3,
+  .card-content p {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  /* Ensure timeline is readable */
+  .timeline-content h3,
+  .timeline-content p {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  /* Fix contact form */
+  .neon-input {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+  
+  /* Ensure modals are properly sized */
+  .cybermatrix-modal .modal-content {
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  
+  /* Fix AI chat positioning */
+  .ai-chat {
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  
+  /* Ensure sound controls are accessible */
+  .sound-controls {
+    z-index: 1002;
+  }
+  
+  /* Fix AI assistant positioning */
+  .ai-assistant {
+    z-index: 1002;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Extra small device fixes */
+  .hero {
+    padding-top: 60px;
+  }
+  
+  .neon-nav {
+    height: 60px;
+  }
+  
+  .nav-links {
+    padding-top: 60px;
+  }
+  
+  /* Ensure all text is readable */
+  .neon-title {
+    font-size: 1.8rem;
+    line-height: 1.2;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.85rem;
+  }
+  
+  .hero-description p {
+    font-size: 0.75rem;
+  }
+  
+  /* Fix button sizing */
+  .neon-button {
+    font-size: 0.75rem;
+    padding: 0.6rem 1rem;
+  }
+  
+  /* Ensure project cards are properly sized */
+  .project-card {
+    min-height: auto;
+  }
+  
+  .card-content {
+    padding: 1rem 0.8rem;
+  }
+  
+  /* Fix game board sizing */
+  .game-board {
+    max-width: 180px;
+    margin: 0 auto;
+  }
+  
+  .cell {
+    width: 45px;
+    height: 45px;
+    font-size: 1rem;
+  }
+  
+  /* Fix jump game */
+  .jump-game-container {
+    max-width: 250px;
+  }
+  
+  #jump-game {
+    height: 120px;
+  }
+  
+  /* Fix timeline */
+  .timeline-container {
+    padding: 0 0.5rem;
+  }
+  
+  .timeline-content {
+    padding: 0.8rem;
+  }
+  
+  /* Fix contact form */
+  .contact-container {
+    gap: 1.5rem;
+  }
+  
+  .contact-form {
+    padding: 0.8rem 0.5rem;
+  }
+  
+  .neon-input {
+    padding: 0.6rem;
+    font-size: 14px;
+  }
+  
+  /* Fix info items */
+  .info-item {
+    padding: 0.8rem;
+  }
+  
+  .info-item h4 {
+    font-size: 0.9rem;
+  }
+  
+  .info-item p {
+    font-size: 0.75rem;
+  }
+  
+  /* Fix modals */
+  .cybermatrix-modal .modal-content {
+    margin: 10px auto;
+    max-height: 85vh;
+  }
+  
+  .modal-header h3 {
+    font-size: 1.1rem;
+  }
+  
+  .access-form {
+    padding: 0.8rem;
+  }
+  
+  .form-group input {
+    font-size: 14px;
+    padding: 0.6rem;
+  }
+  
+  /* Fix AI chat */
+  .ai-chat {
+    max-height: 75vh;
+    width: 98vw;
+  }
+  
+  .chat-header h3 {
+    font-size: 1rem;
+  }
+  
+  .chat-input input {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 360px) {
+  /* Very small devices */
+  .neon-title {
+    font-size: 1.6rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.8rem;
+  }
+  
+  .hero-description p {
+    font-size: 0.7rem;
+  }
+  
+  .neon-button {
+    font-size: 0.7rem;
+    padding: 0.5rem 0.8rem;
+  }
+  
+  .lightning-sphere {
+    width: 70px;
+    height: 70px;
+  }
+  
+  #lightning-sphere-canvas {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .section-title {
+    font-size: 1.2rem;
+  }
+  
+  .card-content h3 {
+    font-size: 1rem;
+  }
+  
+  .card-content p {
+    font-size: 0.7rem;
+  }
+  
+  .game-board {
+    max-width: 160px;
+  }
+  
+  .cell {
+    width: 40px;
+    height: 40px;
+    font-size: 0.9rem;
+  }
+  
+  .jump-game-container {
+    max-width: 220px;
+  }
+  
+  #jump-game {
+    height: 100px;
+  }
+  
+  .timeline-content h3 {
+    font-size: 1rem;
+  }
+  
+  .timeline-content p {
+    font-size: 0.7rem;
+  }
+  
+  .neon-input {
+    font-size: 13px;
+    padding: 0.5rem;
+  }
+  
+  .info-item h4 {
+    font-size: 0.85rem;
+  }
+  
+  .info-item p {
+    font-size: 0.7rem;
+  }
+}
+
+/* Ensure proper viewport handling */
+@media (max-width: 768px) {
+  html, body {
+    width: 100%;
+    overflow-x: hidden;
+  }
+  
+  /* Fix any horizontal scrolling issues */
+  .neon-nav,
+  .hero-content,
+  .project-grid,
+  .gaming-container,
+  .timeline-container,
+  .contact-container {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+  
+  /* Ensure proper touch targets */
+  .nav-link,
+  .neon-button,
+  .cell,
+  .unlock-btn,
+  .send-btn,
+  .mute-btn,
+  .assistant-icon {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Fix for devices with notches */
+@supports (padding: max(0px)) {
+  @media (max-width: 768px) {
+    .neon-nav {
+      padding-left: max(1rem, env(safe-area-inset-left));
+      padding-right: max(1rem, env(safe-area-inset-right));
+    }
+    
+    .hero {
+      padding-left: max(1rem, env(safe-area-inset-left));
+      padding-right: max(1rem, env(safe-area-inset-right));
+    }
+    
+    .sound-controls {
+      bottom: max(20px, env(safe-area-inset-bottom));
+      right: max(20px, env(safe-area-inset-right));
+    }
+    
+    .ai-assistant {
+      bottom: max(80px, calc(env(safe-area-inset-bottom) + 60px));
+      right: max(20px, env(safe-area-inset-right));
+    }
+  }
+}
+
