@@ -595,297 +595,323 @@ function initializeTicTacToe() {
   restartBtn.addEventListener('click', restartGame);
 }
 
-// Aggressive Mobile Performance Optimizations
-
-// Detect mobile and low-end devices
-function isMobileDevice() {
-  return window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-}
-
-function isLowEndDevice() {
-  return window.innerWidth <= 480 || navigator.hardwareConcurrency <= 2;
-}
-
-// Disable heavy features on mobile
+// Ultra-Aggressive Mobile Performance Optimizations
 function initializeMobileOptimizations() {
-  const isMobile = isMobileDevice();
+  const isMobile = window.innerWidth <= 768;
   const isLowEnd = isLowEndDevice();
   
   if (isMobile) {
-    // Disable lightning sphere completely on mobile
-    const lightningSphere = document.querySelector('.lightning-sphere');
-    if (lightningSphere) {
-      lightningSphere.style.display = 'none';
+    // Disable all heavy animations on mobile
+    disableHeavyAnimations();
+    
+    // Simplify particle system
+    if (isLowEnd) {
+      disableParticles();
     }
     
-    // Disable particle creation
-    const particlesContainer = document.querySelector('.floating-particles');
-    if (particlesContainer) {
-      particlesContainer.innerHTML = '';
-    }
+    // Optimize canvas rendering
+    optimizeCanvasRendering();
     
-    // Optimize game performance
-    const jumpGame = document.getElementById('jump-game');
-    if (jumpGame) {
-      jumpGame.style.imageRendering = 'pixelated';
-    }
+    // Reduce JavaScript processing
+    reduceJSProcessing();
+    
+    // Optimize touch interactions
+    optimizeTouchInteractions();
   }
-  
-  if (isLowEnd) {
-    // Disable all animations for low-end devices
-    const style = document.createElement('style');
-    style.textContent = `
+}
+
+function disableHeavyAnimations() {
+  // Disable all CSS animations on mobile
+  const style = document.createElement('style');
+  style.textContent = `
+    @media (max-width: 768px) {
       * {
         animation: none !important;
         transition: none !important;
       }
-    `;
-    document.head.appendChild(style);
-  }
-}
-
-// Optimize lightning sphere for mobile
-function initializeLightningSphere() {
-  const canvas = document.getElementById('lightning-sphere-canvas');
-  if (!canvas) return;
-  
-  const isMobile = isMobileDevice();
-  const isLowEnd = isLowEndDevice();
-  
-  // Completely disable on mobile
-  if (isMobile) {
-    canvas.style.display = 'none';
-    return;
-  }
-  
-  const ctx = canvas.getContext('2d');
-  const w = canvas.width;
-  const h = canvas.height;
-  const centerX = w / 2;
-  const centerY = h / 2;
-  const radius = 75;
-  
-  function drawSphere() {
-    ctx.clearRect(0, 0, w, h);
-    
-    // Core sphere only
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, radius - 8, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(0,30,40,0.95)';
-    ctx.fill();
-  }
-
-  function drawLightning() {
-    // Minimal lightning for performance
-    const bolts = isLowEnd ? 1 : 2;
-    
-    for (let i = 0; i < bolts; i++) {
-      const angle = Math.random() * Math.PI * 2;
-      const boltLength = 30;
-      const startX = centerX + Math.cos(angle) * (radius - 18);
-      const startY = centerY + Math.sin(angle) * (radius - 18);
-      
-      ctx.save();
-      ctx.strokeStyle = '#00ffff';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.moveTo(centerX, centerY);
-      ctx.lineTo(startX, startY);
-      ctx.stroke();
-      ctx.restore();
+      .neon-grid, .floating-particles, .solar-system, .lightning-sphere {
+        display: none !important;
+      }
     }
-  }
+  `;
+  document.head.appendChild(style);
+}
 
-  function animate() {
-    drawSphere();
-    drawLightning();
+function disableParticles() {
+  // Remove all particle elements
+  const particles = document.querySelectorAll('.floating-particles div');
+  particles.forEach(particle => particle.remove());
+  
+  // Disable particle creation
+  window.createFloatingParticles = function() {};
+}
+
+function optimizeCanvasRendering() {
+  // Optimize jump game canvas
+  const jumpCanvas = document.getElementById('jump-game');
+  if (jumpCanvas) {
+    const ctx = jumpCanvas.getContext('2d');
+    ctx.imageSmoothingEnabled = false;
+    ctx.imageSmoothingQuality = 'low';
+  }
+  
+  // Disable lightning sphere on mobile
+  const lightningCanvas = document.getElementById('lightning-sphere-canvas');
+  if (lightningCanvas && window.innerWidth <= 768) {
+    lightningCanvas.style.display = 'none';
+  }
+}
+
+function reduceJSProcessing() {
+  // Reduce animation frame rate on mobile
+  if (window.innerWidth <= 768) {
+    // Override requestAnimationFrame for lower frame rate
+    const originalRAF = window.requestAnimationFrame;
+    let frameCount = 0;
     
-    // Lower frame rate for performance
-    setTimeout(() => {
-      requestAnimationFrame(animate);
-    }, 50); // 20fps for better performance
+    window.requestAnimationFrame = function(callback) {
+      frameCount++;
+      if (frameCount % 2 === 0) { // Run every other frame
+        return originalRAF(callback);
+      }
+      return originalRAF(() => {
+        setTimeout(callback, 16); // ~30fps instead of 60fps
+      });
+    };
   }
   
-  animate();
-}
-
-// Optimize particle creation for mobile
-function createFloatingParticles() {
-  const particlesContainer = document.querySelector('.floating-particles');
-  const isMobile = isMobileDevice();
-  const isLowEnd = isLowEndDevice();
-  
-  // No particles on mobile or low-end devices
-  if (isMobile || isLowEnd) {
-    particlesContainer.innerHTML = '';
-    return;
-  }
-  
-  const particleCount = window.innerWidth < 768 ? 3 : 5;
-  
-  for (let i = 0; i < particleCount; i++) {
-    const particle = document.createElement('div');
-    particle.className = 'particle';
-    particle.style.cssText = `
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      background: ${getRandomNeonColor()};
-      border-radius: 50%;
-      animation: float 8s ease-in-out infinite;
-      animation-delay: ${Math.random() * 4}s;
-      left: ${Math.random() * 100}%;
-      top: ${Math.random() * 100}%;
-      will-change: transform;
-    `;
-    particlesContainer.appendChild(particle);
+  // Disable complex calculations on mobile
+  if (window.innerWidth <= 480) {
+    // Simplify scroll animations
+    window.addEventListener('scroll', function() {
+      // Throttle scroll events
+      if (this.scrollTimeout) return;
+      this.scrollTimeout = setTimeout(() => {
+        this.scrollTimeout = null;
+      }, 100);
+    });
   }
 }
 
-// Optimize jump game for mobile
-function initializeJumpGame() {
+function optimizeTouchInteractions() {
+  // Optimize touch events
+  document.addEventListener('touchstart', function(e) {
+    // Prevent default on touch to reduce processing
+    if (e.target.classList.contains('neon-button') || 
+        e.target.classList.contains('cell') ||
+        e.target.classList.contains('nav-link')) {
+      e.preventDefault();
+    }
+  }, { passive: false });
+  
+  // Simplify hover effects on touch devices
+  if ('ontouchstart' in window) {
+    const hoverElements = document.querySelectorAll('.neon-button, .project-card, .game-card');
+    hoverElements.forEach(element => {
+      element.addEventListener('touchstart', function() {
+        this.style.transform = 'scale(0.98)';
+      });
+      element.addEventListener('touchend', function() {
+        this.style.transform = 'scale(1)';
+      });
+    });
+  }
+}
+
+// Enhanced device detection
+function isLowEndDevice() {
+  const isMobile = window.innerWidth <= 768;
+  const isLowResolution = window.devicePixelRatio <= 1;
+  const isSlowConnection = navigator.connection && 
+    (navigator.connection.effectiveType === 'slow-2g' || 
+     navigator.connection.effectiveType === '2g');
+  
+  return isMobile && (isLowResolution || isSlowConnection);
+}
+
+// Optimize game performance on mobile
+function initializeGames() {
+  const isMobile = window.innerWidth <= 768;
+  
+  if (isMobile) {
+    // Simplify game initialization on mobile
+    initializeSimpleTicTacToe();
+    initializeSimpleJumpGame();
+  } else {
+    // Full game initialization for desktop
+    initializeTicTacToe();
+    initializeJumpGame();
+  }
+}
+
+function initializeSimpleTicTacToe() {
+  const board = document.getElementById('tictactoe-board');
+  const status = document.getElementById('tictactoe-status');
+  const restartBtn = document.getElementById('tictactoe-restart');
+  
+  if (!board) return;
+  
+  let currentPlayer = 'X';
+  let gameState = ['', '', '', '', '', '', '', '', ''];
+  let gameActive = true;
+  
+  const winningConditions = [
+    [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+    [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+    [0, 4, 8], [2, 4, 6] // Diagonals
+  ];
+  
+  function handleCellClick(e) {
+    const cell = e.target;
+    const cellIndex = Array.from(board.children).indexOf(cell);
+    
+    if (gameState[cellIndex] !== '' || !gameActive) return;
+    
+    gameState[cellIndex] = currentPlayer;
+    cell.textContent = currentPlayer;
+    cell.classList.add(currentPlayer.toLowerCase());
+    
+    if (checkWin()) {
+      status.textContent = `Player ${currentPlayer} wins!`;
+      gameActive = false;
+      return;
+    }
+    
+    if (checkDraw()) {
+      status.textContent = 'Game ended in a draw!';
+      gameActive = false;
+      return;
+    }
+    
+    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+    status.textContent = `Player ${currentPlayer}'s turn`;
+  }
+  
+  function checkWin() {
+    return winningConditions.some(condition => {
+      return condition.every(index => {
+        return gameState[index] === currentPlayer;
+      });
+    });
+  }
+  
+  function checkDraw() {
+    return gameState.every(cell => cell !== '');
+  }
+  
+  function restartGame() {
+    currentPlayer = 'X';
+    gameState = ['', '', '', '', '', '', '', '', ''];
+    gameActive = true;
+    status.textContent = `Player ${currentPlayer}'s turn`;
+    
+    board.querySelectorAll('.cell').forEach(cell => {
+      cell.textContent = '';
+      cell.classList.remove('x', 'o', 'winning');
+    });
+  }
+  
+  // Event listeners
+  board.querySelectorAll('.cell').forEach(cell => {
+    cell.addEventListener('click', handleCellClick);
+  });
+  
+  if (restartBtn) {
+    restartBtn.addEventListener('click', restartGame);
+  }
+}
+
+function initializeSimpleJumpGame() {
   const canvas = document.getElementById('jump-game');
-  const ctx = canvas.getContext('2d');
   const startBtn = document.getElementById('jump-start');
   const restartBtn = document.getElementById('jump-restart');
-  const scoreDisplay = document.getElementById('jump-score');
-  const highScoreDisplay = document.getElementById('jump-high-score');
   
-  const isMobile = isMobileDevice();
+  if (!canvas) return;
+  
+  const ctx = canvas.getContext('2d');
+  ctx.imageSmoothingEnabled = false;
   
   let gameRunning = false;
-  let animationId;
+  let playerY = canvas.height - 50;
+  let playerVelocity = 0;
+  let obstacles = [];
   let score = 0;
   let highScore = localStorage.getItem('jumpHighScore') || 0;
   
-  // Game objects
-  const player = {
-    x: 50,
-    y: canvas.height - 60,
-    width: 30,
-    height: 30,
-    velocityY: 0,
-    jumping: false
-  };
-  
-  const obstacles = [];
-  const gravity = 0.8;
-  const jumpForce = -15;
-  const groundY = canvas.height - 60;
-  
-  highScoreDisplay.textContent = highScore;
-  
-  function drawPlayer() {
-    ctx.fillStyle = '#00ffff';
-    // Remove shadow for mobile performance
-    if (!isMobile) {
-      ctx.shadowColor = '#00ffff';
-      ctx.shadowBlur = 10;
-    }
-    ctx.fillRect(player.x, player.y, player.width, player.height);
-    if (!isMobile) {
-      ctx.shadowBlur = 0;
-    }
-  }
-  
-  function drawObstacle(obstacle) {
-    ctx.fillStyle = '#ffa500';
-    // Remove shadow for mobile performance
-    if (!isMobile) {
-      ctx.shadowColor = '#ffa500';
-      ctx.shadowBlur = 10;
-    }
-    ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
-    if (!isMobile) {
-      ctx.shadowBlur = 0;
-    }
-  }
-  
-  function drawGround() {
-    ctx.fillStyle = '#333';
-    ctx.fillRect(0, groundY + player.height, canvas.width, canvas.height - groundY - player.height);
-  }
-  
-  function updatePlayer() {
-    player.velocityY += gravity;
-    player.y += player.velocityY;
-    
-    if (player.y >= groundY) {
-      player.y = groundY;
-      player.velocityY = 0;
-      player.jumping = false;
-    }
-  }
-  
-  function updateObstacles() {
-    for (let i = obstacles.length - 1; i >= 0; i--) {
-      const obstacle = obstacles[i];
-      obstacle.x -= 5;
-      
-      if (obstacle.x + obstacle.width < 0) {
-        obstacles.splice(i, 1);
-        score++;
-        scoreDisplay.textContent = score;
-      }
-    }
-    
-    // Spawn new obstacles
-    if (Math.random() < 0.02) {
-      obstacles.push({
-        x: canvas.width,
-        y: groundY,
-        width: 20,
-        height: 40
-      });
-    }
-  }
-  
-  function checkCollision() {
-    for (const obstacle of obstacles) {
-      if (player.x < obstacle.x + obstacle.width &&
-          player.x + player.width > obstacle.x &&
-          player.y < obstacle.y + obstacle.height &&
-          player.y + player.height > obstacle.y) {
-        return true;
-      }
-    }
-    return false;
-  }
-  
-  function jump() {
-    if (!player.jumping) {
-      player.velocityY = jumpForce;
-      player.jumping = true;
-    }
-  }
-  
+  // Simplified game loop for mobile
   function gameLoop() {
     if (!gameRunning) return;
     
     // Clear canvas
-    ctx.fillStyle = '#0a0a0a';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     
-    drawGround();
-    drawPlayer();
+    // Update player
+    playerVelocity += 0.8;
+    playerY += playerVelocity;
     
-    for (const obstacle of obstacles) {
-      drawObstacle(obstacle);
+    if (playerY > canvas.height - 50) {
+      playerY = canvas.height - 50;
+      playerVelocity = 0;
     }
     
-    updatePlayer();
-    updateObstacles();
+    // Draw player
+    ctx.fillStyle = '#00ffff';
+    ctx.fillRect(50, playerY, 30, 30);
     
-    if (checkCollision()) {
-      gameOver();
-      return;
+    // Update and draw obstacles
+    obstacles.forEach((obstacle, index) => {
+      obstacle.x -= 3;
+      ctx.fillStyle = '#ff00ff';
+      ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+      
+      if (obstacle.x + obstacle.width < 0) {
+        obstacles.splice(index, 1);
+        score++;
+      }
+    });
+    
+    // Generate obstacles
+    if (Math.random() < 0.02) {
+      obstacles.push({
+        x: canvas.width,
+        y: canvas.height - 40,
+        width: 20,
+        height: 40
+      });
     }
     
-    // Lower frame rate for mobile
-    const frameDelay = isMobile ? 33 : 16;
-    setTimeout(() => {
-      requestAnimationFrame(gameLoop);
-    }, frameDelay);
+    // Check collision
+    obstacles.forEach(obstacle => {
+      if (50 < obstacle.x + obstacle.width &&
+          50 + 30 > obstacle.x &&
+          playerY < obstacle.y + obstacle.height &&
+          playerY + 30 > obstacle.y) {
+        gameOver();
+      }
+    });
+    
+    // Draw score
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '16px Arial';
+    ctx.fillText(`Score: ${score}`, 10, 20);
+    ctx.fillText(`High: ${highScore}`, 10, 40);
+    
+    requestAnimationFrame(gameLoop);
+  }
+  
+  function jump() {
+    if (playerY >= canvas.height - 50) {
+      playerVelocity = -12;
+    }
+  }
+  
+  function startGame() {
+    gameRunning = true;
+    score = 0;
+    obstacles = [];
+    playerY = canvas.height - 50;
+    playerVelocity = 0;
+    gameLoop();
   }
   
   function gameOver() {
@@ -893,50 +919,26 @@ function initializeJumpGame() {
     if (score > highScore) {
       highScore = score;
       localStorage.setItem('jumpHighScore', highScore);
-      highScoreDisplay.textContent = highScore;
     }
-    alert(`Game Over! Score: ${score}`);
-  }
-  
-  function startGame() {
-    if (gameRunning) return;
-    
-    gameRunning = true;
-    score = 0;
-    scoreDisplay.textContent = score;
-    obstacles.length = 0;
-    player.y = groundY;
-    player.velocityY = 0;
-    player.jumping = false;
-    
-    gameLoop();
   }
   
   function restartGame() {
-    gameOver();
     startGame();
   }
   
   // Event listeners
-  startBtn.addEventListener('click', startGame);
-  restartBtn.addEventListener('click', restartGame);
-  
-  // Touch/click to jump
   canvas.addEventListener('click', jump);
-  canvas.addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    jump();
-  });
-  
-  // Keyboard support
   document.addEventListener('keydown', (e) => {
     if (e.code === 'Space') {
       e.preventDefault();
       jump();
     }
   });
-}
   
+  if (startBtn) startBtn.addEventListener('click', startGame);
+  if (restartBtn) restartBtn.addEventListener('click', restartGame);
+}
+
 // CyberMatrix Password Functions
 function openCyberMatrixModal() {
   const modal = document.getElementById('cybermatrix-modal');
@@ -1043,6 +1045,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const navMenu = document.querySelector('.nav-links');
     
     if (!event.target.closest('.neon-nav') && navMenu.classList.contains('active')) {
+      mobileToggle.classList.remove('active');
+      navMenu.classList.remove('active');
+    }
+  });
+  
+  // Handle window resize
+  window.addEventListener('resize', function() {
+    if (window.innerWidth > 768) {
+      const mobileToggle = document.querySelector('.mobile-menu-toggle');
+      const navMenu = document.querySelector('.nav-links');
+      
+      // Close mobile menu on desktop
       mobileToggle.classList.remove('active');
       navMenu.classList.remove('active');
     }
