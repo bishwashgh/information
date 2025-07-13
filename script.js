@@ -1005,4 +1005,47 @@ function checkPassword() {
     }, 500);
   }
 }
+
+// Mobile Menu Toggle
+function toggleMobileMenu() {
+  const mobileToggle = document.querySelector('.mobile-menu-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  
+  mobileToggle.classList.toggle('active');
+  navLinks.classList.toggle('active');
+  
+  // Play sound effect
+  if (!isMuted) {
+    playSound('click-sound');
+  }
+}
+
+// Close mobile menu when clicking on a link
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  
+  navLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      const mobileToggle = document.querySelector('.mobile-menu-toggle');
+      const navMenu = document.querySelector('.nav-links');
+      
+      // Close mobile menu if open
+      if (mobileToggle.classList.contains('active')) {
+        mobileToggle.classList.remove('active');
+        navMenu.classList.remove('active');
+      }
+    });
+  });
+  
+  // Close mobile menu when clicking outside
+  document.addEventListener('click', function(event) {
+    const mobileToggle = document.querySelector('.mobile-menu-toggle');
+    const navMenu = document.querySelector('.nav-links');
+    
+    if (!event.target.closest('.neon-nav') && navMenu.classList.contains('active')) {
+      mobileToggle.classList.remove('active');
+      navMenu.classList.remove('active');
+    }
+  });
+});
   
