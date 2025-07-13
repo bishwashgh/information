@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CyberMatrix Dashboard</title>
+  <link rel="stylesheet" href="cybermatrix.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Matrix Rain Background -->
+  <div id="matrix-rain"></div>
+  
+  <!-- Main Dashboard Container -->
+  <div class="dashboard-container">
+    <!-- Header with Toggle -->
+    <header class="dashboard-header">
+      <div class="logo">
+        <span class="logo-text">CyberMatrix</span>
+        <div class="logo-glow"></div>
+      </div>
+      <div class="controls">
+        <button id="mode-toggle" class="mode-toggle">
+          <span class="toggle-icon">🌙</span>
+          <span class="toggle-text">Dark Mode</span>
+        </button>
+        <button id="command-toggle" class="command-toggle">
+          <span class="command-icon">⌨️</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="dashboard-content">
+      <!-- System Status Panel -->
+      <div class="status-panel">
+        <h2 class="panel-title">System Status</h2>
+        <div class="status-grid">
+          <div class="status-item" data-message="Accessing Memory Core...">
+            <div class="status-icon">💾</div>
+            <div class="status-info">
+              <h3>Memory Core</h3>
+              <p>Online</p>
+            </div>
+            <div class="status-indicator active"></div>
+          </div>
+          
+          <div class="status-item" data-message="Establishing Neural Network...">
+            <div class="status-icon">🧠</div>
+            <div class="status-info">
+              <h3>Neural Network</h3>
+              <p>Connected</p>
+            </div>
+            <div class="status-indicator active"></div>
+          </div>
+          
+          <div class="status-item" data-message="Scanning Quantum Channels...">
+            <div class="status-icon">⚛️</div>
+            <div class="status-info">
+              <h3>Quantum Link</h3>
+              <p>Stable</p>
+            </div>
+            <div class="status-indicator active"></div>
+          </div>
+          
+          <div class="status-item" data-message="Initializing Cyber Interface...">
+            <div class="status-icon">🔌</div>
+            <div class="status-info">
+              <h3>Interface</h3>
+              <p>Ready</p>
+            </div>
+            <div class="status-indicator active"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Data Stream Panel -->
+      <div class="stream-panel">
+        <h2 class="panel-title">Data Streams</h2>
+        <div class="stream-container">
+          <div class="stream-item" data-sound="glitch1">
+            <div class="stream-header">
+              <span class="stream-id">STREAM_001</span>
+              <span class="stream-status">ACTIVE</span>
+            </div>
+            <div class="stream-data">
+              <span class="data-byte">0x4A</span>
+              <span class="data-byte">0x7F</span>
+              <span class="data-byte">0x3C</span>
+              <span class="data-byte">0x9E</span>
+            </div>
+          </div>
+          
+          <div class="stream-item" data-sound="glitch2">
+            <div class="stream-header">
+              <span class="stream-id">STREAM_002</span>
+              <span class="stream-status">ACTIVE</span>
+            </div>
+            <div class="stream-data">
+              <span class="data-byte">0x2B</span>
+              <span class="data-byte">0x8D</span>
+              <span class="data-byte">0x5F</span>
+              <span class="data-byte">0x1A</span>
+            </div>
+          </div>
+          
+          <div class="stream-item" data-sound="glitch3">
+            <div class="stream-header">
+              <span class="stream-id">STREAM_003</span>
+              <span class="stream-status">ACTIVE</span>
+            </div>
+            <div class="stream-data">
+              <span class="data-byte">0x6C</span>
+              <span class="data-byte">0x4E</span>
+              <span class="data-byte">0x9B</span>
+              <span class="data-byte">0x3D</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Activity Log -->
+      <div class="log-panel">
+        <h2 class="panel-title">Activity Log</h2>
+        <div class="log-container">
+          <div class="log-entry">
+            <span class="log-time">[12:34:56]</span>
+            <span class="log-message">System initialization complete</span>
+          </div>
+          <div class="log-entry">
+            <span class="log-time">[12:34:57]</span>
+            <span class="log-message">Neural interface established</span>
+          </div>
+          <div class="log-entry">
+            <span class="log-time">[12:34:58]</span>
+            <span class="log-message">Quantum encryption active</span>
+          </div>
+          <div class="log-entry">
+            <span class="log-time">[12:34:59]</span>
+            <span class="log-message">Matrix connection stable</span>
+          </div>
+          <div class="log-entry">
+            <span class="log-time">[12:35:00]</span>
+            <span class="log-message">Ready for cyber operations</span>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Hidden Command Line -->
+    <div id="command-line" class="command-line hidden">
+      <div class="command-header">
+        <span class="command-prompt">cybermatrix:~$</span>
+        <button class="command-close">×</button>
+      </div>
+      <div class="command-output">
+        <div class="output-line">CyberMatrix Terminal v2.1.0</div>
+        <div class="output-line">Type 'help' for available commands</div>
+        <div class="output-line">Type 'clear' to clear terminal</div>
+      </div>
+      <div class="command-input-line">
+        <span class="command-prompt">cybermatrix:~$</span>
+        <input type="text" id="command-input" placeholder="Enter command..." autocomplete="off">
+      </div>
+    </div>
+
+    <!-- Secret Message Overlay -->
+    <div id="secret-message" class="secret-message hidden">
+      <div class="message-content">
+        <span class="message-text"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Audio Elements -->
+  <audio id="glitch1" preload="auto">
+    <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIG2m98OScTgwOUarm7blmGgU7k9n1unEiBC13yO/eizEIHWq+8+OWT" type="audio/wav">
+  </audio>
+  <audio id="glitch2" preload="auto">
+    <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIG2m98OScTgwOUarm7blmGgU7k9n1unEiBC13yO/eizEIHWq+8+OWT" type="audio/wav">
+  </audio>
+  <audio id="glitch3" preload="auto">
+    <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIG2m98OScTgwOUarm7blmGgU7k9n1unEiBC13yO/eizEIHWq+8+OWT" type="audio/wav">
+  </audio>
+  <audio id="terminal-sound" preload="auto">
+    <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIG2m98OScTgwOUarm7blmGgU7k9n1unEiBC13yO/eizEIHWq+8+OWT" type="audio/wav">
+  </audio>
+
+  <script src="cybermatrix.js"></script>
+</body>
+</html> 
