@@ -1,512 +1,647 @@
-/* AURA.MoodEngine CSS Variables and Theme Transitions */
+/* AURA.MoodEngine Enhanced Styling */
 
-:root {
-    /* Default theme variables */
-    --primary-color: #00D4FF;
-    --secondary-color: #0099CC;
-    --accent-color: #FFD700;
-    --glow-color: #00D4FF;
-    --text-color: #FFFFFF;
-    --background-gradient: linear-gradient(135deg, #00D4FF 0%, #0099CC 50%, #FFD700 100%);
-    --particle-color: #FFD700;
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Theme transition effects */
 body {
-    transition: all 0.5s ease;
+  font-family: 'Rajdhani', sans-serif;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+  color: #ffffff;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
 }
 
-/* Update existing elements to use CSS variables */
-.neon-text {
-    color: var(--glow-color);
-    text-shadow: 0 0 10px var(--glow-color);
+/* Animated Background */
+.neon-grid {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: gridMove 20s linear infinite;
+  z-index: -2;
 }
 
-.neon-title .neon-cyan {
-    color: var(--primary-color);
-    text-shadow: 0 0 20px var(--primary-color);
+.floating-particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
 }
 
-.neon-title .neon-pink {
-    color: var(--secondary-color);
-    text-shadow: 0 0 20px var(--secondary-color);
-}
-
-.neon-button {
-    border-color: var(--glow-color);
-    color: var(--glow-color);
-    box-shadow: 0 0 10px var(--glow-color);
-}
-
-.neon-button:hover {
-    background: var(--glow-color);
-    color: #000;
-    box-shadow: 0 0 20px var(--glow-color);
-}
-
-.nav-link {
-    color: var(--glow-color);
-    text-shadow: 0 0 5px var(--glow-color);
-}
-
-.nav-link:hover {
-    color: var(--accent-color);
-    text-shadow: 0 0 10px var(--accent-color);
-}
-
-.section-title {
-    color: var(--glow-color);
-    text-shadow: 0 0 15px var(--glow-color);
-}
-
-/* Project cards with dynamic glow */
-.project-card .card-glow.cyan {
-    background: var(--primary-color);
-    box-shadow: 0 0 30px var(--primary-color);
-}
-
-.project-card .card-glow.pink {
-    background: var(--secondary-color);
-    box-shadow: 0 0 30px var(--secondary-color);
-}
-
-.project-card .card-glow.purple {
-    background: var(--accent-color);
-    box-shadow: 0 0 30px var(--accent-color);
-}
-
-/* Gaming cards */
-.game-card .card-glow.green {
-    background: var(--primary-color);
-    box-shadow: 0 0 30px var(--primary-color);
-}
-
-.game-card .card-glow.orange {
-    background: var(--accent-color);
-    box-shadow: 0 0 30px var(--accent-color);
-}
-
-/* Timeline markers */
-.timeline-marker.cyan {
-    background: var(--primary-color);
-    box-shadow: 0 0 15px var(--primary-color);
-}
-
-/* Floating particles with dynamic color */
 .floating-particles::before,
 .floating-particles::after {
-    background: var(--particle-color);
-    box-shadow: 0 0 10px var(--particle-color);
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #00ffff;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #00ffff;
+  animation: float 6s ease-in-out infinite;
 }
 
-/* Solar system dynamic colors */
-.sun {
-    background: var(--primary-color);
-    box-shadow: 0 0 50px var(--primary-color);
-    transition: all 0.5s ease;
+.floating-particles::before {
+  top: 20%;
+  left: 10%;
+  animation-delay: 0s;
 }
 
-.planet-core {
-    transition: all 0.5s ease;
+.floating-particles::after {
+  top: 60%;
+  right: 15%;
+  animation-delay: 3s;
 }
 
-/* Neon grid with dynamic glow */
-.neon-grid {
-    background-image: 
-        linear-gradient(var(--glow-color) 1px, transparent 1px),
-        linear-gradient(90deg, var(--glow-color) 1px, transparent 1px);
-    box-shadow: 0 0 20px var(--glow-color);
-}
-
-/* Theme-specific animations */
-@keyframes glowPulse {
-    0%, 100% {
-        box-shadow: 0 0 10px var(--glow-color);
-    }
-    50% {
-        box-shadow: 0 0 20px var(--glow-color), 0 0 30px var(--glow-color);
-    }
-}
-
-.neon-button {
-    animation: glowPulse 2s ease-in-out infinite;
-}
-
-/* Weather effects */
-.rainy-theme .floating-particles::before {
-    animation: rain 0.5s linear infinite;
-}
-
-@keyframes rain {
-    0% {
-        transform: translateY(-100vh);
-    }
-    100% {
-        transform: translateY(100vh);
-    }
-}
-
-.stormy-theme .neon-grid {
-    animation: lightning 3s ease-in-out infinite;
-}
-
-@keyframes lightning {
-    0%, 90%, 100% {
-        opacity: 0.3;
-    }
-    95% {
-        opacity: 1;
-    }
-}
-
-/* Hacker theme special effects */
-.hacker-theme .neon-text {
-    animation: glitch 0.3s ease-in-out infinite;
-}
-
-@keyframes glitch {
-    0%, 100% {
-        transform: translate(0);
-    }
-    20% {
-        transform: translate(-2px, 2px);
-    }
-    40% {
-        transform: translate(-2px, -2px);
-    }
-    60% {
-        transform: translate(2px, 2px);
-    }
-    80% {
-        transform: translate(2px, -2px);
-    }
-}
-
-/* Dreamy theme effects */
-.dreamy-theme .floating-particles::before {
-    animation: float 6s ease-in-out infinite;
+@keyframes gridMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(50px, 50px); }
 }
 
 @keyframes float {
-    0%, 100% {
-        transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        transform: translateY(-20px) rotate(180deg);
-    }
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(180deg); }
 }
 
-/* AURA.MoodEngine Mood Selector Styles */
-.aura-mood-selector {
-    position: fixed;
-    z-index: 1000;
-    font-family: 'Orbitron', monospace;
-    transition: all 0.3s ease;
+/* Navigation Styles */
+.neon-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(10, 10, 10, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+  z-index: 1000;
+  padding: 1rem 0;
 }
 
-.mood-panel {
-    background: rgba(0, 0, 0, 0.8);
-    border: 2px solid var(--glow-color, #00D4FF);
-    border-radius: 15px;
-    padding: 15px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 20px var(--glow-color, #00D4FF);
-    transition: all 0.3s ease;
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
 }
 
-.mood-panel h3 {
-    color: var(--glow-color, #00D4FF);
-    margin: 0 0 10px 0;
-    font-size: 14px;
-    text-align: center;
+.nav-brand {
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
-.mood-options {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+.brand-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(0, 255, 255, 0.3) 0%, transparent 70%);
+  animation: brandPulse 3s ease-in-out infinite;
+}
+
+.neon-text {
+  color: #00ffff;
+  font-family: 'Orbitron', monospace;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-shadow: 0 0 10px #00ffff;
+  position: relative;
+  z-index: 1;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-link:hover {
+  color: #00ffff;
+  text-shadow: 0 0 10px #00ffff;
+}
+
+.link-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 5px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.nav-link:hover .link-glow {
+  opacity: 1;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+@keyframes brandPulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* Main Content Styles */
+.aura-main {
+  padding-top: 100px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.aura-container {
+  max-width: 1200px;
+  width: 100%;
+  padding: 2rem;
+}
+
+.aura-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.aura-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 3rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+}
+
+.neon-cyan {
+  color: #00ffff;
+  text-shadow: 0 0 20px #00ffff;
+}
+
+.neon-pink {
+  color: #ff00ff;
+  text-shadow: 0 0 20px #ff00ff;
+}
+
+.aura-subtitle {
+  font-size: 1.2rem;
+  color: #cccccc;
+  margin-bottom: 2rem;
+}
+
+.aura-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* Mood Engine Styles */
+.mood-engine {
+  background: rgba(10, 10, 10, 0.9);
+  border: 2px solid rgba(0, 255, 255, 0.3);
+  border-radius: 15px;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.mood-engine:hover {
+  border-color: #00ffff;
+  box-shadow: 0 0 40px rgba(0, 255, 255, 0.4);
+}
+
+.engine-display {
+  margin-bottom: 2rem;
+}
+
+.mood-visualization {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+#mood-canvas {
+  border: 2px solid rgba(0, 255, 255, 0.3);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+}
+
+.mood-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.stat-item {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stat-label {
+  color: #cccccc;
+  font-size: 0.9rem;
+}
+
+.stat-value {
+  color: #00ffff;
+  font-weight: 600;
+  text-shadow: 0 0 5px #00ffff;
+}
+
+/* Mood Controls */
+.mood-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.control-group label {
+  color: #00ffff;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+#mood-input {
+  width: 100%;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid rgba(0, 255, 255, 0.3);
+  border-radius: 8px;
+  color: #ffffff;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1rem;
+  resize: vertical;
+  transition: all 0.3s ease;
+}
+
+#mood-input:focus {
+  outline: none;
+  border-color: #00ffff;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+}
+
+.mood-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0.5rem;
 }
 
 .mood-btn {
-    background: transparent;
-    border: 1px solid var(--glow-color, #00D4FF);
-    color: var(--glow-color, #00D4FF);
-    padding: 8px 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 12px;
-    transition: all 0.3s ease;
-    font-family: 'Orbitron', monospace;
+  padding: 0.8rem 1rem;
+  border: 2px solid;
+  border-radius: 8px;
+  background: transparent;
+  color: #ffffff;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.mood-btn:hover {
-    background: var(--glow-color, #00D4FF);
-    color: #000;
-    box-shadow: 0 0 10px var(--glow-color, #00D4FF);
+.mood-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
 }
 
-.mood-btn.active {
-    background: var(--glow-color, #00D4FF);
-    color: #000;
-    box-shadow: 0 0 15px var(--glow-color, #00D4FF);
+.mood-btn:hover::before {
+  left: 100%;
 }
 
-.current-theme {
-    margin-top: 10px;
+.mood-btn.happy {
+  border-color: #00ff00;
+  color: #00ff00;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+}
+
+.mood-btn.happy:hover {
+  background: #00ff00;
+  color: #000000;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.6);
+}
+
+.mood-btn.sad {
+  border-color: #0000ff;
+  color: #0000ff;
+  box-shadow: 0 0 10px rgba(0, 0, 255, 0.3);
+}
+
+.mood-btn.sad:hover {
+  background: #0000ff;
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(0, 0, 255, 0.6);
+}
+
+.mood-btn.excited {
+  border-color: #ff00ff;
+  color: #ff00ff;
+  box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+}
+
+.mood-btn.excited:hover {
+  background: #ff00ff;
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(255, 0, 255, 0.6);
+}
+
+.mood-btn.calm {
+  border-color: #00ffff;
+  color: #00ffff;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+.mood-btn.calm:hover {
+  background: #00ffff;
+  color: #000000;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+}
+
+.mood-btn.anxious {
+  border-color: #ffff00;
+  color: #ffff00;
+  box-shadow: 0 0 10px rgba(255, 255, 0, 0.3);
+}
+
+.mood-btn.anxious:hover {
+  background: #ffff00;
+  color: #000000;
+  box-shadow: 0 0 20px rgba(255, 255, 0, 0.6);
+}
+
+.mood-btn.angry {
+  border-color: #ff0000;
+  color: #ff0000;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+}
+
+.mood-btn.angry:hover {
+  background: #ff0000;
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.neon-button {
+  padding: 0.8rem 1.5rem;
+  border: 2px solid;
+  border-radius: 8px;
+  background: transparent;
+  color: #ffffff;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.neon-button.cyan {
+  border-color: #00ffff;
+  color: #00ffff;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+.neon-button.cyan:hover {
+  background: #00ffff;
+  color: #000000;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+}
+
+.neon-button.pink {
+  border-color: #ff00ff;
+  color: #ff00ff;
+  box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+}
+
+.neon-button.pink:hover {
+  background: #ff00ff;
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(255, 0, 255, 0.6);
+}
+
+.neon-button.green {
+  border-color: #00ff00;
+  color: #00ff00;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+}
+
+.neon-button.green:hover {
+  background: #00ff00;
+  color: #000000;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.6);
+}
+
+/* Mood Analysis Styles */
+.mood-analysis {
+  background: rgba(10, 10, 10, 0.9);
+  border: 2px solid rgba(0, 255, 255, 0.3);
+  border-radius: 15px;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.mood-analysis:hover {
+  border-color: #00ffff;
+  box-shadow: 0 0 40px rgba(0, 255, 255, 0.4);
+}
+
+.mood-analysis h3 {
+  color: #00ffff;
+  font-family: 'Orbitron', monospace;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.analysis-content {
+  color: #ffffff;
+  line-height: 1.6;
+}
+
+.analysis-item {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 1.5rem;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  margin-bottom: 1rem;
+}
+
+.analysis-item h4 {
+  color: #00ffff;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.analysis-item p {
+  margin-bottom: 0.5rem;
+}
+
+.analysis-item strong {
+  color: #00ffff;
+}
+
+.aura-response {
+  background: rgba(0, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid #00ffff;
+  margin: 1rem 0;
+  font-style: italic;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .aura-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .aura-title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-container {
+    padding: 0 1rem;
+  }
+  
+  .nav-links {
+    gap: 1rem;
+  }
+  
+  .aura-container {
+    padding: 1rem;
+  }
+  
+  .aura-title {
+    font-size: 2rem;
+  }
+  
+  .mood-buttons {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+  }
+  
+  .neon-button {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .aura-title {
+    font-size: 1.8rem;
+  }
+  
+  .mood-buttons {
+    grid-template-columns: 1fr;
+  }
+  
+  .stat-item {
+    flex-direction: column;
     text-align: center;
-    font-size: 11px;
-    color: var(--glow-color, #00D4FF);
-    opacity: 0.8;
+    gap: 0.5rem;
+  }
 }
 
-/* Responsive design for mood selector */
-@media (max-width: 768px) {
-    .aura-mood-selector {
-        top: 10px;
-        right: 10px;
-    }
-    
-    .mood-panel {
-        padding: 10px;
-    }
-    
-    .mood-btn {
-        padding: 6px 8px;
-        font-size: 10px;
-    }
-    
-    .mood-panel h3 {
-        font-size: 12px;
-    }
-}
-
-/* Accessibility improvements */
-@media (prefers-reduced-motion: reduce) {
-    * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-    .mood-panel {
-        border-width: 3px;
-    }
-    
-    .mood-btn {
-        border-width: 2px;
-    }
-}
-
-/* AURA.MoodEngine Popup Styles */
-.aura-popup {
-    position: fixed;
-    z-index: 1001;
-    pointer-events: none;
+/* Animation Enhancements */
+@keyframes fadeInUp {
+  from {
     opacity: 0;
-    transform: translateY(-10px) scale(0.9);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.aura-popup.show {
+    transform: translateY(30px);
+  }
+  to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
+  }
 }
 
-.popup-content {
-    background: rgba(0, 0, 0, 0.95);
-    border: 2px solid var(--glow-color, #00D4FF);
-    border-radius: 12px;
-    padding: 15px;
-    backdrop-filter: blur(15px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px var(--glow-color, #00D4FF);
-    min-width: 200px;
-    max-width: 250px;
+.mood-engine,
+.mood-analysis {
+  animation: fadeInUp 0.8s ease-out;
 }
 
-.popup-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
+.mood-engine {
+  animation-delay: 0.2s;
 }
 
-.popup-content h4 {
-    color: var(--glow-color, #00D4FF);
-    margin: 0;
-    font-size: 16px;
-    font-family: 'Orbitron', monospace;
-    text-shadow: 0 0 10px var(--glow-color, #00D4FF);
+.mood-analysis {
+  animation-delay: 0.4s;
 }
 
-.countdown-bar {
-    width: 40px;
-    height: 3px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 2px;
-    overflow: hidden;
+/* Enhanced Glow Effects */
+.mood-engine::before,
+.mood-analysis::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #00ffff, #ff00ff, #00ffff);
+  border-radius: 17px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-.countdown-fill {
-    height: 100%;
-    background: var(--glow-color, #00D4FF);
-    border-radius: 2px;
-    animation: countdown 2s linear forwards;
-}
-
-@keyframes countdown {
-    from {
-        width: 100%;
-    }
-    to {
-        width: 0%;
-    }
-}
-
-.popup-content p {
-    color: var(--text-color, #FFFFFF);
-    margin: 0 0 12px 0;
-    font-size: 13px;
-    line-height: 1.4;
-    opacity: 0.9;
-}
-
-.theme-preview {
-    margin-top: 10px;
-}
-
-.color-preview {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 10px;
-    justify-content: center;
-}
-
-.color-dot {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: 2px solid #fff;
-    box-shadow: 0 0 8px currentColor;
-    transition: all 0.3s ease;
-}
-
-.color-dot:hover {
-    transform: scale(1.2);
-    box-shadow: 0 0 15px currentColor;
-}
-
-.theme-features {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    justify-content: center;
-}
-
-.feature {
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--glow-color, #00D4FF);
-    padding: 4px 8px;
-    border-radius: 12px;
-    font-size: 11px;
-    border: 1px solid var(--glow-color, #00D4FF);
-    opacity: 0.8;
-    transition: all 0.3s ease;
-}
-
-.feature:hover {
-    opacity: 1;
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-1px);
-}
-
-/* Popup arrow */
-.popup-content::before {
-    content: '';
-    position: absolute;
-    top: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-bottom: 8px solid var(--glow-color, #00D4FF);
-}
-
-/* Enhanced mood button hover effects */
-.mood-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px var(--glow-color, #00D4FF);
-}
-
-/* Responsive popup adjustments */
-@media (max-width: 768px) {
-    .popup-content {
-        min-width: 180px;
-        max-width: 220px;
-        padding: 12px;
-    }
-    
-    .popup-content h4 {
-        font-size: 14px;
-    }
-    
-    .popup-content p {
-        font-size: 12px;
-    }
-    
-    .color-dot {
-        width: 16px;
-        height: 16px;
-    }
-    
-    .feature {
-        font-size: 10px;
-        padding: 3px 6px;
-    }
-}
-
-/* Animation for popup entrance */
-@keyframes popupSlideIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px) scale(0.8);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-.aura-popup.show {
-    animation: popupSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Glow effect for popup */
-.popup-content {
-    position: relative;
-    overflow: hidden;
-}
-
-.popup-content::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    animation: shimmer 2s infinite;
-}
-
-@keyframes shimmer {
-    0% {
-        left: -100%;
-    }
-    100% {
-        left: 100%;
-    }
+.mood-engine:hover::before,
+.mood-analysis:hover::before {
+  opacity: 0.3;
 } 
