@@ -1,0 +1,1798 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PageTurner - Your Literary Haven</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: rgb(86, 60, 41);
+        --primary-foreground: rgb(251, 250, 249);
+        --secondary: rgb(75, 65, 58);
+        --background: rgb(251, 250, 249);
+        --foreground: rgb(44, 37, 33);
+        --muted: rgb(236, 231, 223);
+        --muted-foreground: rgb(126, 113, 103);
+        --accent: rgb(236, 231, 223);
+        --accent-foreground: rgb(64, 49, 38);
+        --border: rgb(229, 226, 220);
+        --warm: rgb(245, 238, 228);
+        --gold: rgb(218, 165, 32);
+        --gold-foreground: rgb(44, 37, 33);
+      }
+
+      body {
+        font-family: "Inter", system-ui, sans-serif;
+        background-color: var(--background);
+        color: var(--foreground);
+        line-height: 1.6;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: "Crimson Text", Georgia, serif;
+        font-weight: 600;
+      }
+
+      /* Header */
+      .header {
+        position: sticky;
+        top: 0;
+        background: rgba(251, 250, 249, 0.95);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--border);
+        z-index: 100;
+        padding: 0 2rem;
+      }
+
+      .header-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 80px;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .logo-icon {
+        width: 40px;
+        height: 40px;
+        background: var(--primary);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 12px;
+      }
+
+      .logo-text {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .logo-title {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--primary);
+      }
+
+      .logo-subtitle {
+        font-size: 12px;
+        color: var(--muted-foreground);
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .nav-link {
+        padding: 8px 16px;
+        border-radius: 10px;
+        text-decoration: none;
+        color: var(--foreground);
+        font-weight: 500;
+        font-size: 14px;
+        transition: all 0.15s;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+      }
+
+      .nav-link:hover,
+      .nav-link.active {
+        background: var(--accent);
+        color: var(--accent-foreground);
+      }
+
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .btn {
+        padding: 8px 16px;
+        border-radius: 8px;
+        border: none;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+      }
+
+      .btn-primary {
+        background: var(--primary);
+        color: var(--primary-foreground);
+      }
+
+      .btn-primary:hover {
+        background: var(--secondary);
+      }
+
+      .btn-secondary {
+        background: var(--accent);
+        color: var(--accent-foreground);
+      }
+
+      .btn-secondary:hover {
+        background: var(--muted);
+      }
+
+      .btn-ghost {
+        background: transparent;
+        color: var(--foreground);
+      }
+
+      .btn-ghost:hover {
+        background: var(--accent);
+      }
+
+      .search-container {
+        position: relative;
+        flex: 1;
+        max-width: 400px;
+        margin: 0 2rem;
+      }
+
+      .search-input {
+        width: 100%;
+        padding: 10px 16px 10px 40px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-size: 14px;
+        background: white;
+      }
+
+      .search-icon {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 16px;
+        height: 16px;
+        color: var(--muted-foreground);
+      }
+
+      .cart-badge {
+        position: absolute;
+        top: -4px;
+        right: -4px;
+        background: #ef4444;
+        color: white;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Main Content */
+      .main {
+        min-height: calc(100vh - 80px);
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      /* Hero Section */
+      .hero {
+        background: linear-gradient(
+          135deg,
+          var(--warm) 0%,
+          rgba(245, 238, 228, 0.5) 100%
+        );
+        padding: 5rem 0;
+        text-align: center;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        margin-bottom: 1.5rem;
+        color: var(--primary);
+      }
+
+      .hero p {
+        font-size: 1.25rem;
+        color: var(--secondary);
+        margin-bottom: 2rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-search {
+        max-width: 500px;
+        margin: 0 auto 2rem auto;
+        position: relative;
+      }
+
+      .hero-search input {
+        width: 100%;
+        padding: 16px 20px 16px 50px;
+        border: none;
+        border-radius: 12px;
+        font-size: 16px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .hero-search .search-icon {
+        left: 16px;
+        width: 20px;
+        height: 20px;
+      }
+
+      .hero-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .btn-lg {
+        padding: 12px 24px;
+        font-size: 16px;
+        border-radius: 12px;
+      }
+
+      /* Sections */
+      .section {
+        padding: 4rem 0;
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        color: var(--primary);
+        margin-bottom: 1rem;
+      }
+
+      .section-description {
+        font-size: 1.125rem;
+        color: var(--muted-foreground);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      /* Books Grid */
+      .books-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .book-card {
+        background: white;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s;
+        cursor: pointer;
+      }
+
+      .book-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .book-image {
+        position: relative;
+        aspect-ratio: 3/4;
+        overflow: hidden;
+      }
+
+      .book-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s;
+      }
+
+      .book-card:hover .book-image img {
+        transform: scale(1.05);
+      }
+
+      .book-badges {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .badge {
+        padding: 4px 8px;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 600;
+        color: white;
+      }
+
+      .badge-bestseller {
+        background: var(--gold);
+        color: var(--gold-foreground);
+      }
+
+      .badge-new {
+        background: #10b981;
+      }
+
+      .badge-sale {
+        background: #ef4444;
+      }
+
+      .book-content {
+        padding: 1.5rem;
+      }
+
+      .book-title {
+        font-size: 1.125rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: var(--primary);
+        line-height: 1.4;
+      }
+
+      .book-author {
+        color: var(--muted-foreground);
+        margin-bottom: 0.75rem;
+        font-size: 14px;
+      }
+
+      .book-rating {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .stars {
+        display: flex;
+        gap: 1px;
+      }
+
+      .star {
+        width: 16px;
+        height: 16px;
+        color: var(--gold);
+      }
+
+      .star.filled {
+        fill: currentColor;
+      }
+
+      .rating-text {
+        font-size: 14px;
+        color: var(--muted-foreground);
+      }
+
+      .book-price {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .price-current {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--primary);
+      }
+
+      .price-original {
+        font-size: 14px;
+        color: var(--muted-foreground);
+        text-decoration: line-through;
+      }
+
+      .book-actions {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .btn-sm {
+        padding: 8px 12px;
+        font-size: 14px;
+      }
+
+      /* Categories */
+      .categories-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .category-card {
+        position: relative;
+        height: 200px;
+        border-radius: 16px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .category-card:hover {
+        transform: translateY(-4px);
+      }
+
+      .category-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s;
+      }
+
+      .category-card:hover img {
+        transform: scale(1.05);
+      }
+
+      .category-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.7) 0%,
+          rgba(0, 0, 0, 0.2) 50%,
+          transparent 100%
+        );
+        display: flex;
+        align-items: flex-end;
+        padding: 1.5rem;
+      }
+
+      .category-content {
+        color: white;
+      }
+
+      .category-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+
+      .category-count {
+        font-size: 14px;
+        opacity: 0.9;
+      }
+
+      /* Filter Sidebar */
+      .books-layout {
+        display: grid;
+        grid-template-columns: 250px 1fr;
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .filters {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 12px;
+        height: fit-content;
+        position: sticky;
+        top: 100px;
+      }
+
+      .filter-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .filter-title {
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+        color: var(--primary);
+      }
+
+      .filter-option {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+        cursor: pointer;
+      }
+
+      .filter-option input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+      }
+
+      .price-range {
+        margin-top: 0.5rem;
+      }
+
+      .price-range input[type="range"] {
+        width: 100%;
+        margin: 0.5rem 0;
+      }
+
+      .price-display {
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+        color: var(--muted-foreground);
+      }
+
+      /* Footer */
+      .footer {
+        background: var(--muted);
+        padding: 3rem 0 1.5rem 0;
+        border-top: 1px solid var(--border);
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .footer-section h4 {
+        color: var(--primary);
+        margin-bottom: 1rem;
+      }
+
+      .footer-section a {
+        display: block;
+        color: var(--muted-foreground);
+        text-decoration: none;
+        margin-bottom: 0.5rem;
+        transition: color 0.2s;
+      }
+
+      .footer-section a:hover {
+        color: var(--primary);
+      }
+
+      .footer-bottom {
+        text-align: center;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border);
+        color: var(--muted-foreground);
+        font-size: 14px;
+      }
+
+      /* Newsletter */
+      .newsletter {
+        background: var(--primary);
+        color: var(--primary-foreground);
+        text-align: center;
+      }
+
+      .newsletter h2 {
+        color: var(--primary-foreground);
+        margin-bottom: 1rem;
+      }
+
+      .newsletter-form {
+        display: flex;
+        max-width: 400px;
+        margin: 2rem auto 0 auto;
+        gap: 0.5rem;
+      }
+
+      .newsletter-form input {
+        flex: 1;
+        padding: 12px 16px;
+        border: none;
+        border-radius: 8px;
+      }
+
+      .newsletter-form button {
+        background: var(--gold);
+        color: var(--gold-foreground);
+      }
+
+      /* Mobile Responsiveness */
+      @media (max-width: 768px) {
+        .header-content {
+          padding: 0 1rem;
+        }
+
+        .nav {
+          display: none;
+        }
+
+        .search-container {
+          display: none;
+        }
+
+        .hero {
+          padding: 3rem 0;
+        }
+
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero-buttons {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .books-layout {
+          grid-template-columns: 1fr;
+        }
+
+        .filters {
+          position: static;
+        }
+
+        .books-grid {
+          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+          gap: 1.5rem;
+        }
+
+        .container {
+          padding: 0 1rem;
+        }
+      }
+
+      /* Loading States */
+      .loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+      }
+
+      .spinner {
+        width: 40px;
+        height: 40px;
+        border: 3px solid var(--muted);
+        border-top: 3px solid var(--primary);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Utility Classes */
+      .hidden {
+        display: none !important;
+      }
+
+      .text-center {
+        text-align: center;
+      }
+
+      .mt-4 {
+        margin-top: 1rem;
+      }
+
+      .mb-4 {
+        margin-bottom: 1rem;
+      }
+
+      /* Modal */
+      .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+      }
+
+      .modal-content {
+        background: white;
+        padding: 2rem;
+        border-radius: 16px;
+        max-width: 500px;
+        width: 90%;
+        max-height: 80vh;
+        overflow-y: auto;
+      }
+
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+
+      .modal-close {
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: var(--muted-foreground);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <a href="#" class="logo" onclick="showSection('home')">
+          <div class="logo-icon">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              style="color: white"
+            >
+              <path d="M12 7v14"></path>
+              <path
+                d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"
+              ></path>
+            </svg>
+          </div>
+          <div class="logo-text">
+            <span class="logo-title">PageTurner</span>
+            <span class="logo-subtitle">Your Literary Haven</span>
+          </div>
+        </a>
+
+        <nav class="nav">
+          <a href="#" class="nav-link active" onclick="showSection('home')"
+            >Home</a
+          >
+          <a href="#" class="nav-link" onclick="showSection('books')"
+            >All Books</a
+          >
+          <a href="#" class="nav-link" onclick="showSection('bestsellers')">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              stroke="currentColor"
+              style="margin-right: 4px"
+            >
+              <polygon
+                points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"
+              ></polygon>
+            </svg>
+            Bestsellers
+          </a>
+          <a href="#" class="nav-link" onclick="showSection('categories')"
+            >Categories</a
+          >
+        </nav>
+
+        <div class="search-container">
+          <svg
+            class="search-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+          <input
+            type="text"
+            class="search-input"
+            placeholder="Search books, authors, or genres..."
+            id="globalSearch"
+          />
+        </div>
+
+        <div class="header-actions">
+          <button class="btn btn-ghost" style="position: relative">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+              ></path>
+            </svg>
+          </button>
+          <button class="btn btn-ghost" style="position: relative">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="8" cy="21" r="1"></circle>
+              <circle cx="19" cy="21" r="1"></circle>
+              <path
+                d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57L20.95 7.05H5.12"
+              ></path>
+            </svg>
+            <span class="cart-badge">3</span>
+          </button>
+          <button class="btn btn-ghost">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+      <!-- Home Section -->
+      <section id="home-section" class="section-content">
+        <!-- Hero -->
+        <div class="hero">
+          <div class="container">
+            <h1>
+              Discover Your Next<br /><span
+                style="
+                  background: linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--secondary)
+                  );
+                  -webkit-background-clip: text;
+                  -webkit-text-fill-color: transparent;
+                  background-clip: text;
+                "
+                >Great Read</span
+              >
+            </h1>
+            <p>
+              Explore our curated collection of exceptional books, from
+              bestselling novels to hidden literary gems. Your perfect story is
+              waiting to be discovered.
+            </p>
+
+            <div class="hero-search">
+              <svg
+                class="search-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.35-4.35"></path>
+              </svg>
+              <input
+                type="text"
+                placeholder="Search books, authors, or genres..."
+                id="heroSearch"
+              />
+            </div>
+
+            <div class="hero-buttons">
+              <button
+                class="btn btn-primary btn-lg"
+                onclick="showSection('books')"
+              >
+                Browse All Books
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  style="margin-left: 8px"
+                >
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12,5 19,12 12,19"></polyline>
+                </svg>
+              </button>
+              <button
+                class="btn btn-secondary btn-lg"
+                onclick="showSection('bestsellers')"
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  stroke="currentColor"
+                  style="margin-right: 8px"
+                >
+                  <polygon
+                    points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"
+                  ></polygon>
+                </svg>
+                View Bestsellers
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Featured Books -->
+        <div class="section">
+          <div class="container">
+            <div class="section-header">
+              <h2 class="section-title">Featured Books</h2>
+              <p class="section-description">
+                Handpicked by our literary experts, these exceptional books are
+                must-reads for every book lover.
+              </p>
+            </div>
+            <div class="books-grid" id="featured-books"></div>
+          </div>
+        </div>
+
+        <!-- Categories -->
+        <div class="section" style="background: var(--warm)">
+          <div class="container">
+            <div class="section-header">
+              <h2 class="section-title">Explore Categories</h2>
+              <p class="section-description">
+                Dive into your favorite genres and discover new worlds of
+                literature.
+              </p>
+            </div>
+            <div class="categories-grid" id="categories-grid"></div>
+          </div>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="section newsletter">
+          <div class="container">
+            <h2>Stay Updated</h2>
+            <p>
+              Subscribe to our newsletter and be the first to know about new
+              releases, exclusive offers, and literary events.
+            </p>
+            <div class="newsletter-form">
+              <input type="email" placeholder="Enter your email address" />
+              <button class="btn">Subscribe</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Books Section -->
+      <section id="books-section" class="section-content hidden">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title">All Books</h2>
+            <p class="section-description">
+              Explore our complete collection of books
+            </p>
+          </div>
+
+          <div class="books-layout">
+            <div class="filters">
+              <h3 class="filter-title">Filters</h3>
+
+              <div class="filter-group">
+                <h4 class="filter-title">Categories</h4>
+                <div id="category-filters"></div>
+              </div>
+
+              <div class="filter-group">
+                <h4 class="filter-title">Price Range</h4>
+                <div class="price-range">
+                  <input
+                    type="range"
+                    id="price-range"
+                    min="0"
+                    max="100"
+                    value="100"
+                  />
+                  <div class="price-display">
+                    <span>$0</span>
+                    <span id="max-price">$100</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="filter-group">
+                <h4 class="filter-title">Sort By</h4>
+                <select
+                  id="sort-select"
+                  style="
+                    width: 100%;
+                    padding: 8px;
+                    border-radius: 6px;
+                    border: 1px solid var(--border);
+                  "
+                >
+                  <option value="relevance">Relevance</option>
+                  <option value="price-low">Price: Low to High</option>
+                  <option value="price-high">Price: High to Low</option>
+                  <option value="rating">Highest Rated</option>
+                  <option value="title">Title A-Z</option>
+                </select>
+              </div>
+
+              <button
+                class="btn btn-secondary"
+                onclick="clearFilters()"
+                style="width: 100%; margin-top: 1rem"
+              >
+                Clear Filters
+              </button>
+            </div>
+
+            <div>
+              <div style="margin-bottom: 1rem">
+                <input
+                  type="text"
+                  id="books-search"
+                  placeholder="Search books..."
+                  style="
+                    width: 100%;
+                    padding: 12px;
+                    border-radius: 8px;
+                    border: 1px solid var(--border);
+                  "
+                />
+              </div>
+              <div class="books-grid" id="all-books"></div>
+              <div id="books-loading" class="loading hidden">
+                <div class="spinner"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bestsellers Section -->
+      <section id="bestsellers-section" class="section-content hidden">
+        <div class="container">
+          <div class="section-header">
+            <div
+              style="
+                width: 64px;
+                height: 64px;
+                background: rgba(218, 165, 32, 0.2);
+                border-radius: 16px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 0 auto 1.5rem auto;
+              "
+            >
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="var(--gold)"
+                stroke="var(--gold)"
+              >
+                <polygon
+                  points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"
+                ></polygon>
+              </svg>
+            </div>
+            <h2 class="section-title">Bestselling Books</h2>
+            <p class="section-description">
+              Discover the most popular books loved by readers worldwide. These
+              titles have captured hearts and minds across the globe.
+            </p>
+          </div>
+          <div class="books-grid" id="bestseller-books"></div>
+        </div>
+      </section>
+
+      <!-- Categories Section -->
+      <section id="categories-section" class="section-content hidden">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title">Book Categories</h2>
+            <p class="section-description">
+              Browse books by genre and discover your next favorite read
+            </p>
+          </div>
+          <div class="categories-grid" id="all-categories"></div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h4>Company</h4>
+            <a href="#">About Us</a>
+            <a href="#">Our Story</a>
+            <a href="#">Careers</a>
+            <a href="#">Press</a>
+          </div>
+          <div class="footer-section">
+            <h4>Customer Service</h4>
+            <a href="#">Help Center</a>
+            <a href="#">Shipping Info</a>
+            <a href="#">Returns</a>
+            <a href="#">Contact Us</a>
+          </div>
+          <div class="footer-section">
+            <h4>Quick Links</h4>
+            <a href="#" onclick="showSection('books')">All Books</a>
+            <a href="#" onclick="showSection('bestsellers')">Bestsellers</a>
+            <a href="#">New Releases</a>
+            <a href="#">Gift Cards</a>
+          </div>
+          <div class="footer-section">
+            <h4>Connect</h4>
+            <a href="#">Newsletter</a>
+            <a href="#">Social Media</a>
+            <a href="#">Book Club</a>
+            <a href="#">Events</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2024 PageTurner. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Book Detail Modal -->
+    <div id="book-modal" class="modal hidden">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 id="modal-title">Book Details</h3>
+          <button class="modal-close" onclick="closeModal()">&times;</button>
+        </div>
+        <div id="modal-body"></div>
+      </div>
+    </div>
+
+    <script>
+      // Sample Data
+      const books = [
+        {
+          id: 1,
+          title: "The Midnight Library",
+          author: "Matt Haig",
+          description:
+            "Between life and death there is a library, and within that library, the shelves go on forever. Every book provides a chance to try another life you could have lived.",
+          price: 24.99,
+          originalPrice: 29.99,
+          rating: 4.8,
+          reviewCount: 12847,
+          image:
+            "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=300&h=450&fit=crop",
+          category: "Fiction",
+          featured: true,
+          bestseller: true,
+          newRelease: false,
+        },
+        {
+          id: 2,
+          title: "Dune",
+          author: "Frank Herbert",
+          description:
+            "Set on the desert planet Arrakis, Dune is the story of the boy Paul Atreides, heir to a noble family tasked with ruling an inhospitable world.",
+          price: 22.99,
+          originalPrice: null,
+          rating: 4.7,
+          reviewCount: 8934,
+          image:
+            "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=450&fit=crop",
+          category: "Science Fiction",
+          featured: true,
+          bestseller: false,
+          newRelease: false,
+        },
+        {
+          id: 3,
+          title: "The Seven Husbands of Evelyn Hugo",
+          author: "Taylor Jenkins Reid",
+          description:
+            "Aging and reclusive Hollywood movie icon Evelyn Hugo is finally ready to tell the truth about her glamorous and scandalous life.",
+          price: 18.99,
+          originalPrice: 21.99,
+          rating: 4.9,
+          reviewCount: 15623,
+          image:
+            "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=300&h=450&fit=crop",
+          category: "Fiction",
+          featured: false,
+          bestseller: true,
+          newRelease: false,
+        },
+        {
+          id: 4,
+          title: "Educated",
+          author: "Tara Westover",
+          description:
+            "A memoir about a young girl who, kept out of school, leaves her survivalist family and goes on to earn a PhD from Cambridge University.",
+          price: 26.99,
+          originalPrice: null,
+          rating: 4.6,
+          reviewCount: 9876,
+          image:
+            "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=300&h=450&fit=crop",
+          category: "Biography",
+          featured: true,
+          bestseller: false,
+          newRelease: false,
+        },
+        {
+          id: 5,
+          title: "The Silent Patient",
+          author: "Alex Michaelides",
+          description:
+            "A woman's act of violence against her husband and the therapist obsessed with uncovering her motive.",
+          price: 19.99,
+          originalPrice: null,
+          rating: 4.5,
+          reviewCount: 11234,
+          image:
+            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=450&fit=crop",
+          category: "Mystery & Thriller",
+          featured: false,
+          bestseller: true,
+          newRelease: false,
+        },
+        {
+          id: 6,
+          title: "It Ends with Us",
+          author: "Colleen Hoover",
+          description:
+            "A heart-wrenching story about love, hope, and the courage to make difficult choices.",
+          price: 17.99,
+          originalPrice: null,
+          rating: 4.7,
+          reviewCount: 18765,
+          image:
+            "https://images.unsplash.com/photo-1518373714866-3f1478910cc0?w=300&h=450&fit=crop",
+          category: "Romance",
+          featured: false,
+          bestseller: false,
+          newRelease: true,
+        },
+        {
+          id: 7,
+          title: "Atomic Habits",
+          author: "James Clear",
+          description:
+            "An easy & proven way to build good habits & break bad ones. The fundamental system for success.",
+          price: 23.99,
+          originalPrice: null,
+          rating: 4.8,
+          reviewCount: 14532,
+          image:
+            "https://images.unsplash.com/photo-1471194402133-4be7fd4835a4?w=300&h=450&fit=crop",
+          category: "Non-Fiction",
+          featured: true,
+          bestseller: true,
+          newRelease: false,
+        },
+        {
+          id: 8,
+          title: "The Thursday Murder Club",
+          author: "Richard Osman",
+          description:
+            "Four unlikely friends meet weekly to investigate cold cases in their quiet retirement village.",
+          price: 20.99,
+          originalPrice: null,
+          rating: 4.4,
+          reviewCount: 7654,
+          image:
+            "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=300&h=450&fit=crop",
+          category: "Mystery & Thriller",
+          featured: false,
+          bestseller: false,
+          newRelease: false,
+        },
+      ];
+
+      const categories = [
+        {
+          id: 1,
+          name: "Fiction",
+          description: "Explore imaginary worlds and compelling stories",
+          image:
+            "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=300&fit=crop",
+          bookCount: 156,
+        },
+        {
+          id: 2,
+          name: "Science Fiction",
+          description: "Discover future worlds and technological wonders",
+          image:
+            "https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?w=400&h=300&fit=crop",
+          bookCount: 89,
+        },
+        {
+          id: 3,
+          name: "Mystery & Thriller",
+          description: "Heart-pounding suspense and intriguing puzzles",
+          image:
+            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop",
+          bookCount: 124,
+        },
+        {
+          id: 4,
+          name: "Romance",
+          description: "Love stories that warm the heart",
+          image:
+            "https://images.unsplash.com/photo-1518373714866-3f1478910cc0?w=400&h=300&fit=crop",
+          bookCount: 98,
+        },
+        {
+          id: 5,
+          name: "Non-Fiction",
+          description: "Real stories, insights, and knowledge",
+          image:
+            "https://images.unsplash.com/photo-1471194402133-4be7fd4835a4?w=400&h=300&fit=crop",
+          bookCount: 142,
+        },
+        {
+          id: 6,
+          name: "Biography",
+          description: "Inspiring life stories of remarkable people",
+          image:
+            "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop",
+          bookCount: 67,
+        },
+      ];
+
+      // State
+      let currentSection = "home";
+      let filteredBooks = [...books];
+      let selectedCategories = [];
+      let maxPrice = 100;
+      let sortBy = "relevance";
+
+      // Navigation
+      function showSection(section) {
+        // Hide all sections
+        document.querySelectorAll(".section-content").forEach((el) => {
+          el.classList.add("hidden");
+        });
+
+        // Show selected section
+        document
+          .getElementById(`${section}-section`)
+          .classList.remove("hidden");
+
+        // Update nav links
+        document.querySelectorAll(".nav-link").forEach((link) => {
+          link.classList.remove("active");
+        });
+
+        // Find and activate current nav link
+        const currentLink = Array.from(
+          document.querySelectorAll(".nav-link"),
+        ).find((link) => {
+          return (
+            link.textContent.toLowerCase().includes(section) ||
+            (section === "home" && link.textContent === "Home") ||
+            (section === "books" && link.textContent === "All Books")
+          );
+        });
+        if (currentLink) {
+          currentLink.classList.add("active");
+        }
+
+        currentSection = section;
+
+        // Load section content
+        switch (section) {
+          case "home":
+            loadFeaturedBooks();
+            loadCategories();
+            break;
+          case "books":
+            loadAllBooks();
+            loadCategoryFilters();
+            break;
+          case "bestsellers":
+            loadBestsellers();
+            break;
+          case "categories":
+            loadAllCategories();
+            break;
+        }
+      }
+
+      // Book rendering
+      function createBookCard(book) {
+        const badges = [];
+        if (book.bestseller)
+          badges.push('<span class="badge badge-bestseller">Bestseller</span>');
+        if (book.newRelease)
+          badges.push('<span class="badge badge-new">New Release</span>');
+        if (book.originalPrice && book.originalPrice > book.price) {
+          const discount = Math.round(
+            ((book.originalPrice - book.price) / book.originalPrice) * 100,
+          );
+          badges.push(`<span class="badge badge-sale">${discount}% Off</span>`);
+        }
+
+        const stars = Array.from({ length: 5 }, (_, i) => {
+          const filled = i < Math.floor(book.rating);
+          return `<svg class="star ${filled ? "filled" : ""}" viewBox="0 0 24 24" fill="${filled ? "currentColor" : "none"}" stroke="currentColor">
+                    <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"></polygon>
+                </svg>`;
+        }).join("");
+
+        return `
+                <div class="book-card" onclick="showBookDetails(${book.id})">
+                    <div class="book-image">
+                        <img src="${book.image}" alt="${book.title}">
+                        <div class="book-badges">
+                            ${badges.join("")}
+                        </div>
+                    </div>
+                    <div class="book-content">
+                        <h3 class="book-title">${book.title}</h3>
+                        <p class="book-author">by ${book.author}</p>
+                        <div class="book-rating">
+                            <div class="stars">${stars}</div>
+                            <span class="rating-text">${book.rating} (${book.reviewCount.toLocaleString()})</span>
+                        </div>
+                        <div class="book-price">
+                            <span class="price-current">$${book.price}</span>
+                            ${book.originalPrice ? `<span class="price-original">$${book.originalPrice}</span>` : ""}
+                        </div>
+                        <div class="book-actions">
+                            <button class="btn btn-primary btn-sm" onclick="event.stopPropagation(); addToCart(${book.id})">Add to Cart</button>
+                            <button class="btn btn-secondary btn-sm" onclick="event.stopPropagation(); showBookDetails(${book.id})">Preview</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+      }
+
+      function createCategoryCard(category) {
+        return `
+                <div class="category-card" onclick="filterByCategory('${category.name}')">
+                    <img src="${category.image}" alt="${category.name}">
+                    <div class="category-overlay">
+                        <div class="category-content">
+                            <h3 class="category-title">${category.name}</h3>
+                            <p class="category-count">${category.bookCount} books</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+      }
+
+      // Content loading functions
+      function loadFeaturedBooks() {
+        const featuredBooks = books.filter((book) => book.featured);
+        document.getElementById("featured-books").innerHTML = featuredBooks
+          .map(createBookCard)
+          .join("");
+      }
+
+      function loadCategories() {
+        document.getElementById("categories-grid").innerHTML = categories
+          .slice(0, 6)
+          .map(createCategoryCard)
+          .join("");
+      }
+
+      function loadAllCategories() {
+        document.getElementById("all-categories").innerHTML = categories
+          .map(createCategoryCard)
+          .join("");
+      }
+
+      function loadBestsellers() {
+        const bestsellers = books.filter((book) => book.bestseller);
+        document.getElementById("bestseller-books").innerHTML = bestsellers
+          .map(createBookCard)
+          .join("");
+      }
+
+      function loadAllBooks() {
+        applyFilters();
+      }
+
+      function loadCategoryFilters() {
+        const filterContainer = document.getElementById("category-filters");
+        filterContainer.innerHTML = categories
+          .map(
+            (category) => `
+                <div class="filter-option">
+                    <input type="checkbox" id="cat-${category.id}" value="${category.name}" onchange="updateCategoryFilter()">
+                    <label for="cat-${category.id}">${category.name} (${category.bookCount})</label>
+                </div>
+            `,
+          )
+          .join("");
+      }
+
+      // Filtering and search
+      function applyFilters() {
+        const searchTerm =
+          document.getElementById("books-search")?.value.toLowerCase() || "";
+
+        filteredBooks = books.filter((book) => {
+          const matchesSearch =
+            !searchTerm ||
+            book.title.toLowerCase().includes(searchTerm) ||
+            book.author.toLowerCase().includes(searchTerm) ||
+            book.description.toLowerCase().includes(searchTerm) ||
+            book.category.toLowerCase().includes(searchTerm);
+
+          const matchesCategory =
+            selectedCategories.length === 0 ||
+            selectedCategories.includes(book.category);
+
+          const matchesPrice = book.price <= maxPrice;
+
+          return matchesSearch && matchesCategory && matchesPrice;
+        });
+
+        // Apply sorting
+        switch (sortBy) {
+          case "price-low":
+            filteredBooks.sort((a, b) => a.price - b.price);
+            break;
+          case "price-high":
+            filteredBooks.sort((a, b) => b.price - a.price);
+            break;
+          case "rating":
+            filteredBooks.sort((a, b) => b.rating - a.rating);
+            break;
+          case "title":
+            filteredBooks.sort((a, b) => a.title.localeCompare(b.title));
+            break;
+          default:
+            // Relevance: featured and bestsellers first
+            filteredBooks.sort((a, b) => {
+              if (a.featured && !b.featured) return -1;
+              if (!a.featured && b.featured) return 1;
+              if (a.bestseller && !b.bestseller) return -1;
+              if (!a.bestseller && b.bestseller) return 1;
+              return 0;
+            });
+        }
+
+        document.getElementById("all-books").innerHTML = filteredBooks
+          .map(createBookCard)
+          .join("");
+      }
+
+      function updateCategoryFilter() {
+        selectedCategories = Array.from(
+          document.querySelectorAll("#category-filters input:checked"),
+        ).map((cb) => cb.value);
+        applyFilters();
+      }
+
+      function updatePriceFilter() {
+        maxPrice = parseInt(document.getElementById("price-range").value);
+        document.getElementById("max-price").textContent = `$${maxPrice}`;
+        applyFilters();
+      }
+
+      function updateSort() {
+        sortBy = document.getElementById("sort-select").value;
+        applyFilters();
+      }
+
+      function clearFilters() {
+        selectedCategories = [];
+        maxPrice = 100;
+        sortBy = "relevance";
+
+        document
+          .querySelectorAll("#category-filters input")
+          .forEach((cb) => (cb.checked = false));
+        document.getElementById("price-range").value = 100;
+        document.getElementById("max-price").textContent = "$100";
+        document.getElementById("sort-select").value = "relevance";
+        document.getElementById("books-search").value = "";
+
+        applyFilters();
+      }
+
+      function filterByCategory(categoryName) {
+        showSection("books");
+        setTimeout(() => {
+          selectedCategories = [categoryName];
+          document.querySelector(`input[value="${categoryName}"]`).checked =
+            true;
+          applyFilters();
+        }, 100);
+      }
+
+      // Search functionality
+      function performSearch(query) {
+        if (query.trim()) {
+          showSection("books");
+          setTimeout(() => {
+            document.getElementById("books-search").value = query;
+            applyFilters();
+          }, 100);
+        }
+      }
+
+      // Book details modal
+      function showBookDetails(bookId) {
+        const book = books.find((b) => b.id === bookId);
+        if (!book) return;
+
+        const stars = Array.from({ length: 5 }, (_, i) => {
+          const filled = i < Math.floor(book.rating);
+          return `<svg class="star ${filled ? "filled" : ""}" style="width: 20px; height: 20px;" viewBox="0 0 24 24" fill="${filled ? "currentColor" : "none"}" stroke="currentColor">
+                    <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"></polygon>
+                </svg>`;
+        }).join("");
+
+        document.getElementById("modal-title").textContent = book.title;
+        document.getElementById("modal-body").innerHTML = `
+                <div style="display: grid; grid-template-columns: 200px 1fr; gap: 2rem; margin-bottom: 2rem;">
+                    <div>
+                        <img src="${book.image}" alt="${book.title}" style="width: 100%; border-radius: 12px;">
+                    </div>
+                    <div>
+                        <h4 style="color: var(--primary); margin-bottom: 0.5rem;">by ${book.author}</h4>
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+                            <div style="display: flex; gap: 2px;">${stars}</div>
+                            <span>${book.rating} (${book.reviewCount.toLocaleString()} reviews)</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span style="font-size: 1.5rem; font-weight: 700; color: var(--primary);">$${book.price}</span>
+                            ${book.originalPrice ? `<span style="text-decoration: line-through; color: var(--muted-foreground);">$${book.originalPrice}</span>` : ""}
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <span style="padding: 4px 8px; background: var(--accent); border-radius: 6px; font-size: 12px;">${book.category}</span>
+                        </div>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button class="btn btn-primary" onclick="addToCart(${book.id}); closeModal();">Add to Cart</button>
+                            <button class="btn btn-secondary" onclick="addToWishlist(${book.id})">Add to Wishlist</button>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 1rem;">Description</h4>
+                    <p style="line-height: 1.6; color: var(--muted-foreground);">${book.description}</p>
+                </div>
+            `;
+
+        document.getElementById("book-modal").classList.remove("hidden");
+      }
+
+      function closeModal() {
+        document.getElementById("book-modal").classList.add("hidden");
+      }
+
+      // Cart and wishlist functions
+      function addToCart(bookId) {
+        // Simulate adding to cart
+        console.log(`Added book ${bookId} to cart`);
+        // You could show a toast notification here
+        alert("Book added to cart!");
+      }
+
+      function addToWishlist(bookId) {
+        // Simulate adding to wishlist
+        console.log(`Added book ${bookId} to wishlist`);
+        alert("Book added to wishlist!");
+      }
+
+      // Event listeners
+      document.addEventListener("DOMContentLoaded", function () {
+        // Initialize the homepage
+        showSection("home");
+
+        // Search functionality
+        document
+          .getElementById("globalSearch")
+          .addEventListener("keypress", function (e) {
+            if (e.key === "Enter") {
+              performSearch(this.value);
+            }
+          });
+
+        document
+          .getElementById("heroSearch")
+          .addEventListener("keypress", function (e) {
+            if (e.key === "Enter") {
+              performSearch(this.value);
+            }
+          });
+
+        // Books page search
+        document.addEventListener("input", function (e) {
+          if (e.target.id === "books-search") {
+            applyFilters();
+          }
+        });
+
+        // Price range filter
+        document.addEventListener("input", function (e) {
+          if (e.target.id === "price-range") {
+            updatePriceFilter();
+          }
+        });
+
+        // Sort filter
+        document.addEventListener("change", function (e) {
+          if (e.target.id === "sort-select") {
+            updateSort();
+          }
+        });
+
+        // Close modal when clicking outside
+        document
+          .getElementById("book-modal")
+          .addEventListener("click", function (e) {
+            if (e.target === this) {
+              closeModal();
+            }
+          });
+      });
+    </script>
+  </body>
+</html>

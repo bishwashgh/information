@@ -1,0 +1,51 @@
+[
+    {
+        "id": 1,
+        "name":"A Tale of Two Cities",
+        "price": 200,
+        "images": "./images/1st.jpg"
+    },
+    {
+        "id": 2,
+        "name":" The Little Prince" ,
+        "price": 250,
+        "images": "./images/2nd.jpeg"
+    },
+    {
+        "id": 3,
+        "name":" The Alchemist",
+        "price": 290,
+        "images": "./images/3rd.jpg"
+    },
+    {
+        "id": 4,
+        "name":" Harry Potter and the Philosopher's Stone",
+        "price": 200,
+        "images": "./images/4th.jpeg"
+    },
+    {
+        "id": 5,
+        "name":" Castle Christie",
+        "price": 300,
+        "images": "./images/5th.jpg"
+    },
+    {
+        "id": 6,
+        "name":" Dream of the red chamber",
+        "price": 200,
+        "images": "./images/6th.jpg"
+    },
+    {
+        "id": 7,
+        "name":" The Hobbit",
+        "price": 200,
+        "images": "./images/7th.jpg"
+    },
+    {
+        "id": 8,
+        "name":" Alice In Wonderland",
+        "price": 200,
+        "images": "./images/8th.jpg"
+    }
+
+]

@@ -1,0 +1,75 @@
+        * {
+          overflow-y: scroll;
+          scrollbar-width: none;
+          /* for Firefox */
+          -ms-overflow-style: none;
+          /* for IE and Edge */
+        }
+
+        ul {
+          list-style: none;
+          display: inline;
+        }
+
+        nav ul li {
+          display: inline;
+        }
+
+        a {
+          text-decoration: none;
+          color: black;
+        }
+
+        #logo {
+          width: 50px;
+        }
+
+        .headd {
+          text-align: center;
+        }
+
+        .downn {
+          text-align: center;
+        }
+
+        .searchinsite {
+          input {
+            width: 250px;
+            border: 2px solid black;
+            border-radius: 3px;
+            align-self: center;
+          }
+        }
+
+        .fa-arrow {
+          color: red;
+        }
+
+        .browse-1 {
+
+          text-decoration: white;
+          background-color: brown;
+
+        }
+
+        .star {
+          background-color: rgba(97, 25, 25, 0);
+        }
+
+        #subscribe {
+          border: 1px solid black;
+          border-radius: 3px;
+          background-color: yellow;
+        }
+
+        #u-email {
+          width: 200px;
+          border: 1px solid black;
+          border-radius: 5px;
+          padding: 5px 5px 5px 20px;
+        }
+
+        footer {
+          display: flex;
+          justify-content: space-between;
+        }
