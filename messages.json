@@ -1,0 +1,54 @@
+[
+    {
+        "time": "2025-08-17T11:44:52+02:00",
+        "ip": "::1",
+        "name": "Test User",
+        "email": "test@example.com",
+        "message": "This is a test message",
+        "status": "pending"
+    },
+    {
+        "time": "2025-08-17T11:46:09+02:00",
+        "ip": "::1",
+        "name": "test user",
+        "email": "test@example.com",
+        "message": "This is a test message",
+        "status": "pending"
+    },
+    {
+        "time": "2025-08-17T11:50:07+02:00",
+        "ip": "::1",
+        "name": "Test User",
+        "email": "test@example.com",
+        "message": "this is text message",
+        "status": "sent"
+    },
+    {
+        "time": "2025-08-17T12:29:24+02:00",
+        "ip": "::1",
+        "name": "hi",
+        "email": "test@examaple.com",
+        "message": "test message",
+        "status": "pending"
+    },
+    {
+        "time": "2025-08-17T12:30:36+02:00",
+        "ip": "::1",
+        "name": "hi bishwas",
+        "email": "bishwasghimire2060@gmail.com",
+        "message": "k xa ho kbr",
+        "status": "pending"
+<<<<<<< HEAD
+    },
+    {
+        "time": "2025-08-17T14:57:08+02:00",
+        "ip": "::1",
+        "name": "Bishwas Ghimire",
+        "email": "bishwasghimire2060@gmail.com",
+        "message": "hi",
+        "status": "sent",
+        "via": "brevo"
+=======
+>>>>>>> 3b8f3122371c56de57271cc72033e0ff6e27a3dd
+    }
+]
