@@ -1,5 +1,4 @@
 <?php
-<<<<<<< HEAD
 // Start session at the very beginning
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -11,16 +10,6 @@ if (empty($_SESSION['csrf_token'])) {
 }
 
 $csrf = $_SESSION['csrf_token'];
-=======
-// Start session for CSRF token
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-if (empty($_SESSION['csrf'])) {
-    $_SESSION['csrf'] = bin2hex(random_bytes(32));
-}
-$csrf = $_SESSION['csrf'];
->>>>>>> 3b8f3122371c56de57271cc72033e0ff6e27a3dd
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -247,11 +236,7 @@ $csrf = $_SESSION['csrf'];
         </div>
 
         <form class="card form" action="contact.php" method="POST" data-aos="fade-left" novalidate>
-<<<<<<< HEAD
           <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf, ENT_QUOTES, 'UTF-8'); ?>">
-=======
-          <input type="hidden" name="csrf" value="<?php echo htmlspecialchars($csrf, ENT_QUOTES, 'UTF-8'); ?>">
->>>>>>> 3b8f3122371c56de57271cc72033e0ff6e27a3dd
           <div class="field">
             <label for="name">Name</label>
             <input id="name" name="name" type="text" placeholder="Your name" required>
