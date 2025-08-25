@@ -1,9 +1,0 @@
-{
-    "require": {
-<<<<<<< HEAD
-        "phpmailer/phpmailer": "^6.10"
-=======
-        "phpmailer/phpmailer": "^6.8"
->>>>>>> 3b8f3122371c56de57271cc72033e0ff6e27a3dd
-    }
-}
