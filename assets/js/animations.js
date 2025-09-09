@@ -1,18 +1,73 @@
-// Scroll Animations
+// Optimized Scroll Animations with throttling and performance improvements
 const animateOnScroll = () => {
-    const elements = document.querySelectorAll('[data-animation]');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animate');
-                observer.unobserve(entry.target);
+    // Options for better performance
+    const observerOptions = {
+        root: null,
+        rootMargin: '50px', // Start loading slightly before elements come into view
+        threshold: 0.15
+    };
+
+    // Performance optimization: Use requestAnimationFrame
+    const rafCallback = (element, shouldAnimate) => {
+        requestAnimationFrame(() => {
+            if (shouldAnimate) {
+                element.classList.add('will-animate');
+                // Trigger reflow
+                void element.offsetWidth;
+                element.classList.add('animate');
             }
         });
-    }, {
-        threshold: 0.1
+    };
+
+    // Create observer with optimized callback
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            // Only trigger animation when element is entering viewport
+            if (entry.isIntersecting) {
+                const element = entry.target;
+                rafCallback(element, true);
+                // Stop observing after animation
+                observer.unobserve(element);
+            }
+        });
+    }, observerOptions);
+
+    // Batch DOM operations
+    const elements = document.querySelectorAll('[data-animation]');
+    const fragment = document.createDocumentFragment();
+    
+    elements.forEach(element => {
+        // Add to observer
+        observer.observe(element);
+        
+        // Prevent Flash Of Unstyled Content
+        element.style.visibility = 'visible';
     });
 
-    elements.forEach(element => observer.observe(element));
+    // Function to handle animation on load
+    const handleInitialAnimation = () => {
+        elements.forEach(element => {
+            if (element.getBoundingClientRect().top < window.innerHeight) {
+                rafCallback(element, true);
+                observer.unobserve(element);
+            }
+        });
+    };
+
+    // Optimize scroll performance
+    let ticking = false;
+    document.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                handleInitialAnimation();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }, { passive: true });
+
+    // Initial check for elements in viewport
+    handleInitialAnimation();
 };
 
 // Scroll Progress Bar

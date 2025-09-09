@@ -6,10 +6,31 @@
     <meta name="description" content="Portfolio of Bishwas Ghimire - Frontend Developer & UI Designer">
     <meta name="keywords" content="web developer, frontend, UI designer, portfolio">
     <title>Bishwas Ghimire | Portfolio</title>
+    
+    <!-- Preload critical assets -->
+    <link rel="preload" href="assets/css/styles.css" as="style">
+    <link rel="preload" href="assets/css/animations.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" as="style">
+    
+    <!-- Load styles -->
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/animations.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+Pro:wght@300;400;600&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Prevent Flash of Unstyled Content -->
+    <style>
+        [data-animation] {
+            opacity: 0;
+            visibility: hidden;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            [data-animation] {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="progress-bar"></div>
