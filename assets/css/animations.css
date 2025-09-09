@@ -1,0 +1,412 @@
+/* Scroll-triggered animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Apply animations to elements with delays */
+[data-animation="fade-up"] {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+[data-animation="fade-down"] {
+    opacity: 0;
+    animation: fadeInDown 0.8s ease forwards;
+}
+
+[data-animation="fade-left"] {
+    opacity: 0;
+    animation: fadeInLeft 0.8s ease forwards;
+}
+
+[data-animation="fade-right"] {
+    opacity: 0;
+    animation: fadeInRight 0.8s ease forwards;
+}
+
+[data-animation="scale"] {
+    opacity: 0;
+    animation: scaleIn 0.8s ease forwards;
+}
+
+/* Stagger animations */
+[data-animation]:nth-child(1) { animation-delay: 0.1s; }
+[data-animation]:nth-child(2) { animation-delay: 0.2s; }
+[data-animation]:nth-child(3) { animation-delay: 0.3s; }
+[data-animation]:nth-child(4) { animation-delay: 0.4s; }
+[data-animation]:nth-child(5) { animation-delay: 0.5s; }
+
+/* Section title animation */
+@keyframes titleReveal {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+.section-title {
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: var(--color-accent);
+    animation: titleReveal 0.6s ease forwards;
+    animation-delay: 0.3s;
+}
+
+/* Project card animations */
+.project-card {
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                box-shadow 0.4s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.project-image img {
+    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.project-card:hover .project-image img {
+    transform: scale(1.1);
+}
+
+/* Form animations */
+.form-group input,
+.form-group textarea {
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Button hover effects */
+.submit-btn,
+.newsletter-form button {
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.submit-btn:hover,
+.newsletter-form button:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 5px 15px rgba(var(--color-accent-rgb), 0.3);
+}
+
+/* Navigation link animations */
+.nav-links a {
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-accent);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* Hover Animations */
+.project-card {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.skill-item {
+    transition: all 0.3s ease;
+}
+
+.skill-item:hover {
+    transform: scale(1.05);
+    background-color: var(--color-accent);
+    color: var(--color-background);
+}
+
+/* Parallax Effect */
+.parallax-section {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Back to Top Button */
+.back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--color-accent);
+    color: var(--color-background);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    transform: translateY(-5px);
+    background: var(--color-text);
+}
+
+/* Progress Bar */
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: var(--color-accent);
+    z-index: 1001;
+    transition: width 0.1s ease;
+}
+
+/* Mobile Menu Animation */
+.hamburger {
+    display: none;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.hamburger-line {
+    width: 25px;
+    height: 2px;
+    background-color: var(--color-text);
+    margin: 5px 0;
+    transition: 0.4s;
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 80px;
+        right: -100%;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background: var(--color-background);
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: 2rem;
+        transition: 0.4s;
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+}
+
+/* Project Filter Animation */
+.project-filters button {
+    transition: all 0.3s ease;
+}
+
+.project-filters button.active {
+    background: var(--color-accent);
+    color: var(--color-background);
+}
+
+/* Timeline Animation */
+.timeline-item {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 2rem;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.6s ease;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background: var(--color-accent);
+}
+
+.timeline-item.animate {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Form Animations */
+.form-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--color-secondary);
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+.form-group label {
+    position: absolute;
+    left: 0.8rem;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 0.3s ease;
+    pointer-events: none;
+    color: var(--color-secondary);
+}
+
+.form-group input:focus ~ label,
+.form-group input:not(:placeholder-shown) ~ label {
+    top: -0.5rem;
+    left: 0;
+    font-size: 0.8rem;
+    color: var(--color-accent);
+}
+
+/* Social Links Animation */
+.social-links {
+    position: fixed;
+    left: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.social-link {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-background);
+    border: 1px solid var(--color-text);
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    transform: scale(1.1);
+    background: var(--color-accent);
+    color: var(--color-background);
+}
+
+/* Copy Email Animation */
+.copy-email {
+    position: relative;
+    cursor: pointer;
+}
+
+.copy-email .tooltip {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 10px;
+    background: var(--color-text);
+    color: var(--color-background);
+    font-size: 0.8rem;
+    border-radius: 4px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.copy-email:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+}
