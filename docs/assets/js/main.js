@@ -87,7 +87,17 @@
 
         bindEvents() {
             if (this.themeToggle) {
-                this.themeToggle.addEventListener('click', () => {
+                // Enhanced click handling for mobile
+                this.themeToggle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.toggleTheme();
+                });
+
+                // Add touch events for mobile
+                this.themeToggle.addEventListener('touchend', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
                     this.toggleTheme();
                 });
 
@@ -97,6 +107,11 @@
                         e.preventDefault();
                         this.toggleTheme();
                     }
+                });
+                
+                // Prevent double-tap zoom on theme toggle
+                this.themeToggle.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
                 });
             }
 
@@ -113,8 +128,18 @@
 
         setTheme(theme) {
             this.currentTheme = theme;
+            
+            // Force immediate DOM update
             document.documentElement.setAttribute('data-theme', theme);
+            document.body.setAttribute('data-theme', theme);
             localStorage.setItem('theme', theme);
+
+            // Force style recalculation for mobile
+            if (window.innerWidth <= 768) {
+                document.documentElement.style.display = 'none';
+                document.documentElement.offsetHeight; // Trigger reflow
+                document.documentElement.style.display = '';
+            }
 
             // Update meta theme-color for mobile browsers
             let metaThemeColor = $('meta[name="theme-color"]');
@@ -237,21 +262,28 @@
         bindEvents() {
             // Mobile menu toggle
             if (this.navToggle) {
+                this.mobileDebugger.log('NavToggle found, binding events');
+                
                 // Enhanced mobile touch support
                 this.navToggle.addEventListener('click', (e) => {
                     e.preventDefault();
+                    e.stopPropagation();
+                    this.mobileDebugger.log('NavToggle click event triggered');
                     this.toggleMobileMenu();
                 });
 
                 // Add touch events for better mobile responsiveness
                 this.navToggle.addEventListener('touchend', (e) => {
                     e.preventDefault();
+                    e.stopPropagation();
+                    this.mobileDebugger.log('NavToggle touchend event triggered');
                     this.toggleMobileMenu();
                 });
 
                 this.navToggle.addEventListener('keydown', (e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
                         e.preventDefault();
+                        this.mobileDebugger.log('NavToggle keyboard event triggered');
                         this.toggleMobileMenu();
                     }
                 });
@@ -260,10 +292,17 @@
                 this.navToggle.addEventListener('touchstart', (e) => {
                     e.preventDefault();
                     this.navToggle.style.transform = 'scale(0.95)';
+                    this.mobileDebugger.log('NavToggle touchstart feedback');
                 });
 
                 this.navToggle.addEventListener('touchcancel', (e) => {
                     this.navToggle.style.transform = '';
+                    this.mobileDebugger.log('NavToggle touchcancel reset');
+                });
+            } else {
+                this.mobileDebugger.log('NavToggle NOT found!', { 
+                    getElementById: document.getElementById('nav-toggle'),
+                    querySelector: document.querySelector('#nav-toggle')
                 });
             }
 
