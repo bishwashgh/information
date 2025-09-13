@@ -313,12 +313,20 @@ a:hover {
   left: -100%;
   width: 100%;
   height: 100vh;
+  height: 100dvh; /* Use dynamic viewport height for mobile */
   background: var(--color-bg);
   display: flex;
   align-items: center;
   justify-content: center;
   transition: left var(--transition-slow);
   z-index: var(--z-modal);
+  /* Prevent scrolling on the background */
+  overflow: hidden;
+  /* Better mobile performance */
+  -webkit-overflow-scrolling: touch;
+  /* Prevent text selection */
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .nav__menu.show {
@@ -339,6 +347,15 @@ a:hover {
   color: var(--color-text);
   position: relative;
   transition: color var(--transition-fast);
+  /* Better touch targets */
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  /* Remove tap highlight */
+  -webkit-tap-highlight-color: transparent;
+  /* Better touch response */
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .nav__link:hover,
@@ -407,8 +424,8 @@ a:hover {
 .nav__toggle {
   background: none;
   border: none;
-  width: 40px;
-  height: 40px;
+  width: 44px; /* Increased for better touch target */
+  height: 44px; /* Increased for better touch target */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -416,10 +433,19 @@ a:hover {
   gap: 4px;
   cursor: pointer;
   transition: transform var(--transition-fast);
+  /* Ensure it's above other elements */
+  z-index: calc(var(--z-modal) + 1);
+  /* Better touch feedback */
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
 
 .nav__toggle:hover {
   transform: scale(1.05);
+}
+
+.nav__toggle:active {
+  transform: scale(0.95);
 }
 
 .nav__toggle-line {
@@ -459,10 +485,34 @@ a:hover {
 
   .nav__link {
     font-size: var(--text-base);
+    padding: var(--space-2) var(--space-3);
   }
 
   .nav__toggle {
     display: none;
+  }
+}
+
+/* Mobile-specific improvements */
+@media (max-width: 767px) {
+  .nav {
+    padding: var(--space-3) var(--space-4);
+    min-height: 3.5rem;
+  }
+  
+  .nav__logo {
+    max-height: 2rem;
+    width: auto;
+  }
+  
+  /* Ensure proper touch scrolling */
+  body {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Improve typewriter animation for mobile */
+  .typewriter-cursor {
+    animation: blink 1s infinite;
   }
 }
 
@@ -1849,6 +1899,11 @@ a:hover {
 
 .no-scroll {
   overflow: hidden;
+  /* Prevent iOS bounce scroll */
+  position: fixed;
+  width: 100%;
+  /* Maintain scroll position */
+  top: var(--scroll-position, 0);
 }
 
 /* Smooth scrolling enhancement */

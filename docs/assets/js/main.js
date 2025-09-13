@@ -148,6 +148,70 @@
     }
 
     // =================================================================
+    // MOBILE DEBUGGING UTILITIES
+    // =================================================================
+
+    class MobileDebugger {
+        constructor() {
+            this.enabled = window.location.search.includes('debug=mobile');
+            this.debugPanel = null;
+            if (this.enabled) {
+                this.createDebugPanel();
+                this.logMobileInfo();
+            }
+        }
+
+        createDebugPanel() {
+            this.debugPanel = document.createElement('div');
+            this.debugPanel.id = 'mobile-debug-panel';
+            this.debugPanel.style.cssText = `
+                position: fixed;
+                bottom: 10px;
+                right: 10px;
+                background: rgba(0,0,0,0.8);
+                color: white;
+                padding: 10px;
+                border-radius: 5px;
+                font-size: 12px;
+                z-index: 9999;
+                max-width: 250px;
+                font-family: monospace;
+            `;
+            document.body.appendChild(this.debugPanel);
+        }
+
+        logMobileInfo() {
+            if (!this.enabled) return;
+            
+            const info = {
+                userAgent: navigator.userAgent,
+                screenSize: `${screen.width}x${screen.height}`,
+                viewportSize: `${window.innerWidth}x${window.innerHeight}`,
+                devicePixelRatio: window.devicePixelRatio,
+                touchSupport: 'ontouchstart' in window,
+                timestamp: new Date().toLocaleTimeString()
+            };
+
+            console.log('Mobile Debug Info:', info);
+            
+            if (this.debugPanel) {
+                this.debugPanel.innerHTML = `
+                    <strong>Mobile Debug</strong><br>
+                    Screen: ${info.screenSize}<br>
+                    Viewport: ${info.viewportSize}<br>
+                    Touch: ${info.touchSupport}<br>
+                    Time: ${info.timestamp}
+                `;
+            }
+        }
+
+        log(message, data = {}) {
+            if (!this.enabled) return;
+            console.log(`[Mobile Debug] ${message}`, data);
+        }
+    }
+
+    // =================================================================
     // NAVIGATION MANAGEMENT
     // =================================================================
 
@@ -160,6 +224,7 @@
             this.navLinks = $$('.nav__link');
             this.lastScrollY = window.scrollY;
             this.isMenuOpen = false;
+            this.mobileDebugger = new MobileDebugger();
             this.init();
         }
 
@@ -172,7 +237,15 @@
         bindEvents() {
             // Mobile menu toggle
             if (this.navToggle) {
-                this.navToggle.addEventListener('click', () => {
+                // Enhanced mobile touch support
+                this.navToggle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.toggleMobileMenu();
+                });
+
+                // Add touch events for better mobile responsiveness
+                this.navToggle.addEventListener('touchend', (e) => {
+                    e.preventDefault();
                     this.toggleMobileMenu();
                 });
 
@@ -182,10 +255,21 @@
                         this.toggleMobileMenu();
                     }
                 });
+
+                // Improve touch target feedback
+                this.navToggle.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    this.navToggle.style.transform = 'scale(0.95)';
+                });
+
+                this.navToggle.addEventListener('touchcancel', (e) => {
+                    this.navToggle.style.transform = '';
+                });
             }
 
-            // Navigation links
+            // Navigation links with enhanced mobile support
             this.navLinks.forEach(link => {
+                // Regular click event
                 link.addEventListener('click', (e) => {
                     const href = link.getAttribute('href');
                     if (href.startsWith('#')) {
@@ -193,6 +277,31 @@
                         this.smoothScrollTo(href);
                         this.closeMobileMenu();
                     }
+                });
+
+                // Touch events for mobile
+                link.addEventListener('touchend', (e) => {
+                    const href = link.getAttribute('href');
+                    if (href.startsWith('#')) {
+                        e.preventDefault();
+                        this.smoothScrollTo(href);
+                        this.closeMobileMenu();
+                    }
+                });
+
+                // Visual feedback for touch
+                link.addEventListener('touchstart', (e) => {
+                    link.style.opacity = '0.7';
+                });
+
+                link.addEventListener('touchcancel', (e) => {
+                    link.style.opacity = '';
+                });
+
+                link.addEventListener('touchend', (e) => {
+                    setTimeout(() => {
+                        link.style.opacity = '';
+                    }, 100);
                 });
             });
 
@@ -225,6 +334,15 @@
         }
 
         toggleMobileMenu() {
+            // Debug logging for mobile troubleshooting
+            this.mobileDebugger.log('Mobile menu toggle triggered', {
+                isMenuOpen: this.isMenuOpen,
+                navMenu: !!this.navMenu,
+                navToggle: !!this.navToggle,
+                navMenuClasses: this.navMenu?.className,
+                navToggleClasses: this.navToggle?.className
+            });
+
             if (this.isMenuOpen) {
                 this.closeMobileMenu();
             } else {
@@ -234,6 +352,11 @@
 
         openMobileMenu() {
             this.isMenuOpen = true;
+            
+            // Store current scroll position
+            const scrollY = window.scrollY;
+            document.body.style.setProperty('--scroll-position', `-${scrollY}px`);
+            
             this.navMenu.classList.add('show');
             this.navToggle.classList.add('active');
             this.navToggle.setAttribute('aria-expanded', 'true');
@@ -254,7 +377,15 @@
             this.navMenu.classList.remove('show');
             this.navToggle.classList.remove('active');
             this.navToggle.setAttribute('aria-expanded', 'false');
+            
+            // Restore scroll position
+            const scrollY = document.body.style.getPropertyValue('--scroll-position');
             document.body.classList.remove('no-scroll');
+            document.body.style.removeProperty('--scroll-position');
+            
+            if (scrollY) {
+                window.scrollTo(0, parseInt(scrollY) * -1);
+            }
 
             // Return focus to toggle button
             this.navToggle.focus();

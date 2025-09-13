@@ -526,15 +526,26 @@
     class TypewriterEffect {
         constructor() {
             this.typewriters = document.querySelectorAll('.typewriter');
+            this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
             this.init();
         }
 
         init() {
-            this.typewriters.forEach((element, index) => {
-                // Add delay for multiple typewriters
-                setTimeout(() => {
-                    this.typeText(element);
-                }, index * 2000);
+            // Add intersection observer for better mobile performance
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting && !entry.target.classList.contains('typed')) {
+                        const index = Array.from(this.typewriters).indexOf(entry.target);
+                        setTimeout(() => {
+                            this.typeText(entry.target);
+                        }, index * 1000); // Reduced delay for mobile
+                        entry.target.classList.add('typed');
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            this.typewriters.forEach((element) => {
+                observer.observe(element);
             });
         }
 
@@ -546,7 +557,8 @@
             element.textContent = '';
             
             let i = 0;
-            const speed = 50; // Typing speed in milliseconds
+            // Faster typing speed on mobile for better UX
+            const speed = this.isMobile ? 30 : 50;
 
             const typeInterval = setInterval(() => {
                 if (i < text.length) {
@@ -556,6 +568,8 @@
                     clearInterval(typeInterval);
                     element.classList.remove('typing');
                     element.classList.add('finished');
+                    // Ensure proper layout after typing
+                    element.style.minHeight = 'auto';
                 }
             }, speed);
         }
