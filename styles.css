@@ -87,7 +87,7 @@
   
   /* Z-index layers */
   --z-base: 1;
-  --z-nav: 100;
+  --z-nav: 1000;
   --z-modal-overlay: 1000;
   --z-modal: 1001;
   --z-toast: 2000;
@@ -1335,32 +1335,35 @@ body {
 @media (max-width: 1023px) {
   .nav-toggle {
     display: block;
+    /* ensure toggle sits above when nav is closed */
+    z-index: calc(var(--z-nav) + 1);
   }
   
   .nav-menu {
+    /* Full-screen overlay for mobile: cover entire viewport and sit above content */
     position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: min(300px, 80vw);
+    inset: 0; /* top:0; right:0; bottom:0; left:0 */
+    width: 100vw;
     height: 100vh;
-    background: rgba(15, 18, 38, 0.98);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-left: 1px solid var(--color-glass-border);
+    background: rgba(15, 18, 38, 0.99);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    /* remove side border for full overlay */
+    border-left: none;
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: flex-start;
-    padding: var(--spacing-10) var(--spacing-6);
+    justify-content: center; /* center items vertically for better UX */
+    padding: var(--spacing-12) var(--spacing-6);
     gap: var(--spacing-4);
-    transform: translateX(100%);
+    transform: translateY(-100%); /* slide down when opening */
     transition: transform var(--transition-base);
-    z-index: 100;
+    z-index: var(--z-nav);
     overflow-y: auto;
   }
   
   .nav-menu.active {
-    transform: translateX(0);
+    transform: translateY(0);
   }
   
   .nav-menu li {
