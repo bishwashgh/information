@@ -108,8 +108,8 @@ if (contactForm) {
 // =====================================================
 const musicFiles = [
     { 
-        title: 'Finding Her (Jana Mere Sawalon Ka Manzar Tu)', 
-        artist: 'Khusagra', 
+        title: 'Top songs', 
+        artist: 'Various Artists', 
         file: 'music.mp3',
         image: 'https://i.pinimg.com/736x/fa/d5/e7/fad5e79954583ad50ccb3f16ee64f66d.jpg'
     },
@@ -144,6 +144,7 @@ function loadMusicHub() {
                 <h3 class="music-title">${track.title}</h3>
                 <p class="music-artist">${track.artist}</p>
                 <audio controls class="music-player">
+                    <source src="./music/${track.file}" type="audio/mpeg">
                     <source src="music/${track.file}" type="audio/mpeg">
                     Your browser does not support the audio element.
                 </audio>
@@ -269,5 +270,3 @@ if (prefersReducedMotion.matches) {
         el.style.transition = 'none';
     });
 }
-
-
