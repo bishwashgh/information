@@ -108,9 +108,9 @@ if (contactForm) {
 // =====================================================
 const musicFiles = [
     { 
-        title: 'Top songs', 
-        artist: 'Various Artists', 
-        file: 'Viral songs latest ~ Top Songs Spotify 2025.mp3',
+        title: 'Finding Her (Jana Mere Sawalon Ka Manzar Tu)', 
+        artist: 'Khusagra', 
+        file: 'music/music.mp3',
         image: 'https://i.pinimg.com/736x/fa/d5/e7/fad5e79954583ad50ccb3f16ee64f66d.jpg'
     },
     // Add more tracks as needed
@@ -269,3 +269,4 @@ if (prefersReducedMotion.matches) {
         el.style.transition = 'none';
     });
 }
+
