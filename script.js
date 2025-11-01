@@ -143,7 +143,7 @@ function loadMusicHub() {
             <div class="music-info">
                 <h3 class="music-title">${track.title}</h3>
                 <p class="music-artist">${track.artist}</p>
-                <audio controls class="music-player">
+                <audio controls class="music-player" preload="metadata">
                     <source src="./music/${track.file}" type="audio/mpeg">
                     <source src="music/${track.file}" type="audio/mpeg">
                     Your browser does not support the audio element.
@@ -156,6 +156,17 @@ function loadMusicHub() {
         // Add play/pause interaction for visual feedback
         const audioPlayer = musicItem.querySelector('.music-player');
         const musicIcon = musicItem.querySelector('.music-icon svg');
+        
+        // Add error handling for audio
+        audioPlayer.addEventListener('error', (e) => {
+            console.error('Audio error for', track.file, ':', audioPlayer.error);
+            console.error('Error code:', audioPlayer.error ? audioPlayer.error.code : 'unknown');
+            console.error('Tried paths:', `./music/${track.file}`, `music/${track.file}`);
+        });
+        
+        audioPlayer.addEventListener('loadeddata', () => {
+            console.log('Audio loaded successfully:', track.file);
+        });
         
         audioPlayer.addEventListener('play', () => {
             musicItem.style.borderColor = 'var(--accent)';
